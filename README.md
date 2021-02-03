@@ -8,16 +8,22 @@ Gazzeth frontend to interact with protocol in a human friendly way.
 
 ## Install
 
-* ``` cd ./client ```
-* ``` npm install ```
+```bash
+ cd ./client 
+ npm install
+```
 
 ## Run development
 
-* ``` npm start ```
+```bash
+ npm start
+```
 
 ## Build production
 
-* ``` npm build ```
+```bash
+ npm build
+```
 
 ## Test
 
