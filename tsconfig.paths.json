@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+    	"baseUrl": ".",
+      	"paths": {
+        	"@domain/*": ["src/domain/*"],
+        	"@application/*": ["src/application/*"],
+        	"@entrypoint/*": ["src/entrypoint/*"],
+        	"@infraestructure/*": ["src/infraestructure/*"],
+        	"@configuration/*": ["src/configuration/*"],
+        	"@constants/*": ["src/constants/*"],
+			"@helpers/*": ["src/helpers/*"],
+			"@container-inversify": ["src/inversify.config.ts"]
+      	}
+    }
+}
