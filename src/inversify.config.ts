@@ -1,16 +1,15 @@
 import "reflect-metadata";
 import { Container } from "inversify";
 import { TYPES } from "@constants/types";
+import NewsService from "@configuration/usecases/NewsService";
+import INewsRepository from "@application/repositories/INewsRepository";
+import NewsHardcodeRepository from "@infraestructure/repositories/news/NewsHardcodeRepository";
 
 const container = new Container();
 
-// TODO: remove, this is a example
-// container.bind<ICommodityRepository>(TYPES.ICommodityRepository).to(CommodityHarcodeRepository);
-// container.bind<IAnalysisRepository>(TYPES.IAnalysisRepository).to(AnalysisHarcodeRepository);
-// container.bind<CommodityService>(TYPES.CommodityService).to(CommodityService);
-// container.bind<AnalysisService>(TYPES.AnalysisService).to(AnalysisService);
+container.bind<INewsRepository>(TYPES.INewsRepository).to(NewsHardcodeRepository);
+container.bind<NewsService>(TYPES.NewsService).to(NewsService);
 
-// container.resolve(CommodityService);
-// container.resolve(AnalysisService);
+container.resolve(NewsService);
 
 export { container }
