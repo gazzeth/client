@@ -3,5 +3,7 @@
 
     "page-not-found": "La página que usted busca no existe",
     "back-message": "Presione el boton para volver a la página principal",
-    "home": "Inicio"
+    "home": "Inicio",
+
+    "see-more": "Ver más"
 }
