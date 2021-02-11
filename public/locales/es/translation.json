@@ -5,5 +5,12 @@
     "back-message": "Presione el boton para volver a la página principal",
     "home": "Inicio",
 
-    "see-more": "Ver más"
+    "see-more": "Ver más",
+
+    "filter-bar-title": "Filtros:",
+    "verified-title": "Estado de verificacion",
+    "none": "Ninguno",
+    "verified": "Verdadera",
+    "not-verified": "Falsa",
+    "pending": "Pendiente"
 }

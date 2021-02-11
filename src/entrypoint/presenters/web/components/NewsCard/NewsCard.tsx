@@ -8,11 +8,11 @@ import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
-interface Props {
+interface PropTypes {
     News: News;
 }
 
-export default function NewsCard(props: Props) {
+export default function NewsCard(props: PropTypes) {
     const news = props.News;
 
     const { t } = useTranslation();

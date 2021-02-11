@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles(theme => ({
     root: {
     },
-    newsListContainer: {
+    gridContainer: {
         justify:"center",
         alignItems:"center",
     }

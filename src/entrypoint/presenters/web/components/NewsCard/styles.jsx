@@ -10,8 +10,8 @@ export default makeStyles(theme => ({
     },
     overlay: {
         position: 'absolute',
-        top: '110px',
-        left: '310px',
+        top: '110px', //TODO check
+        left: '310px',//TODO check
     },
     trueIcon: {
         color: 'green',

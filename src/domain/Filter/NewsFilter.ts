@@ -1,11 +1,13 @@
-export default class NewsFilter {
-    public verified?: "true" | "false" | "pending";
+import { VERIFIED_STATUS } from "@constants/verifiedStatus";
 
-    constructor(verified?: "true" | "false" | "pending") {
+export default class NewsFilter {
+    public verified?: VERIFIED_STATUS;
+
+    constructor(verified?: VERIFIED_STATUS) {
         this.verified = verified;
     }
 
-    setVerified(verified?: "true" | "false" | "pending") {
+    setVerified(verified?: VERIFIED_STATUS) {
         return new NewsFilter(verified);
     }
 }
