@@ -13,10 +13,12 @@ interface PropTypes {
 }
 
 export default function NewsCard(props: PropTypes) {
-    const news = props.News;
+    let news = props.News;
 
     const { t } = useTranslation();
     const classes = useStyles();
+    
+    const MAX_LEDE = 500;
 
     const getIcon = () => {
         switch (news.verified) {
@@ -27,6 +29,11 @@ export default function NewsCard(props: PropTypes) {
             case false:
                 return <CancelOutlinedIcon className={classnames(classes.overlay, classes.falseIcon)} />;
         }
+    }
+
+    if (news.lede.length > MAX_LEDE) {
+        const shortLede = news.lede.substring(0, MAX_LEDE).replace(/[\W]*\S+[\W]*$/, '...');
+        news = news.setLede(shortLede)
     }
 
     return (

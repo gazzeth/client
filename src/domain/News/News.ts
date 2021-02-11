@@ -12,5 +12,9 @@ export default class News {
         this.body = body;
         this.image = image;
     }
+
+    setLede(lede: string) {
+        return new News(this.title, lede, this.body, this.image, this.verified);
+    }
     
 };
