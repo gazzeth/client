@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  toolbar: {    
+  toolbar: {
     justifyContent: 'space-between',
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -21,7 +21,7 @@ export default makeStyles(theme => ({
     justifyContent: 'center',
   },
   typografyContainer: {
-    display: 'flex',    
+    display: 'flex',
   },
   logotype: {
     color: "white",
@@ -35,10 +35,13 @@ export default makeStyles(theme => ({
     },
   },
   nameGazz: {
-    color: "#000000",    
+    color: "#000000",
     marginLeft: 10,
   },
   nameEth: {
-    color: "#ffffff",    
+    color: "#ffffff",
   },
+  button: {
+    textTransform: "none",
+  }
 }));

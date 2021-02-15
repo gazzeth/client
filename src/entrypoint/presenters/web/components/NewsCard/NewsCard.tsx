@@ -7,6 +7,8 @@ import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typo
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import { Link } from 'react-router-dom';
+import { URLS } from "@constants/urls";
 
 interface PropTypes {
     News: News;
@@ -47,7 +49,7 @@ export default function NewsCard(props: PropTypes) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">{t("see-more")}</Button>
+                <Button size="small" color="primary" component={Link} to={URLS.news.replace(":id", `${news.id}`)}>{t("see-more")}</Button>
             </CardActions>
         </Card>
     )

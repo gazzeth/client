@@ -1,11 +1,13 @@
 export default class News {
+    id: number;
     verified?: boolean;
     title: string;
     lede: string;
     body: string;
     image: string;
 
-    constructor(title: string, lede: string, body: string, image: string, verified?: boolean) {
+    constructor(id: number, title: string, lede: string, body: string, image: string, verified?: boolean) {
+        this.id = id;
         this.verified = verified;
         this.title = title;
         this.lede = lede;
@@ -14,7 +16,7 @@ export default class News {
     }
 
     setLede(lede: string) {
-        return new News(this.title, lede, this.body, this.image, this.verified);
+        return new News(this.id, this.title, lede, this.body, this.image, this.verified);
     }
     
 };
