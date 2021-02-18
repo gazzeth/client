@@ -10,6 +10,7 @@ export default makeStyles(theme => ({
     },
     statusBarIcon: {
         color: 'white',
+        margin: 7
     },
     statusBar: {
         color: 'white',
@@ -18,12 +19,12 @@ export default makeStyles(theme => ({
         alignItems: 'center'
     },
     falseStatusBar: {
-        backgroundColor: 'red'
+        backgroundColor: theme.palette.status.false
     },
     pendingStatusBar: {
-        backgroundColor: 'grey'
+        backgroundColor: theme.palette.status.pending
     },
     trueStatusBar: {
-        backgroundColor: 'green'
+        backgroundColor: theme.palette.status.true
     }
 }));

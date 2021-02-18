@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
 import News from "@domain/News/News";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
@@ -48,26 +48,6 @@ export default function NewsCard(props: PropTypes) {
         }
     }
 
-    // const getStatusBarByType = (statusClass: string, iconComponent: React.ReactNode, description: string) => {
-    //     return (
-    //         <div className={classnames(classes.statusBar, statusClass)}>
-    //             <iconComponent className={classes.statusBarIcon} />
-    //             <span>{description}</span>
-    //         </div>
-    //     );
-    // }
-
-    // const getStatusBar = () => {
-    //     switch (news.verified) {
-    //         case undefined:
-    //             return getStatusBarByType(classes.pendingStatusBar, ErrorOutlineOutlinedIcon, t("pending-status-bar-description"));
-    //         case true:
-    //             return getStatusBarByType(classes.trueStatusBar, CheckIcon, t("true-status-bar-description"));
-    //         case false:
-    //             return getStatusBarByType(classes.falseStatusBar, CancelOutlinedIcon, t("false-status-bar-description"));
-    //     }
-    // }
-
     if (news.lede.length > MAX_LEDE) {
         const shortLede = news.lede.substring(0, MAX_LEDE).replace(/[\W]*\S+[\W]*$/, '...');
         news = news.setLede(shortLede)
@@ -77,8 +57,8 @@ export default function NewsCard(props: PropTypes) {
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia component="img" className={classes.image} image={news.image} />
+                {getStatusBar()}
                 <CardContent>
-                    {getStatusBar()}
                     <Typography gutterBottom variant="h5" component="h2">{news.title}</Typography>
                     <Typography variant="body2" color="textSecondary" component="p">{news.lede}</Typography>
                 </CardContent>
