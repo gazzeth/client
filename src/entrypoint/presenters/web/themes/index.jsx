@@ -1,8 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import tinycolor from "tinycolor2";
 
-const primary = "#9c0606";
-const secondary = "#FF5C93";
+const primary = "#061459";
+const secondary = "#ffffff";
 const success = "#3CD4A0";
 const info = "#9013FE";
 const warning = "#FFC260";

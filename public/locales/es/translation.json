@@ -9,8 +9,12 @@
 
     "filter-bar-title": "Filtros:",
     "verified-title": "Estado de verificacion",
-    "none": "Ninguno",
+    "none": "Todas",
     "verified": "Verdadera",
     "not-verified": "Falsa",
-    "pending": "Pendiente"
+    "pending": "Pendiente",
+
+    "pending-status-bar-description": "Esta noticia está pendiente de revisión",
+    "false-status-bar-description": "Esta noticia fue declarada falsa",
+    "true-status-bar-description": "Esta noticia fue declarada verdadera"
 }

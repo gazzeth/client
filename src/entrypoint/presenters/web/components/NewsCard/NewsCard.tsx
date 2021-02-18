@@ -19,19 +19,54 @@ export default function NewsCard(props: PropTypes) {
 
     const { t } = useTranslation();
     const classes = useStyles();
-    
+
     const MAX_LEDE = 500;
 
-    const getIcon = () => {
+    const getStatusBar = () => {
         switch (news.verified) {
             case undefined:
-                return <ErrorOutlineOutlinedIcon className={classnames(classes.overlay, classes.pendingIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.pendingStatusBar)}>
+                        <ErrorOutlineOutlinedIcon className={classes.statusBarIcon} />
+                        <span>{t("pending-status-bar-description")}</span>
+                    </div>
+                );
             case true:
-                return <CheckIcon className={classnames(classes.overlay, classes.trueIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
+                        <CheckIcon className={classes.statusBarIcon} />
+                        <span>{t("true-status-bar-description")}</span>
+                    </div>
+                );
             case false:
-                return <CancelOutlinedIcon className={classnames(classes.overlay, classes.falseIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
+                        <CancelOutlinedIcon className={classes.statusBarIcon} />
+                        <span>{t("false-status-bar-description")}</span>
+                    </div>
+                );
         }
     }
+
+    // const getStatusBarByType = (statusClass: string, iconComponent: React.ReactNode, description: string) => {
+    //     return (
+    //         <div className={classnames(classes.statusBar, statusClass)}>
+    //             <iconComponent className={classes.statusBarIcon} />
+    //             <span>{description}</span>
+    //         </div>
+    //     );
+    // }
+
+    // const getStatusBar = () => {
+    //     switch (news.verified) {
+    //         case undefined:
+    //             return getStatusBarByType(classes.pendingStatusBar, ErrorOutlineOutlinedIcon, t("pending-status-bar-description"));
+    //         case true:
+    //             return getStatusBarByType(classes.trueStatusBar, CheckIcon, t("true-status-bar-description"));
+    //         case false:
+    //             return getStatusBarByType(classes.falseStatusBar, CancelOutlinedIcon, t("false-status-bar-description"));
+    //     }
+    // }
 
     if (news.lede.length > MAX_LEDE) {
         const shortLede = news.lede.substring(0, MAX_LEDE).replace(/[\W]*\S+[\W]*$/, '...');
@@ -42,8 +77,8 @@ export default function NewsCard(props: PropTypes) {
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia component="img" className={classes.image} image={news.image} />
-                {getIcon()}
                 <CardContent>
+                    {getStatusBar()}
                     <Typography gutterBottom variant="h5" component="h2">{news.title}</Typography>
                     <Typography variant="body2" color="textSecondary" component="p">{news.lede}</Typography>
                 </CardContent>

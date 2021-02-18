@@ -27,20 +27,11 @@ export default makeStyles(theme => ({
     marginLeft: 20,
     display: 'flex',
   },
-  nameGazz: {
-    letterSpacing: '-0.19rem',
-    color: "#000000",
-    fontSize: 84,
-    fontWeight: 800,
-    [theme.breakpoints.down("md")]: {
-      fontSize: 48,
-    },
-  },
-  nameEth: {
-    fontSize: 84,
-    fontWeight: 800,
+  brandName: {
     letterSpacing: '-0.19rem',
     color: "#ffffff",
+    fontSize: 84,
+    fontWeight: 800,
     [theme.breakpoints.down("md")]: {
       fontSize: 48,
     },

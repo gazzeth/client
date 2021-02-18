@@ -8,18 +8,22 @@ export default makeStyles(theme => ({
         position: "relative",
         height: 140,
     },
-    overlay: {
-        position: 'absolute',
-        top: '110px', //TODO check
-        left: '310px',//TODO check
+    statusBarIcon: {
+        color: 'white',
     },
-    trueIcon: {
-        color: 'green',
+    statusBar: {
+        color: 'white',
+        fontWeight: 'bold',
+        display: 'flex',
+        alignItems: 'center'
     },
-    pendingIcon: {
-        color: 'orange',
+    falseStatusBar: {
+        backgroundColor: 'red'
     },
-    falseIcon: {
-        color: 'red',
+    pendingStatusBar: {
+        backgroundColor: 'grey'
     },
+    trueStatusBar: {
+        backgroundColor: 'green'
+    }
 }));
