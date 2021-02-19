@@ -1,11 +1,15 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import tinycolor from "tinycolor2";
 
-const primary = "#9c0606";
-const secondary = "#FF5C93";
+const primary = "#061459";
+const secondary = "#ffffff";
 const success = "#3CD4A0";
 const info = "#9013FE";
 const warning = "#FFC260";
+
+const red = "#ba1833";
+const green = "#10913d";
+const grey = "#7d7968";
 
 const darkenRate = 15;
 const lightenRate = 7.5;
@@ -30,6 +34,11 @@ const theme = (createMuiTheme)({ //TODO check
                 .darken(darkenRate)
                 .toHexString(),
             contrastText: "#FFFFFF",
+        },
+        status: {
+            pending: grey,
+            false: red,
+            true: green
         },
         warning: {
             main: warning,

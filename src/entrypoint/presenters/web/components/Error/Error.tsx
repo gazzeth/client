@@ -17,8 +17,7 @@ export default function Error() {
             <Grid item>
                 <div className={classes.logo}>
                     <div className={classes.typografyContainer}>
-                        <Typography variant="h4" className={classes.nameGazz}>Gazz</Typography>
-                        <Typography variant="h4" className={classes.nameEth}>Eth</Typography>
+                        <Typography variant="h4" className={classes.brandName}>Gazzeth</Typography>
                     </div>
                 </div>
             </Grid>

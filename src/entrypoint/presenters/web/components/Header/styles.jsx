@@ -34,12 +34,9 @@ export default makeStyles(theme => ({
       display: "none",
     },
   },
-  nameGazz: {
-    color: "#000000",
-    marginLeft: 10,
-  },
-  nameEth: {
+  brandName: {
     color: "#ffffff",
+    marginLeft: 10,
   },
   button: {
     textTransform: "none",

@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
 import News from "@domain/News/News";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
@@ -19,17 +19,32 @@ export default function NewsCard(props: PropTypes) {
 
     const { t } = useTranslation();
     const classes = useStyles();
-    
+
     const MAX_LEDE = 500;
 
-    const getIcon = () => {
+    const getStatusBar = () => {
         switch (news.verified) {
             case undefined:
-                return <ErrorOutlineOutlinedIcon className={classnames(classes.overlay, classes.pendingIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.pendingStatusBar)}>
+                        <ErrorOutlineOutlinedIcon className={classes.statusBarIcon} />
+                        <span>{t("pending-status-bar-description")}</span>
+                    </div>
+                );
             case true:
-                return <CheckIcon className={classnames(classes.overlay, classes.trueIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
+                        <CheckIcon className={classes.statusBarIcon} />
+                        <span>{t("true-status-bar-description")}</span>
+                    </div>
+                );
             case false:
-                return <CancelOutlinedIcon className={classnames(classes.overlay, classes.falseIcon)} />;
+                return (
+                    <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
+                        <CancelOutlinedIcon className={classes.statusBarIcon} />
+                        <span>{t("false-status-bar-description")}</span>
+                    </div>
+                );
         }
     }
 
@@ -42,7 +57,7 @@ export default function NewsCard(props: PropTypes) {
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia component="img" className={classes.image} image={news.image} />
-                {getIcon()}
+                {getStatusBar()}
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">{news.title}</Typography>
                     <Typography variant="body2" color="textSecondary" component="p">{news.lede}</Typography>
