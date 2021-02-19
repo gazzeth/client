@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
 import News from "@domain/News/News";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';

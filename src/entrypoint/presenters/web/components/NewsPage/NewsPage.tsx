@@ -6,7 +6,9 @@ import useStyles from "./styles";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia } from "@material-ui/core";
+import classnames from "classnames";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
@@ -39,6 +41,29 @@ export default function NewsPage() {
         );
     }
     return (
-        <>{id} es el id</>
+        <Container maxWidth={false}>
+            <Grid container direction="column" className={classes.gridContainer} spacing={2}>
+                <Grid item>
+                    <Grid container justify="center" className={classes.gridContainer}>
+                        <Card className={classes.card}>
+                            <CardActionArea>
+                                <CardMedia component="img" className={classes.image} image={news.image} />
+                                <CardContent>
+                                    <Typography variant="h1" className={classnames(classes.text, classes.title)}>
+                                        {news.title}
+                                    </Typography>
+                                    <Typography variant="h2" className={classnames(classes.text, classes.lede)}>
+                                        {news.lede}
+                                    </Typography>
+                                    <Typography variant="h3" className={classnames(classes.text, classes.body)}>
+                                        {news.body}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                </Grid >
+            </Grid >
+        </Container>
     )
 }

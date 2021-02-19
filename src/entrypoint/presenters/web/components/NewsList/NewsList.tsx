@@ -43,7 +43,7 @@ export default function NewsList() {
                         {newsList.map(news => <Grid item><NewsCard News={news} /></Grid>)}
                     </Grid>
                 </Grid>
-                {loading && <Grid item><CircularProgress color="secondary" /></Grid>}
+                {loading && <Grid item><CircularProgress color="primary" /></Grid>}
             </Grid>
         </Container>
     )
