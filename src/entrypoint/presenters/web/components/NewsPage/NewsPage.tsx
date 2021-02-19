@@ -8,11 +8,14 @@ import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
 import { CircularProgress, Container, Grid, Typography } from "@material-ui/core";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia } from "@material-ui/core";
+import Pie from "react-chartjs-2";
 import classnames from "classnames";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
 export default function NewsPage() {
+    let votesChartInstance = null;
+
     const { id } = useParams<{ id: string }>();
     const idNumber = Number(id)
 
@@ -20,6 +23,32 @@ export default function NewsPage() {
 
     const [news, setNews] = useState<News>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const votesChartOptions = {
+        legend: {
+            display: true,
+            position: "bottom"
+        },
+        elements: {
+            arc: {
+                borderWidth: 2
+            }
+        }
+    };
+
+    const votesChartData = {
+        maintainAspectRatio: false,
+        responsive: true,
+        labels: ["True", "Fake"],
+        datasets: [
+            {
+                data: [3, 7],
+                backgroundColor: ["#10913d", "#ba1833"],
+                hoverBackgroundColor: ["#17d459", "#f52245"],
+                hoverBorderColor: "white"
+            }
+        ]
+    };
 
     useEffect(() => {
         if (idNumber !== NaN) {
@@ -59,6 +88,15 @@ export default function NewsPage() {
                                         {news.body}
                                     </Typography>
                                 </CardContent>
+                                <Container maxWidth="sm">
+                                    <Pie
+                                        data={votesChartData}
+                                        options={votesChartOptions}
+                                        ref={input => {
+                                            votesChartInstance = input;
+                                        }}
+                                    />
+                                </Container>
                             </CardActionArea>
                         </Card>
                     </Grid>
