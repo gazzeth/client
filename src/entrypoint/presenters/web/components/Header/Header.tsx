@@ -3,10 +3,17 @@ import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
+import { container } from "@container-inversify";
+import UserService from "@configuration/usecases/UserService";
+import { TYPES } from "@constants/types";
+
+const userService = container.get<UserService>(TYPES.UserService);
 
 export default function Header() {
 
     const classes = useStyles();
+
+    userService.getUserConnectUseCase().connect();
 
     return (
         <>
