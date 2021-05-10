@@ -3,19 +3,20 @@ import { Container } from "inversify";
 import { TYPES } from "@constants/types";
 
 import NewsService from "@configuration/usecases/NewsService";
-import UserService from "@configuration/usecases/UserService";
 
 import INewsRepository from "@application/repositories/INewsRepository";
-import IUserBlockchainRepository from "@application/repositories/IUserBlockchainRepository";
+import IUseEtherium from "@application/repositories/IEtheriumRepository";
 
 import NewsHardcodeRepository from "@infraestructure/repositories/news/NewsHardcodeRepository";
-import UserMetaMaskRepository from "@infraestructure/repositories/user/UserMetaMaskRepository";
+import MetaMaskRepository from "@infraestructure/repositories/wallet/MetaMaskRepository";
+import useEtherium from "@infraestructure/repositories/etherium/EtheriumRepository";
 
 const container = new Container();
 
 container.bind<INewsRepository>(TYPES.INewsRepository).to(NewsHardcodeRepository);
+container.bind<IUseEtherium>(TYPES.IUseEtherium).toConstantValue(useEtherium);
+container.bind<MetaMaskRepository>(TYPES.MetaMaskRepository).to(MetaMaskRepository);
+
 container.bind<NewsService>(TYPES.NewsService).to(NewsService);
-container.bind<IUserBlockchainRepository>(TYPES.IUserBlockchainRepository).to(UserMetaMaskRepository);
-container.bind<UserService>(TYPES.UserService).to(UserService);
 
 export { container }

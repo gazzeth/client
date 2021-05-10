@@ -4,16 +4,18 @@ import useStyles from "./styles";
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
 import { container } from "@container-inversify";
-import UserService from "@configuration/usecases/UserService";
 import { TYPES } from "@constants/types";
+import MetaMaskRepository from "@infraestructure/repositories/wallet/MetaMaskRepository";
+import IUseEtherium from "@application/repositories/IEtheriumRepository";
 
-const userService = container.get<UserService>(TYPES.UserService);
+const metamaskRepository = container.get<MetaMaskRepository>(TYPES.MetaMaskRepository);
+const useEtherium = container.get<IUseEtherium>(TYPES.IUseEtherium);
 
 export default function Header() {
 
     const classes = useStyles();
 
-    userService.getUserConnectUseCase().connect();
+    const [active, account, connector, activate, error] = useEtherium();
 
     return (
         <>
@@ -25,6 +27,9 @@ export default function Header() {
                                 <Typography variant="h4" className={classes.brandName}>Gazzeth</Typography>
                             </div>
                         </div>
+                    </Button>
+                    <Button className={classes.button} onClick={() => {activate(metamaskRepository.getConnector(), undefined, true)}}>
+                        <Typography>Connect</Typography>
                     </Button>
                 </Toolbar>
             </AppBar>
