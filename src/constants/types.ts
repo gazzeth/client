@@ -1,6 +1,8 @@
 export const TYPES = {
     INewsRepository: Symbol.for("INewsRepository"),
     NewsService: Symbol.for("NewsService"),
-    MetaMaskRepository: Symbol.for("MetaMaskRepository"),
-    IUseEtherium: Symbol.for("IUseEtherium"),
+    IBlockchainRepository: Symbol.for("IBlockchainRepository"),
+    BlockchainService: Symbol.for("BlockchainService"),    
+    IWalletRepository: Symbol.for("IWalletRepository"),
+    WalletService: Symbol.for("WalletService"),
 }

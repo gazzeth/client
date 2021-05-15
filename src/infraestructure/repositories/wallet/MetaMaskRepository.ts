@@ -1,9 +1,7 @@
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import IWalletRepository from '@application/repositories/IWalletRepository';
-import { injectable } from 'inversify';
+import IWalletRepository from './IWalletRepository';
 
-@injectable()
 export default class MetaMaskRepository implements IWalletRepository {
 
     public isInstall(): boolean {

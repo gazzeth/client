@@ -1,8 +1,9 @@
+import { walletType } from '@constants/supported_wallets';
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 export default interface IWalletRepository {
 
-    isInstall(): boolean;
+    isInstall(wallet: walletType): boolean;
 
-    getConnector(): AbstractConnector;
+    getConnector(wallet: walletType): AbstractConnector;
 }
