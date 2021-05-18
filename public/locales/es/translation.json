@@ -16,5 +16,23 @@
 
     "pending-status-bar-description": "Esta noticia está pendiente de revisión",
     "false-status-bar-description": "Esta noticia fue declarada falsa",
-    "true-status-bar-description": "Esta noticia fue declarada verdadera"
+    "true-status-bar-description": "Esta noticia fue declarada verdadera",
+
+    "connect-to-wallet": "Conectarse a la billetera",
+    "back": "Atras",
+    "metamask-header": "Metamask",
+    "metamask-subheader": "Extension de navegador facil de usar",
+    "install": "Install {{wallet}}",
+    "loading-wallet": "Cargando la billetera...",
+    "try-again": "Volver a intentar",
+    "error-wallet": "Error al conectarse a la billetera",
+    "error-chain": "Por favor conectese a la apropiada red.",
+    "error-connecting": "Error al conectar la billetera. Trate de refrescar la pagina.",
+    "account": "Cuenta",
+    "wallet": "Billeteras",
+
+    "connected-with": "Conectado con {{wallet}}",
+    "change": "Cambiar",
+    "copy-address": "Copiar dirreccion",
+    "view-etherscan": "Ver en etherscan"
 }

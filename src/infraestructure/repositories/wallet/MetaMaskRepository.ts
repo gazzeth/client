@@ -10,7 +10,7 @@ export default class MetaMaskRepository implements IWalletRepository {
 
     public getConnector(): AbstractConnector {
         return new InjectedConnector({
-            supportedChainIds: [1, 3, 4, 5, 42],
+            supportedChainIds: [1/*, 3*/], //TODO mainnet and ropsten
         });
     }
 }

@@ -1,5 +1,5 @@
 import IBlockchainGetUseUsecase from "./IBlockchainGetUseUsecase";
-import IBlockchainRepository, { IUseBlockchain } from '@application/repositories/IBlockchainRepository';
+import IBlockchainRepository, { IUseActiveBlockchain, IUseBlockchain } from '@application/repositories/IBlockchainRepository';
 
 export default class BlockchainGetUseUsecase implements IBlockchainGetUseUsecase {
 
@@ -11,5 +11,9 @@ export default class BlockchainGetUseUsecase implements IBlockchainGetUseUsecase
     
     public getUse(): IUseBlockchain {
         return this.blockchainRepository.getUse()
+    }
+
+    public getUseActive(): IUseActiveBlockchain {
+        return this.blockchainRepository.getUseActive()
     }
 }

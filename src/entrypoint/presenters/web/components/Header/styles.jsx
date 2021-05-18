@@ -40,5 +40,5 @@ export default makeStyles(theme => ({
   },
   button: {
     textTransform: "none",
-  }
+  },
 }));
