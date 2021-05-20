@@ -25,7 +25,7 @@ export default function Error() {
                 <Paper classes={{ root: classes.paper }}>
                     <Typography variant="h1" color="primary" className={classnames(classes.text, classes.error)}>
                         404
-                </Typography>
+                    </Typography>
                     <Typography variant="h5" color="primary" className={classes.text}>
                         {t("page-not-found")}
                     </Typography>

@@ -3,6 +3,7 @@ import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
+import Wallet from "../Wallet/Wallet";
 
 export default function Header() {
 
@@ -19,6 +20,7 @@ export default function Header() {
                             </div>
                         </div>
                     </Button>
+                    <Wallet />
                 </Toolbar>
             </AppBar>
         </>

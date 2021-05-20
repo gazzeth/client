@@ -10,14 +10,36 @@ import App from "@entrypoint/presenters/web/App";
 import '@entrypoint/presenters/web/components/Translation/I18next';
 import i18n from "i18next";
 
-ReactDOM.render(  
+import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
+import { Web3Provider } from '@ethersproject/providers'
+
+const getLibrary = (provider: any): Web3Provider => {
+  const library = new Web3Provider(
+    provider,
+    typeof provider.chainId === 'number'
+      ? provider.chainId
+      : typeof provider.chainId === 'string'
+        ? parseInt(provider.chainId)
+        : 'any'
+  )
+  library.pollingInterval = 15000
+  return library
+}
+
+const Web3ProviderNetwork = createWeb3ReactRoot('NETWORK')
+
+ReactDOM.render(
   <Suspense fallback={(<div>{i18n.t("loading")}</div>)}>
-    <Provider store={store}>
-      <ThemeProvider theme={Themes}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Web3ProviderNetwork getLibrary={getLibrary}>
+        <Provider store={store}>
+          <ThemeProvider theme={Themes}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </Provider>
+      </Web3ProviderNetwork>
+    </Web3ReactProvider>
   </Suspense>,
   document.getElementById("root"),
 );

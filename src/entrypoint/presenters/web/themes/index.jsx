@@ -165,6 +165,9 @@ const theme = (createMuiTheme)({ //TODO check
         h6: {
             fontSize: "1.142rem",
         },
+        body2: {
+            fontSize: "1rem",
+        },
     },
 });
 
