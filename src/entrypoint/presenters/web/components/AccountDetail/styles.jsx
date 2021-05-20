@@ -12,6 +12,10 @@ export default makeStyles(theme => ({
         justifyContent: "space-between",
         padding: "0rem"
     },
+    start: {
+        justifyContent: "flex-start",
+        padding: "0rem"
+    },
     columnContainer: {
         display: "flex",
         flexDirection: "column",
@@ -36,19 +40,30 @@ export default makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "flex-start",
     },
-    errorContainer: {
-        border: `1px solid #fd4040`,
+    text: {
+        color: "#888d9b"
     },
-    errorText: {
-        color: "#fd4040"
+    textAccount: {
+        color: "#000000",
     },
     button: {
         textTransform: "none",
-        backgroundColor: "#888d9b",
+        backgroundColor: "none",
         color: "#000000",
         borderRadius: 10,
         "&:hover": {
-            backgroundColor: "#a8abb3"
+            backgroundColor: "none",
+            textDecoration: "underline"
         }
     },
+    buttonChange: {
+        textTransform: "none",
+        color: theme.palette.primary.main,
+        borderRadius: 20,
+        border: `1px solid ${theme.palette.primary.main}`,
+        "&:hover": {
+            backgroundColor: "none",
+            textDecoration: "underline"
+        }
+    }
 }));

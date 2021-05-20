@@ -23,7 +23,7 @@ export default function CustomModal({ isOpen, onClose, onClickTitle, title, chil
             <Paper className={classes.paper}>
                 <div className={classes.titleRow}>
                     <Button className={classes.button} onClick={onClickTitle}>
-                        <Typography>{title}</Typography>
+                        <Typography variant="h5">{title}</Typography>
                     </Button>
                     <IconButton className={classes.iconButton} onClick={onClose}>
                         <CloseIcon />

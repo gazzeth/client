@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import Modal from "../Modal/Modal";
@@ -13,6 +14,8 @@ import { Button, CircularProgress, Typography, Box } from "@material-ui/core";
 import classnames from "classnames";
 import { UnsupportedChainIdError } from "@web3-react/core";
 import usePrevious from "../../hooks/usePrevious";
+import { RootState } from "@entrypoint/presenters/web/reducers/allReducers";
+import allActions from "@entrypoint/presenters/web/actions/allActions";
 
 type Props = {
     isOpen: boolean,
@@ -30,7 +33,9 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
     const useBlockchain = blockchainService.getBlockchainGetUseUseCase().getUse()
     const [active, account, , activate, error] = useBlockchain();
 
-    const [pendingWallet, setPendingWallet] = useState<walletInfo | undefined>(undefined)
+
+    const wallet = useSelector((state: RootState) => state.wallet.wallet);
+    const dispatch = useDispatch();
     const [state, setState] = useState<"account" | "options" | "pending">("options")
 
     const previousAccount = usePrevious(account)
@@ -70,7 +75,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
     }, [error, previousError, onOpen])
 
     const tryActivate = (option: walletInfo) => {
-        setPendingWallet(option)
+        dispatch(allActions.walletActions.setWallet(option))
         setState("pending")
         const connector = walletService.getWalletGetConnectorUseCase().getConnector(option.type)
         activate(connector)
@@ -85,7 +90,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
                     icon={option.icon}
                     header={t(`${option.type}-header`)}
                     onClick={() => tryActivate(option)} 
-                    active={(pendingWallet) ? pendingWallet.type === option.type : false} />
+                    active={(wallet) ? wallet.type === option.type : false} />
             }
             else {
                 return <Options
@@ -114,9 +119,9 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
             <>
                 {!!error ? ((error instanceof UnsupportedChainIdError) ? getError() : getErrorTryAgain()) : getLoading()}
                 <Options
-                    icon={pendingWallet.icon}
-                    header={t(`${pendingWallet.type}-header`)}
-                    subHeader={t(`${pendingWallet.type}-subheader`)} />
+                    icon={wallet.icon}
+                    header={t(`${wallet.type}-header`)}
+                    subHeader={t(`${wallet.type}-subheader`)} />
             </>
         )
     }
@@ -138,7 +143,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
                     <Typography>{t("error-wallet")}</Typography>
                 </div>
                 <div className={classes.rightContainer}>
-                    <Button className={classes.button} onClick={() => { tryActivate(pendingWallet); }}>
+                    <Button className={classes.button} onClick={() => { tryActivate(wallet); }}>
                         <Typography><Box fontWeight={500}>{t("try-again")}</Box></Typography>
                     </Button>
                 </div>
@@ -149,7 +154,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
     if (state === "account") {
         return (
             <Modal isOpen={isOpen} onClose={onCloseWrapper} title={t("account")}>
-                <AccountDetail onChange={() => setState("options")} wallet={pendingWallet} />
+                <AccountDetail onChange={() => setState("options")} wallet={wallet} />
             </Modal>
         )
     }
@@ -160,7 +165,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
                 setState("account")
             }
             else {
-                setPendingWallet(undefined)
+                dispatch(allActions.walletActions.setWallet(undefined))
                 setState("options")
             }
         }

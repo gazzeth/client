@@ -44,6 +44,7 @@
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.1.0",
     "inversify": "^5.0.5",
+    "jazzicon": "^1.5.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
