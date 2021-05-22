@@ -1,22 +1,11 @@
 export default class News {
     id: number;
     verified?: boolean;
-    title: string;
-    lede: string;
-    body: string;
-    image: string;
+    content: File
 
-    constructor(id: number, title: string, lede: string, body: string, image: string, verified?: boolean) {
+    constructor(id: number, content: File, verified?: boolean) {
         this.id = id;
         this.verified = verified;
-        this.title = title;
-        this.lede = lede;
-        this.body = body;
-        this.image = image;
+        this.content = content;
     }
-
-    setLede(lede: string) {
-        return new News(this.id, this.title, lede, this.body, this.image, this.verified);
-    }
-    
-};
+}

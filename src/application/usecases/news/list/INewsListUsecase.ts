@@ -1,7 +1,7 @@
 import Filter from "@domain/Filter/NewsFilter";
-import News from "@domain/News/News";
+import NewsPreview from "@domain/News/NewsPreview";
 import Pagination from "@domain/Pagination/Pagination";
 
 export default interface INewsListUsecase {
-    list(pagination: Pagination, filter: Filter): Promise<News[]>
+    list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]>
 }

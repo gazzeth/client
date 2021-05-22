@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Pagination from "@domain/Pagination/Pagination";
 import Filter from "@domain/Filter/NewsFilter";
-import News from "@domain/News/News";
+import NewsPreview from "@domain/News/NewsPreview";
 
-const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: News[]) => void),
+const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]) => void),
     pagination: Pagination, filter: Filter) => void, filter: Filter, pageSize: number):
-    [boolean, Pagination, Filter, (f: Filter) => void, News[]] => {
+    [boolean, Pagination, Filter, (f: Filter) => void, NewsPreview[]] => {
 
-    const [newsList, setNewList] = useState<News[]>([]);
+    const [newsList, setNewList] = useState<NewsPreview[]>([]);
     const [pageState, setPageState] = useState({
         pagination: new Pagination(pageSize, 0),
         filter: filter,
