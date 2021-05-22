@@ -1,5 +1,5 @@
 import INewsRepository from "@application/repositories/INewsRepository";
-import News from "@domain/News/News";
+import News from "@domain/models/News/News";
 import INewsGetUsecase from "./INewsGetUsecase";
 
 export default class NewsGetUsecase implements INewsGetUsecase{

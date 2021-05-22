@@ -1,4 +1,4 @@
-import Chain from '@domain/Chain/Chain'
+import Chain from '@domain/models/Chain/Chain'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 export type IUseBlockchain = () => [boolean, string, AbstractConnector,

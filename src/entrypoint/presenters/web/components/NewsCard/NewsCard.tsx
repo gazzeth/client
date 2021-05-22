@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
-import NewsPreview from "@domain/News/NewsPreview";
+import NewsPreview from "@domain/models/News/NewsPreview";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';

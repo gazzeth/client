@@ -1,12 +1,12 @@
 import React from "react";
 import useStyles from "./styles";
 import { container } from "@container-inversify";
-import NewsPreview from "@domain/News/NewsPreview";
+import NewsPreview from "@domain/models/News/NewsPreview";
 import NewsCard from "@entrypoint/presenters/web/components/NewsCard/NewsCard";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
-import Pagination from "@domain/Pagination/Pagination";
-import Filter from "@domain/Filter/NewsFilter";
+import Pagination from "@domain/models/Pagination/Pagination";
+import Filter from "@domain/models/Filter/NewsFilter";
 import { CircularProgress, Container, Grid } from '@material-ui/core'
 import NewsFilterBar from "../NewsFilterBar/NewsFilterBar";
 import useInfiniteScrolling from "../../hooks/useInifiniteScrolling";

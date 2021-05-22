@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
 import INewsRepository from "@application/repositories/INewsRepository";
-import Filter from "@domain/Filter/NewsFilter";
-import NewsPreview from "@domain/News/NewsPreview";
-import News from "@domain/News/News";
-import Pagination from "@domain/Pagination/Pagination";
+import Filter from "@domain/models/Filter/NewsFilter";
+import NewsPreview from "@domain/models/News/NewsPreview";
+import News from "@domain/models/News/News";
+import Pagination from "@domain/models/Pagination/Pagination";
 import { VERIFIED_STATUS } from '@constants/verifiedStatus';
 
 @injectable()

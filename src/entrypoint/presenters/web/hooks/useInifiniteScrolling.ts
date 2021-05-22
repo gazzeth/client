@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Pagination from "@domain/Pagination/Pagination";
-import Filter from "@domain/Filter/NewsFilter";
-import NewsPreview from "@domain/News/NewsPreview";
+import Pagination from "@domain/models/Pagination/Pagination";
+import Filter from "@domain/models/Filter/NewsFilter";
+import NewsPreview from "@domain/models/News/NewsPreview";
 
 const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]) => void),
     pagination: Pagination, filter: Filter) => void, filter: Filter, pageSize: number):

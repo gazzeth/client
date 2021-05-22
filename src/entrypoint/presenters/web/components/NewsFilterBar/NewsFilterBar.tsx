@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
-import NewsFilter from "@domain/Filter/NewsFilter";
+import NewsFilter from "@domain/models/Filter/NewsFilter";
 import { InputLabel, FormControl, FormHelperText, MenuItem, Paper, Select, Typography, Container } from "@material-ui/core";
 import { VERIFIED_STATUS } from "@constants/verifiedStatus";
 

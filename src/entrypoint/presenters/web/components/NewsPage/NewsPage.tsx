@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import News from "@domain/News/News";
+import News from "@domain/models/News/News";
 import useStyles from "./styles";
 // import { useTranslation } from 'react-i18next';
 import { container } from "@container-inversify";
