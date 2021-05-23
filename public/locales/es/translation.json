@@ -34,5 +34,9 @@
     "connected-with": "Conectado con {{wallet}}",
     "change": "Cambiar",
     "copy-address": "Copiar dirreccion",
-    "view-etherscan": "Ver en etherscan"
+    "view-etherscan": "Ver en etherscan",
+
+    "select-markdown": "Seleccione un archivo de tipo Markdown",
+    "browse-files": "Examinar un archivo",
+    "select-topic": "Seleccione un topico"
 }
