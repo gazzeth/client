@@ -3,14 +3,14 @@ import useStyles from "./styles";
 import { Button, IconButton, Paper, Typography } from "@material-ui/core";
 
 type Props = {
-    onClose?: () => void,
+    onClick?: () => void,
     onClickTitle?: () => void,
     title?: string,
     icon?: React.ReactNode,
     children: React.ReactNode
 }
 
-export default function Container({ onClose, onClickTitle, title, icon, children }: Props) {
+export default function Container({ onClick, onClickTitle, title, icon, children }: Props) {
 
     const classes = useStyles();
 
@@ -21,7 +21,7 @@ export default function Container({ onClose, onClickTitle, title, icon, children
                     <Typography variant="h5">{title}</Typography>
                 </Button>
                 {icon &&
-                    <IconButton className={classes.iconButton} onClick={onClose}>
+                    <IconButton className={classes.iconButton} onClick={onClick}>
                         {icon}
                     </IconButton>
                 }

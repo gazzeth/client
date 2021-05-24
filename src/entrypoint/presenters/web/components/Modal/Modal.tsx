@@ -21,7 +21,7 @@ export default function CustomModal({ isOpen, onClose, onClickTitle, title, chil
             className={classes.modal}
             open={isOpen}
             onClose={onClose}>
-                <Container onClose={onClose} onClickTitle={onClickTitle} title={title} icon={<CloseIcon />}>
+                <Container onClick={onClose} onClickTitle={onClickTitle} title={title} icon={<CloseIcon />}>
                     {children}
                 </Container>
         </Modal>

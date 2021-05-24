@@ -6,6 +6,7 @@ import withLayout from "@entrypoint/presenters/web/components/Layout/withLayout"
 import NewsList from "@entrypoint/presenters/web/components/NewsList/NewsList";
 import NewsPage from "@entrypoint/presenters/web/components/NewsPage/NewsPage";
 import NewsForm from "@entrypoint/presenters/web/components/NewsForm/NewsForm";
+import JuryForm from "@entrypoint/presenters/web/components/JuryForm/JuryForm";
 import { URLS } from "@constants/urls";
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path={URLS.home} component={withLayout(NewsList)} />
+          <Route exact path={URLS.juryForm} component={withLayout(JuryForm)}/>
           <Route exact path={URLS.newsForm} component={withLayout(NewsForm)}/>
           <Route exact path={URLS.news} component={withLayout(NewsPage)}/>
           <Route component={Error} />

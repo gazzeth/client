@@ -38,5 +38,7 @@
 
     "select-markdown": "Seleccione un archivo de tipo Markdown",
     "browse-files": "Examinar un archivo",
-    "select-topic": "Seleccione un topico"
+    "select-topic": "Seleccione un topico",
+
+    "registry": "Registrarse para ser jurado"
 }
