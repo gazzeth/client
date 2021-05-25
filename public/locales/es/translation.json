@@ -40,5 +40,11 @@
     "browse-files": "Examinar un archivo",
     "select-topic": "Seleccione un topico",
 
-    "registry": "Registrarse para ser jurado"
+    "registry": "Registrarse para ser jurado",
+    "quantity": "Cantidad de veces",
+    "add": "Agregar",
+    "jury-form-incomplete": "Es necesario elegir un topico y la cantidad de veces",
+    "regiter-jury": "Registrarse como jurado",
+
+    "balance": "Balance: {{value}}"
 }
