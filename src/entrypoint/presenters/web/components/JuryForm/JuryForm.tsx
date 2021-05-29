@@ -9,6 +9,12 @@ import { Button, IconButton, TextField, Typography } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import classnames from "classnames";
 import LockInfo from "../LockInfo/LockInfo";
+import { container } from "@container-inversify";
+import { TYPES } from "@constants/types";
+import TopicService from "@configuration/usecases/TopicService";
+
+const topicService = container.get<TopicService>(TYPES.TopicService);
+
 
 export default function JuryForm() {
     const { t } = useTranslation();
@@ -34,7 +40,8 @@ export default function JuryForm() {
         }
     }
     const onSummit = () => {
-        
+        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics)
+            .then((arrayOfPromise) => {}) //TODO handle
     }
 
     return (

@@ -21,4 +21,8 @@ export default class TopicHardcodeRepository implements ITopicRepository {
             }, 1 * 1000)
         });
     }
+
+    subscribe(topic: { topic: Topic, quantity: number }): Promise<void> {
+        return;
+    }
 }
