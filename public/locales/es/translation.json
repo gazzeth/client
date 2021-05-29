@@ -49,5 +49,6 @@
     "balance": "Balance: {{value}}",
 
     "publish-news": "Publicar una noticia",
-    "pre-render": "Mostrar como se rendearia la noticia"
+    "pre-render": "Mostrar como se rendearia la noticia",
+    "publish": "Publicar"
 }

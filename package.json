@@ -59,6 +59,7 @@
     "react-scripts": "4.0.1",
     "react-swipeable-views": "^0.13.9",
     "reflect-metadata": "^0.1.13",
+    "remark-gfm": "^1.0.0",
     "tinycolor2": "^1.4.2",
     "tsconfig-paths": "^3.9.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
