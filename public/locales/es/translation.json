@@ -46,5 +46,8 @@
     "jury-form-incomplete": "Es necesario elegir un topico y la cantidad de veces",
     "regiter-jury": "Registrarse como jurado",
 
-    "balance": "Balance: {{value}}"
+    "balance": "Balance: {{value}}",
+
+    "publish-news": "Publicar una noticia",
+    "pre-render": "Mostrar como se rendearia la noticia"
 }

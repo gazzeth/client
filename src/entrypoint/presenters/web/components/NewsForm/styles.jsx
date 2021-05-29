@@ -23,15 +23,32 @@ export default makeStyles(theme => ({
     text: {
         color: "#000000",
     },
-    columnContainer: {
-        display: "flex",
-        flexDirection: "column",
-        padding: "1.1rem",
-    },
     rowContainer: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        padding: "1.1rem",
+        paddingTop: "1.1rem",
+        paddingBottom: "1.1rem",
+        "& .MuiOutlinedInput-root": {
+            borderRadius: 15,
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+            borderRadius: 15,
+        },
+    },
+    buttonPublish: {
+        textTransform: "none",
+        color: "#FFFFFF",
+        backgroundColor: theme.palette.primary.main,
+        borderRadius: 15,
+        border: `1px solid ${theme.palette.primary.main}`,
+        width: "100%",
+        "&:hover": {
+            backgroundColor: theme.palette.primary.light
+        },
+        "&.MuiButton-root.Mui-disabled": {
+            backgroundColor: "#FFFFFF",
+            border: "none"
+        }
     }
 }));

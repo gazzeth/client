@@ -31,7 +31,7 @@ export default function JuryForm() {
         if (currentTopic && currentQuantity) {
             setSelectedTopics(topics => {
                 setErorMenssage(undefined)
-                setCost(c => c + currentTopic.cost * (+currentQuantity))
+                setCost(c => c + currentTopic.costJury * (+currentQuantity))
                 return [...topics, { topic: currentTopic, quantity: +currentQuantity }]
             })
         }
@@ -63,7 +63,7 @@ export default function JuryForm() {
                             setSelectedTopics(topic => {
                                 const newTopics = [...topic]
                                 newTopics.splice(i, 1)
-                                setCost(c => c - t.topic.cost * t.quantity)
+                                setCost(c => c - t.topic.costJury * t.quantity)
                                 return newTopics
                             })
                         }

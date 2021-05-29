@@ -7,9 +7,9 @@ import { injectable } from 'inversify';
 export default class TopicHardcodeRepository implements ITopicRepository {
 
     private topicList = [
-        new Topic("Quimica", 10), new Topic("Politica", 14), new Topic("Espectaculo", 11),
-        new Topic("Geografia", 20), new Topic("Biologia", 50), new Topic("Fisica", 10),
-        new Topic("Economia", 20), new Topic("Argentina", 24), new Topic("Uruguay", 16),
+        new Topic("Quimica", 10, 11), new Topic("Politica", 14, 15), new Topic("Espectaculo", 11, 12),
+        new Topic("Geografia", 20, 21), new Topic("Biologia", 50, 51), new Topic("Fisica", 10, 11),
+        new Topic("Economia", 20, 21), new Topic("Argentina", 24, 25), new Topic("Uruguay", 16, 17),
     ]
 
     list(pagination: Pagination): Promise<Topic[]> {
