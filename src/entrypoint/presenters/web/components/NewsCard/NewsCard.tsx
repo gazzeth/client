@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
-import News from "@domain/News/News";
+import NewsPreview from "@domain/models/News/NewsPreview";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
 
 interface PropTypes {
-    News: News;
+    News: NewsPreview;
 }
 
 export default function NewsCard(props: PropTypes) {

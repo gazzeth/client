@@ -1,12 +1,12 @@
 import React from "react";
 import useStyles from "./styles";
 import { container } from "@container-inversify";
-import News from "@domain/News/News";
+import NewsPreview from "@domain/models/News/NewsPreview";
 import NewsCard from "@entrypoint/presenters/web/components/NewsCard/NewsCard";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
-import Pagination from "@domain/Pagination/Pagination";
-import Filter from "@domain/Filter/NewsFilter";
+import Pagination from "@domain/models/Pagination/Pagination";
+import Filter from "@domain/models/Filter/NewsFilter";
 import { CircularProgress, Container, Grid } from '@material-ui/core'
 import NewsFilterBar from "../NewsFilterBar/NewsFilterBar";
 import useInfiniteScrolling from "../../hooks/useInifiniteScrolling";
@@ -16,7 +16,7 @@ const newsService = container.get<NewsService>(TYPES.NewsService);
 export default function NewsList() {
     const PAGE_SIZE = 5; //TODO maybe put in constnants?
 
-    const getPage = async (handleNewList: ((newsList: News[]) => void),
+    const getPage = async (handleNewList: ((newsList: NewsPreview[]) => void),
         pagination: Pagination, filter: Filter) => {
         newsService.getNewsListUseCase().list(pagination, filter)
             .then((newsListResponce) => {

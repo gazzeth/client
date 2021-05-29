@@ -5,4 +5,6 @@ export const TYPES = {
     BlockchainService: Symbol.for("BlockchainService"),    
     IWalletRepository: Symbol.for("IWalletRepository"),
     WalletService: Symbol.for("WalletService"),
+    ITopicRepository: Symbol.for("ITopicRepository"),
+    TopicService: Symbol.for("TopicService"),
 }

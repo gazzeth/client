@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import News from "@domain/News/News";
+import News from "@domain/models/News/News";
 import useStyles from "./styles";
 // import { useTranslation } from 'react-i18next';
 import { container } from "@container-inversify";
@@ -71,6 +71,8 @@ export default function NewsPage() {
     }
     return (
         <Container maxWidth={false}>
+            "PROXIMAMENTE"
+            {/* TODO 
             <Grid container direction="column" className={classes.gridContainer} spacing={2}>
                 <Grid item>
                     <Grid container justify="center" className={classes.gridContainer}>
@@ -101,7 +103,7 @@ export default function NewsPage() {
                         </Card>
                     </Grid>
                 </Grid >
-            </Grid >
+            </Grid > */}
         </Container>
     )
 }

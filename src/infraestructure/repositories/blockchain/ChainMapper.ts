@@ -1,4 +1,4 @@
-import Chain from "@domain/Chain/Chain";
+import Chain from "@domain/models/Chain/Chain";
 
 export default class ChainMapper {
     
