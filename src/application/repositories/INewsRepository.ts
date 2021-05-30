@@ -7,4 +7,6 @@ export default interface INewsRepository {
     list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]>
 
     get(id: number): Promise<News>;
+
+    post(news: News): Promise<void>;
 }

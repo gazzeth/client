@@ -15,7 +15,6 @@ import TopicService from "@configuration/usecases/TopicService";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
 
-
 export default function JuryForm() {
     const { t } = useTranslation();
     const classes = useStyles();

@@ -55,4 +55,8 @@ export default class NewsHardcodeRepository implements INewsRepository {
             }, 1 * 1000)
         });
     }
+
+    public async post(news: News): Promise<void> {
+        return;
+    }
 }

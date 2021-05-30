@@ -6,8 +6,13 @@ import Topic from "@domain/models/Topic/Topic";
 import SelectTopic from "../SelectTopic/SelectTopic";
 import Container from "../Container/Container";
 import LockInfo from "../LockInfo/LockInfo";
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
+import NewsService from "@configuration/usecases/NewsService";
+import { container } from "@container-inversify";
+import { TYPES } from "@constants/types";
+import News from "@domain/models/News/News";
+import NewsRender from "../NewsRender/NewsRender";
+
+const newsService = container.get<NewsService>(TYPES.NewsService);
 
 export default function NewsForm() {
     const { t } = useTranslation();
@@ -32,7 +37,10 @@ export default function NewsForm() {
     }
 
     const onSummit = () => {
-
+        newsService.getNewsPostUseCase()
+            .post(new News(undefined, news.content, news.topic, undefined))
+            .then(() => console.log("Succesful")) //TODO
+            .catch((error) => console.log(error))
     }
 
     return (
@@ -69,12 +77,7 @@ export default function NewsForm() {
                 </Container>
             </div>
             {
-                preRender && !!news.content &&
-                <div className={classes.rowContainer}>
-                    <Container>
-                        <ReactMarkdown remarkPlugins={[gfm]}>{news.content}</ReactMarkdown>
-                    </Container>
-                </div>
+                preRender && !!news.content && <NewsRender>{news.content}</NewsRender>
             }
         </>
     )

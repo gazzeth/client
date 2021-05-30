@@ -3,6 +3,7 @@ import { TYPES } from '@constants/types';
 import INewsRepository from "@application/repositories/INewsRepository";
 import NewsListUsecase from "@application/usecases/news/list/NewsListUsecase";
 import NewsGetUsecase from "@application/usecases/news/get/NewsGetUsecase";
+import NewsPostUsecase from "@application/usecases/news/post/NewsPostUsecase";
 
 @injectable()
 export default class NewsService {
@@ -12,7 +13,11 @@ export default class NewsService {
         return new NewsListUsecase(this.newsRepository);
     }
 
-    public getNewsGetListUseCase() {
+    public getNewsGetUseCase() {
         return new NewsGetUsecase(this.newsRepository);
+    }
+
+    public getNewsPostUseCase() {
+        return new NewsPostUsecase(this.newsRepository);
     }
 }
