@@ -50,5 +50,15 @@
 
     "publish-news": "Publicar una noticia",
     "pre-render": "Mostrar como se rendearia la noticia",
-    "publish": "Publicar"
+    "publish": "Publicar",
+
+    "vote-news": "Emitir un voto",
+    "reveal-news": "Revelar un voto",
+    "select-vote-value": "Seleccione un valor para el voto",
+    "vote-value-1": "Verdadero",
+    "vote-value-2": "Falso",
+    "vote-value-3": "No clasifica",
+    "vote": "Votar",
+    "reveal": "Revelar",
+    "justification": "Justificación"
 }
