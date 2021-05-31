@@ -7,4 +7,6 @@ export const TYPES = {
     WalletService: Symbol.for("WalletService"),
     ITopicRepository: Symbol.for("ITopicRepository"),
     TopicService: Symbol.for("TopicService"),
+    IVoteRepository: Symbol.for("IVoteRepository"),
+    VoteService: Symbol.for("VoteService"),
 }

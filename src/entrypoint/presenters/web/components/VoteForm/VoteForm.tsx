@@ -5,6 +5,14 @@ import Container from "../Container/Container";
 import { Button, FormControl, InputLabel, Select, TextField, Typography } from "@material-ui/core";
 import { VOTE_VALUE, VOTE_VALUES } from "@constants/vote_value";
 import { useParams } from "react-router";
+import Vote from "@domain/models/Vote/Vote";
+import VoteService from "@configuration/usecases/VoteService";
+import { container } from "@container-inversify";
+import { TYPES } from "@constants/types";
+import BlockchainService from "@configuration/usecases/BlockchainService";
+
+const voteService = container.get<VoteService>(TYPES.VoteService);
+const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
 type Props = {
     isReveal: boolean
@@ -18,13 +26,17 @@ export default function VoteForm({ isReveal }: Props) {
 
     const [voteValue, setVoteValue] = useState<VOTE_VALUE>(undefined);
     const [justification, setJustification] = useState<string>(undefined);
+    const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
+    const [, , , library] = useActiveBlockchain();
 
     const onSummit = () => {
         if (isReveal) {
-
+            voteService.getVoteRevealUsecase()
+                .reveal(new Vote(voteValue, Number.parseFloat(id), justification), library)
         }
         else {
-
+            voteService.getVoteCommitUseCase()
+                .commit(new Vote(voteValue, Number.parseFloat(id)), library)
         }
     }
 
@@ -49,7 +61,7 @@ export default function VoteForm({ isReveal }: Props) {
                 </div>
                 {
                     isReveal && <TextField className={classes.formControl} label={t("justification")}
-                        multiline rows={4} variant="outlined" onChange={(e) => setJustification(e.target.value as string)}/>
+                        multiline rows={4} variant="outlined" onChange={(e) => setJustification(e.target.value as string)} />
                 }
                 <div className={classes.rowContainer}>
                     <Button className={classes.button} onClick={onSummit}
