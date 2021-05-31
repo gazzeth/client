@@ -5,9 +5,17 @@ import NewsPreview from "@domain/models/News/NewsPreview";
 import News from "@domain/models/News/News";
 import Pagination from "@domain/models/Pagination/Pagination";
 import { VERIFIED_STATUS } from '@constants/verifiedStatus';
+import { ethers } from "ethers";
+import Protocol from '@assets/abis/Protocol.json';
+import { Web3Provider } from '@ethersproject/providers'
+import { signDaiPermit } from 'eth-permit';
+import IpfsHttpClient from "ipfs-http-client"
 
 @injectable()
 export default class NewsHardcodeRepository implements INewsRepository {
+
+    private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
+    private static readonly DAI_CONTRACT_ADDRESS: string = process.env.REACT_APP_DAI_CONTRACT_ADDRESS || "";
 
     private newsList = [
         new NewsPreview(1, "Peso digital: el proyecto de las provincias para financiarse digitalmente",
@@ -56,7 +64,14 @@ export default class NewsHardcodeRepository implements INewsRepository {
         });
     }
 
-    public async post(news: News): Promise<void> {
-        return;
+    public async post(news: News, library: Web3Provider): Promise<void> {
+        const client = IpfsHttpClient.create({ host: "ipfs.infura.io", port: 5001, protocol: "https" })
+        const { path } = await client.add(news.content, { pin: true })
+        
+        const contract = new ethers.Contract(NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+        const senders = await library.listAccounts()
+        const result = await signDaiPermit(window.ethereum, NewsHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
+            NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
+        return contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s);
     }
 }

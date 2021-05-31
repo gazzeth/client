@@ -16,7 +16,7 @@ export default class EthereumRepository implements IBlockchainRepository {
         return useEthereum
     }
 
-    public getUseActive(): IUseActiveBlockchain { 
+    public getUseActive(): IUseActiveBlockchain {
         const useEthereum: IUseActiveBlockchain = () => {
             const context = useWeb3React<Web3Provider>()
             const contextNetwork = useWeb3React<Web3Provider>('NETWORK')

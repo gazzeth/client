@@ -11,8 +11,10 @@ import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import News from "@domain/models/News/News";
 import NewsRender from "../NewsRender/NewsRender";
+import BlockchainService from "@configuration/usecases/BlockchainService";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
+const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
 export default function NewsForm() {
     const { t } = useTranslation();
@@ -21,6 +23,9 @@ export default function NewsForm() {
     const [news, setNews] = useState<{ content: string, topic: Topic }>({ content: undefined, topic: undefined });
     const [preRender, setPreRender] = useState<boolean>(false);
     const [fileName, setFileName] = useState<string>(undefined);
+
+    const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
+    const [ , , , library ] = useActiveBlockchain();
 
     const onChange = (t: Topic) => { setNews((n) => { return { ...n, topic: t } }) }
     const handleChangePreRender = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +43,7 @@ export default function NewsForm() {
 
     const onSummit = () => {
         newsService.getNewsPostUseCase()
-            .post(new News(undefined, news.content, news.topic, undefined))
+            .post(new News(undefined, news.content, news.topic, undefined), library)
             .then(() => console.log("Succesful")) //TODO
             .catch((error) => console.log(error))
     }

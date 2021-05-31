@@ -12,8 +12,10 @@ import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import TopicService from "@configuration/usecases/TopicService";
+import BlockchainService from "@configuration/usecases/BlockchainService";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
+const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
 export default function JuryForm() {
     const { t } = useTranslation();
@@ -24,6 +26,9 @@ export default function JuryForm() {
     const [selectedTopics, setSelectedTopics] = useState<{ topic: Topic, quantity: number }[]>([])
     const [errorMenssage, setErorMenssage] = useState<string>(undefined)
     const [cost, setCost] = useState<number>(0);
+
+    const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
+    const [ , , , library ] = useActiveBlockchain();
 
     const onChange = (t: Topic) => { setCurrentTopic(t) }
     const onAdd = () => {
@@ -39,7 +44,7 @@ export default function JuryForm() {
         }
     }
     const onSummit = () => {
-        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics)
+        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics, library)
             .then((arrayOfPromise) => {}) //TODO handle
     }
 

@@ -4,7 +4,6 @@
   "private": true,
   "description": "",
   "scripts": {
-    "compile-abi-types": "typechain --target ethers-v5 --out-dir src/assets/abis/types './src/assets/abis/**/*.json'",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
@@ -14,8 +13,7 @@
     "@types/classnames": "^2.2.11",
     "@types/react-router-dom": "^5.1.7",
     "prettier": "^2.2.1",
-    "react-app-rewire-alias": "^0.2.0",
-    "typechain": "^5.0.0"
+    "react-app-rewire-alias": "^0.2.0"
   },
   "dependencies": {
     "@ethersproject/address": "^5.1.0",
@@ -27,7 +25,6 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.3",
-    "@typechain/ethers-v5": "^7.0.0",
     "@types/chai": "^4.2.14",
     "@types/jest": "^26.0.20",
     "@types/mocha": "^8.2.0",
@@ -43,10 +40,13 @@
     "class-validator": "^0.13.1",
     "classnames": "^2.2.6",
     "customize-cra": "^1.0.0",
+    "eth-permit": "^0.1.9",
+    "ethers": "^5.2.0",
     "i18next": "^19.8.5",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.1.0",
     "inversify": "^5.0.5",
+    "ipfs-http-client": "^50.1.0",
     "jazzicon": "^1.5.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",
