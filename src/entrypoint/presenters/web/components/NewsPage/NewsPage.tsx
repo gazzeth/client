@@ -52,7 +52,7 @@ export default function NewsPage() {
 
     useEffect(() => {
         if (idNumber !== NaN) {
-            newsService.getNewsGetListUseCase().get(idNumber)
+            newsService.getNewsGetUseCase().get(idNumber)
                 .then((newsResponce) => setNews(newsResponce))
                 .catch((error) => console.log(error))//TODO maybe do somethin else
                 .finally(() => setLoading(false))

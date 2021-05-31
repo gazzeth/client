@@ -16,13 +16,13 @@ export default class EthereumRepository implements IBlockchainRepository {
         return useEthereum
     }
 
-    public getUseActive(): IUseActiveBlockchain { 
+    public getUseActive(): IUseActiveBlockchain {
         const useEthereum: IUseActiveBlockchain = () => {
             const context = useWeb3React<Web3Provider>()
             const contextNetwork = useWeb3React<Web3Provider>('NETWORK')
-            const { chainId, account, connector } = context.active ? context : contextNetwork;
+            const { chainId, account, connector, library } = context.active ? context : contextNetwork;
             const chain = ChainMapper.toEntity(chainId);
-            return [chain, account, connector];
+            return [chain, account, connector, library];
         }
         return useEthereum
     }

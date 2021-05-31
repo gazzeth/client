@@ -21,7 +21,7 @@ export default function LockInfo({ lockCost }: Props) {
                     <img src={daiIcon} alt={'Icon'} className={classes.image} />
                     <Typography variant="h6">DAI</Typography>
                 </div>
-                <Typography variant="body2">{t("balance", { value: balance })}</Typography>
+                {/* TODO <Typography variant="body2">{t("balance", { value: balance })}</Typography> */}
             </div>
             <div className={classes.columnEnd}>
                 <Typography variant="h4">{lockCost}</Typography>

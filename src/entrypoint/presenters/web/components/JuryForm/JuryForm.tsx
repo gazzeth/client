@@ -12,9 +12,10 @@ import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import TopicService from "@configuration/usecases/TopicService";
+import BlockchainService from "@configuration/usecases/BlockchainService";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
-
+const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
 export default function JuryForm() {
     const { t } = useTranslation();
@@ -26,12 +27,15 @@ export default function JuryForm() {
     const [errorMenssage, setErorMenssage] = useState<string>(undefined)
     const [cost, setCost] = useState<number>(0);
 
+    const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
+    const [ , , , library ] = useActiveBlockchain();
+
     const onChange = (t: Topic) => { setCurrentTopic(t) }
     const onAdd = () => {
         if (currentTopic && currentQuantity) {
             setSelectedTopics(topics => {
                 setErorMenssage(undefined)
-                setCost(c => c + currentTopic.cost * (+currentQuantity))
+                setCost(c => c + currentTopic.costJury * (+currentQuantity))
                 return [...topics, { topic: currentTopic, quantity: +currentQuantity }]
             })
         }
@@ -40,7 +44,7 @@ export default function JuryForm() {
         }
     }
     const onSummit = () => {
-        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics)
+        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics, library)
             .then((arrayOfPromise) => {}) //TODO handle
     }
 
@@ -63,7 +67,7 @@ export default function JuryForm() {
                             setSelectedTopics(topic => {
                                 const newTopics = [...topic]
                                 newTopics.splice(i, 1)
-                                setCost(c => c - t.topic.cost * t.quantity)
+                                setCost(c => c - t.topic.costJury * t.quantity)
                                 return newTopics
                             })
                         }

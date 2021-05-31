@@ -1,9 +1,11 @@
 export default class Topic {
     name: string;
-    cost: number;
+    costJury: number;
+    costPublish: number;
 
-    constructor(name: string, cost: number) {
+    constructor(name: string, costJury: number, costPublish: number) {
         this.name = name;
-        this.cost = cost;
+        this.costJury = costJury;
+        this.costPublish = costPublish;
     }
 }
