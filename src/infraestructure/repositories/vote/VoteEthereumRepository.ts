@@ -18,8 +18,8 @@ export default class VoteEthereumRepository implements IVoteRepository {
         const nonce = await contract.getCommitmentNonce(sender, vote.publicationId);
         const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
         const encode = ethers.utils.defaultAbiCoder.encode(["uint8", "bytes32", "bytes32"], [result.v, result.r, result.s]);
-        const hash = ethers.utils.keccak256(encode);
-        return contract.commitVote(vote.publicationId, hash, nonce);
+        const commitment = ethers.utils.keccak256(encode);
+        return contract.commitVote(vote.publicationId, commitment, nonce);
     }
 
     public async reveal(vote: Vote, library: Web3Provider): Promise<void> {
@@ -29,7 +29,7 @@ export default class VoteEthereumRepository implements IVoteRepository {
         const sender = (await library.listAccounts())[0]
         const commitmentNonce = (await contract.getCommitmentNonce(sender, vote.publicationId)) - 1;
         const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
-        return contract.revealVote(vote.publicationId, vote.value, vote.justification, result.v, result.r, result.s);
+        return contract.revealVote(vote.publicationId, vote.value, commitmentNonce, vote.justification, result.v, result.r, result.s);
     }
 }
 
