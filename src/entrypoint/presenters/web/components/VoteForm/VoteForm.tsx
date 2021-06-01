@@ -50,7 +50,7 @@ export default function VoteForm({ isReveal }: Props) {
                             onChange={(e) => setVoteValue(e.target.value as VOTE_VALUE)} >
                             {
                                 VOTE_VALUES.map((voteValue) => {
-                                    if (voteValue == VOTE_VALUE.None) {
+                                    if (voteValue === VOTE_VALUE.None) {
                                         return <option aria-label="None" value={undefined} />
                                     }
                                     return <option value={voteValue}>{t("vote-value-" + voteValue)}</option>

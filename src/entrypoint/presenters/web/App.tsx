@@ -12,16 +12,16 @@ import { URLS } from "@constants/urls";
 
 export default function App() {
   return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path={URLS.home} component={withLayout(NewsList)} />
-          <Route exact path={URLS.revealForm} component={withLayout(() => <VoteForm isReveal={true}/>)}/>
-          <Route exact path={URLS.voteForm} component={withLayout(() => <VoteForm isReveal={false}/>)}/>
-          <Route exact path={URLS.juryForm} component={withLayout(JuryForm)}/>
-          <Route exact path={URLS.newsForm} component={withLayout(NewsForm)}/>
-          <Route exact path={URLS.news} component={withLayout(NewsPage)}/>
-          <Route component={Error} />
-        </Switch>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={URLS.home} component={withLayout(NewsList)} />
+        <Route exact path={URLS.revealForm} component={withLayout(() => <VoteForm isReveal={true} />)} />
+        <Route exact path={URLS.voteForm} component={withLayout(() => <VoteForm isReveal={false} />)} />
+        <Route exact path={URLS.juryForm} component={withLayout(JuryForm)} />
+        <Route exact path={URLS.newsForm} component={withLayout(NewsForm)} />
+        <Route exact path={URLS.news} component={withLayout(NewsPage)} />
+        <Route component={Error} />
+      </Switch>
+    </BrowserRouter>
   );
 }

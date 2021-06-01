@@ -18,7 +18,7 @@ export default function AccountStatus({ onClick }: Props) {
 
     const classes = useStyles();
     const useBlockchain = blockchainService.getBlockchainGetUseUseCase().getUse()
-    const [, account, , , error] = useBlockchain();
+    const [, account, , ,] = useBlockchain();
 
     if (account) {
         return (
