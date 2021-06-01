@@ -1,13 +1,13 @@
 import { VOTE_VALUE } from "@constants/vote_value";
 
 export default class Vote {
-    vote: VOTE_VALUE;
+    value: VOTE_VALUE;
     publicationId: number;
     justification: string;
     penalized: boolean;
 
-    constructor(vote: VOTE_VALUE, publicationId: number, justification?: string, penalized?: boolean) {
-        this.vote = vote;
+    constructor(value: VOTE_VALUE, publicationId: number, justification?: string, penalized?: boolean) {
+        this.value = value;
         this.publicationId = publicationId;
         this.justification = justification ? justification : "";
         this.penalized = penalized ? penalized : false;

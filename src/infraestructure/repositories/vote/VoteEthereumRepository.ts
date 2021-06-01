@@ -16,7 +16,7 @@ export default class VoteEthereumRepository implements IVoteRepository {
         const sender = (await library.listAccounts())[0]
 
         const nonce = await contract.getCommitmentNonce(sender, vote.publicationId);
-        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, 1, nonce);
+        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
         const encode = ethers.utils.defaultAbiCoder.encode(["uint8", "bytes32", "bytes32"], [result.v, result.r, result.s]);
         const hash = ethers.utils.keccak256(encode);
         return contract.commitVote(vote.publicationId, hash, nonce);
@@ -27,15 +27,15 @@ export default class VoteEthereumRepository implements IVoteRepository {
         const senders = await library.listAccounts()
 
         const sender = (await library.listAccounts())[0]
-        const nonce = await contract.getCommitmentNonce(sender, vote.publicationId);
-        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, 1, nonce - 1);
-        return contract.revealVote(vote.publicationId, vote.vote, vote.justification, result.v, result.r, result.s);
+        const commitmentNonce = (await contract.getCommitmentNonce(sender, vote.publicationId)) - 1;
+        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
+        return contract.revealVote(vote.publicationId, vote.value, vote.justification, result.v, result.r, result.s);
     }
 }
 
-const getDomain = async (provider: any, tokenAddress: string): Promise<Domain> => {
+const getDomain = async (provider: any, contractAddress: string): Promise<Domain> => {
     const chainId = await getChainId(provider);
-    const domain: Domain = { name: 'Protocol', version: '1', chainId, verifyingContract: tokenAddress };
+    const domain: Domain = { name: 'Gazzeth Protocol', version: '1', chainId, verifyingContract: contractAddress };
     return domain;
 };
 
@@ -63,13 +63,13 @@ const createTypedVoteData = (message: VoteMessage, domain: Domain) => {
     const typedData = {
         types: {
             EIP712Domain,
-            RevealVote: [
+            Vote: [
                 { name: "publicationId", type: "uint256" },
                 { name: "vote", type: "uint8" },
                 { name: "nonce", type: "uint256" },
             ],
         },
-        primaryType: "RevealVote",
+        primaryType: "Vote",
         domain,
         message,
     };
@@ -79,7 +79,7 @@ const createTypedVoteData = (message: VoteMessage, domain: Domain) => {
 
 export const signVote = async (
     provider: any,
-    tokenAddress: string,
+    contractAddress: string,
     sender: string,
     publicationId: number,
     vote: number,
@@ -91,7 +91,7 @@ export const signVote = async (
         nonce: nonce,
     };
 
-    const domain = await getDomain(provider, tokenAddress);
+    const domain = await getDomain(provider, contractAddress);
     const typedData = createTypedVoteData(message, domain);
     const sig = await signData(provider, sender, typedData);
 
