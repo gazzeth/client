@@ -14,7 +14,7 @@ export default class TopicHardcodeRepository implements ITopicRepository {
     private static readonly DAI_CONTRACT_ADDRESS: string = process.env.REACT_APP_DAI_CONTRACT_ADDRESS || "";
 
     private topicList = [
-        new Topic("Quimica", 10, 11), new Topic("Politica", 14, 15), new Topic("Espectaculo", 11, 12),
+        new Topic("Worldwide/Ethereum/Airdrops", 0.1, 0.1), new Topic("Politica", 14, 15), new Topic("Espectaculo", 11, 12),
         new Topic("Geografia", 20, 21), new Topic("Biologia", 50, 51), new Topic("Fisica", 10, 11),
         new Topic("Economia", 20, 21), new Topic("Argentina", 24, 25), new Topic("Uruguay", 16, 17),
     ]
@@ -34,6 +34,6 @@ export default class TopicHardcodeRepository implements ITopicRepository {
         const senders = await library.listAccounts()
         const result = await signDaiPermit(library, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
             TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-        return contract.subscribeAsJuror("Worldwide/Ethereum/Airdrops", 5, result.nonce, result.expiry, result.v, result.r, result.s);
+        return contract.subscribeAsJuror(topic.topic.name, topic.quantity, result.nonce, result.expiry, result.v, result.r, result.s);
     }
 }
