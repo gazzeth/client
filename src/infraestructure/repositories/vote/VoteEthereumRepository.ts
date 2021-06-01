@@ -10,7 +10,6 @@ import Vote from '@domain/models/Vote/Vote';
 export default class VoteEthereumRepository implements IVoteRepository {
 
     private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
-    private static readonly REVEAL_VOTE_TYPEHASH: string = process.env.REACT_APP_REVEAL_VOTE_TYPEHASH || "";
 
     public async commit(vote: Vote, library: Web3Provider): Promise<void> {
         const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
@@ -66,8 +65,8 @@ const createTypedVoteData = (message: VoteMessage, domain: Domain) => {
             EIP712Domain,
             RevealVote: [
                 { name: "publicationId", type: "uint256" },
-                { name: "vote", type: "int" },
-                //   { name: "nonce", type: "uint256" }, TODO: improve in contract
+                { name: "vote", type: "uint8" },
+                { name: "nonce", type: "uint256" },
             ],
         },
         primaryType: "RevealVote",
@@ -89,7 +88,7 @@ export const signVote = async (
     const message: VoteMessage = {
         publicationId: publicationId,
         vote: vote,
-        nonce: nonce, 
+        nonce: nonce,
     };
 
     const domain = await getDomain(provider, tokenAddress);
