@@ -24,8 +24,6 @@ export default class VoteEthereumRepository implements IVoteRepository {
 
     public async reveal(vote: Vote, library: Web3Provider): Promise<void> {
         const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
-        const senders = await library.listAccounts()
-
         const sender = (await library.listAccounts())[0]
         const commitmentNonce = (await contract.getCommitmentNonce(sender, vote.publicationId)) - 1;
         const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
