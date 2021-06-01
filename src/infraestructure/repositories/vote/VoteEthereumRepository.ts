@@ -15,8 +15,8 @@ export default class VoteEthereumRepository implements IVoteRepository {
         const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
         const sender = (await library.listAccounts())[0]
 
-        const nonce = await contract.getCommitmentNonce(sender, vote.publicationId);
-        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
+        const nonce = (await contract.getCommitmentNonce(sender, vote.publicationId))._hex;
+        const result = await signVote(library, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
         const encode = ethers.utils.defaultAbiCoder.encode(["uint8", "bytes32", "bytes32"], [result.v, result.r, result.s]);
         const commitment = ethers.utils.keccak256(encode);
         return contract.commitVote(vote.publicationId, commitment, nonce);
@@ -25,15 +25,16 @@ export default class VoteEthereumRepository implements IVoteRepository {
     public async reveal(vote: Vote, library: Web3Provider): Promise<void> {
         const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
         const sender = (await library.listAccounts())[0]
-        const commitmentNonce = (await contract.getCommitmentNonce(sender, vote.publicationId)) - 1;
-        const result = await signVote(window.ethereum, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
-        return contract.revealVote(vote.publicationId, vote.value, commitmentNonce, vote.justification, result.v, result.r, result.s);
+        const commitmentNonce = (parseInt((await contract.getCommitmentNonce(sender, vote.publicationId))._hex, 16) -1).toString(16);
+        const result = await signVote(library, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
+        return contract.revealVote(vote.publicationId, vote.value, vote.justification, result.v, result.r, result.s);
     }
 }
 
 const getDomain = async (provider: any, contractAddress: string): Promise<Domain> => {
     const chainId = await getChainId(provider);
-    const domain: Domain = { name: 'Gazzeth Protocol', version: '1', chainId, verifyingContract: contractAddress };
+    console.log(typeof chainId)
+    const domain: Domain = { name: 'Gazzeth Protocol', version: '1', chainId: 3, verifyingContract: contractAddress };
     return domain;
 };
 
@@ -54,7 +55,7 @@ const EIP712Domain = [
 interface VoteMessage {
     publicationId: number;
     vote: number;
-    nonce: number;
+    nonce: string;
 }
 
 const createTypedVoteData = (message: VoteMessage, domain: Domain) => {
@@ -81,7 +82,7 @@ export const signVote = async (
     sender: string,
     publicationId: number,
     vote: number,
-    nonce: number
+    nonce: string
 ): Promise<VoteMessage & RSV> => {
     const message: VoteMessage = {
         publicationId: publicationId,

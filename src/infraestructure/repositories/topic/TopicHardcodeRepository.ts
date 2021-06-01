@@ -32,8 +32,8 @@ export default class TopicHardcodeRepository implements ITopicRepository {
     public async subscribe(topic: { topic: Topic, quantity: number }, library: Web3Provider): Promise<void> {
         const contract = new ethers.Contract(TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
         const senders = await library.listAccounts()
-        const result = await signDaiPermit(window.ethereum, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
+        const result = await signDaiPermit(library, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
             TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-        return contract.subscribeAsJuror("Worldwide/Ethereum/Airdrops", 1, result.nonce, result.expiry, result.v, result.r, result.s);
+        return contract.subscribeAsJuror("Worldwide/Ethereum/Airdrops", 5, result.nonce, result.expiry, result.v, result.r, result.s);
     }
 }
