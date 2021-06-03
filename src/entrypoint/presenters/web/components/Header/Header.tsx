@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
 import Wallet from "../Wallet/Wallet";
 
+const logo = "https://raw.githubusercontent.com/gazzeth/docs/master/logos/gzt_white.png";
+
 export default function Header() {
 
     const classes = useStyles();
@@ -15,9 +17,7 @@ export default function Header() {
                 <Toolbar className={classes.toolbar}>
                     <Button className={classes.button} component={Link} to={URLS.home}>
                         <div className={classes.logo}>
-                            <div className={classes.typografyContainer}>
-                                <Typography variant="h4" className={classes.brandName}>Gazzeth</Typography>
-                            </div>
+                            <img src={logo} alt={'Icon'} className={classes.image} />
                         </div>
                     </Button>
                     <Wallet />

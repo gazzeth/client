@@ -20,9 +20,6 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  typografyContainer: {
-    display: 'flex',
-  },
   logotype: {
     color: "white",
     fontSize: 18,
@@ -34,11 +31,12 @@ export default makeStyles(theme => ({
       display: "none",
     },
   },
-  brandName: {
-    color: "#ffffff",
-    marginLeft: 10,
-  },
   button: {
     textTransform: "none",
   },
+  image: {
+    height: "50px",
+    width: "50px",
+    marginRight: "0.5rem"
+},
 }));
