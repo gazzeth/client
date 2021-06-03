@@ -7,7 +7,11 @@ import classnames from "classnames";
 import useStyles from "./styles";
 import { URLS } from "@constants/urls";
 
-export default function Error() {
+type Props = {
+    code: string
+}
+
+export default function Error({ code }: Props) {
     const { t } = useTranslation();
 
     var classes = useStyles();
@@ -24,10 +28,10 @@ export default function Error() {
             <Grid item>
                 <Paper classes={{ root: classes.paper }}>
                     <Typography variant="h1" color="primary" className={classnames(classes.text, classes.error)}>
-                        404
+                        {code}
                     </Typography>
                     <Typography variant="h5" color="primary" className={classes.text}>
-                        {t("page-not-found")}
+                        {t(code)}
                     </Typography>
                     <Typography variant="h6" color="primary" className={classnames(classes.text, classes.redirect)}>
                         {t("back-message")}

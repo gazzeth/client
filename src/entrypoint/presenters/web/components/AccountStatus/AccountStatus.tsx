@@ -18,12 +18,9 @@ export default function AccountStatus({ onClick }: Props) {
 
     const classes = useStyles();
     const useBlockchain = blockchainService.getBlockchainGetUseUseCase().getUse()
-    const [ , account, , , error] = useBlockchain();
+    const [, account, , ,] = useBlockchain();
 
-    if (error) {
-        return null //TODO
-    }
-    else if (account) {
+    if (account) {
         return (
             <Button className={classes.connectButton} onClick={onClick} >
                 <Typography variant="h4" className={classes.text}>{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>

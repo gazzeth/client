@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import { Typography } from "@material-ui/core";
+import { container } from "@container-inversify";
+import { TYPES } from "@constants/types";
+import BlockchainService from "@configuration/usecases/BlockchainService";
+import { SUPPORTED_CURRENCY } from "@constants/supported_currency";
+import { Web3Provider } from '@ethersproject/providers'
 
 type Props = {
     lockCost: number,
+    library: Web3Provider,
+    account: string
 }
 
-export default function LockInfo({ lockCost }: Props) {
-    const classes = useStyles();
-    const { t } = useTranslation();
+const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
-    const balance = "2 DAI"
+export default function LockInfo({ lockCost, library, account }: Props) {
+    const classes = useStyles();
+    const { t } = useTranslation();    
+    const [balance, setBalance] = useState("-")
     const daiIcon = "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png"
 
+    useEffect(() => {
+        blockchainService
+            .getBlockchainGetBalanceOfUsecase()
+            .getBalanceOf(SUPPORTED_CURRENCY.Dai, library)
+            .then((balance) => {
+                setBalance("" + balance)
+            })
+    }, [library, account])
+    
     return (
         <div className={classes.container}>
             <div className={classes.columnStart}>
@@ -21,7 +38,7 @@ export default function LockInfo({ lockCost }: Props) {
                     <img src={daiIcon} alt={'Icon'} className={classes.image} />
                     <Typography variant="h6">DAI</Typography>
                 </div>
-                {/* TODO <Typography variant="body2">{t("balance", { value: balance })}</Typography> */}
+                <Typography variant="body2">{t("balance", { value: `${balance} DAI` })}</Typography>
             </div>
             <div className={classes.columnEnd}>
                 <Typography variant="h4">{lockCost}</Typography>

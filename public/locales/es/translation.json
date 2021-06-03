@@ -1,7 +1,8 @@
 {
     "loading": "Cargando",
 
-    "page-not-found": "La página que usted busca no existe",
+    "404": "La página que usted busca no existe",
+    "401": "Es necesario conectarse a la billetera para acceder a esta pagina",
     "back-message": "Presione el boton para volver a la página principal",
     "home": "Inicio",
 
@@ -50,5 +51,41 @@
 
     "publish-news": "Publicar una noticia",
     "pre-render": "Mostrar como se rendearia la noticia",
-    "publish": "Publicar"
+    "publish": "Publicar",
+
+    "vote-news": "Emitir un voto",
+    "reveal-news": "Revelar un voto",
+    "select-vote-value": "Seleccione un valor para el voto",
+    "vote-value-1": "Verdadero",
+    "vote-value-2": "Falso",
+    "vote-value-3": "No clasifica",
+    "vote": "Votar",
+    "reveal": "Revelar",
+    "justification": "Justificación",
+
+    "succesful-news-post": "Se publico exitosamente",
+    "succesful-vote-commit": "Se envio el voto exitosamente",
+    "succesful-vote-reveal": "Se revelo el voto exitosamente",
+    "succesful-sucribe-topic": "Se sucribio exitosamente",
+
+    "publication-not-exist-error": "La publicacion no existe",
+    "not-juror-of-publication": "No es jurado de la publicacion",
+    "topic-not-exist-error": "El topico no existe",
+    "close-topic-error": "El topico fue cerrado",
+    "insufficient-jurors-in-topic-error": "El topico no tiene la cantidad minima de jurados",
+    "commit-already-finished-error": "La fase de votacion esta terminada",
+    "invalid-nonce": "Nonce invalido",
+    "poh-error": "Debe estar registrado en \"proof of humanity\"",
+    "already-reveal-error": "El voto ya fue revelado",
+    "penalized-juror-error": "Usted ya fue penalizado",
+    "missing-commitment-error": "No emitio un voto en la fase de votacion",
+    "reveal-already-finished-error": "La fase de revelar esta terminada",
+    "invalid-vote-error": "El valor del voto es invalido",
+    "invalid-signature-error": "La firma es invalida",
+    "arlready-withdrawn-error": "Ya se realizo la operacion de retirada",
+    "times-juror-error": "No puede reducir la cantidad de veces subscrito mas que la cantidad de veces que es juez",
+    "unknown-error": "La operacion fallo, intente nuevamente en unos minutos",
+    "signature-denied-error": "Cancelo la firma de la transacción",
+    "transaction-denied-error": "Cancelo la transacción",
+    "insuficient-funds-error": "Fondos insuficientes"
 }
