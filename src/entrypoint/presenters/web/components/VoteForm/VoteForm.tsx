@@ -75,7 +75,7 @@ export default function VoteForm({ isReveal }: Props) {
                 }
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.button} onClick={onSummit}
-                        disabled={voteValue === undefined || (justification === undefined && isReveal)}>
+                        disabled={loading || voteValue === undefined || (justification === undefined && isReveal)}>
                         <Typography variant="h6">{t(isReveal ? "reveal" : "vote")}</Typography>
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

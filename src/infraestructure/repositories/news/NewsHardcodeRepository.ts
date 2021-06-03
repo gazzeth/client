@@ -74,7 +74,7 @@ export default class NewsHardcodeRepository implements INewsRepository {
             const senders = await library.listAccounts()
             const result = await signDaiPermit(window.ethereum, NewsHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0],
                 NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-            const tx = contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s)
+            const tx = await contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s)
             return await tx.wait();
         } catch (e) {
             throw ErrorMapper.toEntity(e)

@@ -34,7 +34,7 @@ export default class VoteEthereumRepository implements IVoteRepository {
             const sender = (await library.listAccounts())[0]
             const commitmentNonce = (parseInt((await contract.getCommitmentNonce(sender, vote.publicationId))._hex, 16) - 1).toString(16);
             const result = await signVote(library, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
-            const tx = await  contract.revealVote(vote.publicationId, vote.value, commitmentNonce, vote.justification, result.v, result.r, result.s)
+            const tx = await contract.revealVote(vote.publicationId, vote.value, commitmentNonce, vote.justification, result.v, result.r, result.s)
             return await tx.wait();
         } catch (e) {
             throw ErrorMapper.toEntity(e)
