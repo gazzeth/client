@@ -13,6 +13,8 @@ import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import TopicService from "@configuration/usecases/TopicService";
 import BlockchainService from "@configuration/usecases/BlockchainService";
+import { toast } from 'react-toastify';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -26,9 +28,10 @@ export default function JuryForm() {
     const [selectedTopics, setSelectedTopics] = useState<{ topic: Topic, quantity: number }[]>([])
     const [errorMenssage, setErorMenssage] = useState<string>(undefined)
     const [cost, setCost] = useState<number>(0);
+    const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
-    const [ , , , library ] = useActiveBlockchain();
+    const [, , , library] = useActiveBlockchain();
 
     const onChange = (t: Topic) => { setCurrentTopic(t) }
     const onAdd = () => {
@@ -44,8 +47,11 @@ export default function JuryForm() {
         }
     }
     const onSummit = () => {
+        setLoading(true)
         topicService.getTopicSubscribeUsecase().subscribe(selectedTopics, library)
-            .then((arrayOfPromise) => {}) //TODO handle
+            .then(() => toast.success(t("succesful-sucribe-topic"))) //TODO improve Promise.All
+            .catch((error) => toast.error(t(error.message)))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -83,11 +89,12 @@ export default function JuryForm() {
                     })
                 }
                 {selectedTopics.length !== 0 && <LockInfo lockCost={cost} />}
-                <div className={classes.rowContainer}>
+                <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.buttonRegistry} onClick={onSummit}
-                        disabled={selectedTopics.length === 0}>
+                        disabled={loading || selectedTopics.length === 0}>
                         <Typography variant="h6">{t("regiter-jury")}</Typography>
                     </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </Container>
         </div>

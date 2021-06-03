@@ -10,6 +10,8 @@ import VoteService from "@configuration/usecases/VoteService";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import BlockchainService from "@configuration/usecases/BlockchainService";
+import { toast } from 'react-toastify';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const voteService = container.get<VoteService>(TYPES.VoteService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -28,15 +30,23 @@ export default function VoteForm({ isReveal }: Props) {
     const [justification, setJustification] = useState<string>(undefined);
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [, , , library] = useActiveBlockchain();
+    const [loading, setLoading] = React.useState(false);
 
     const onSummit = () => {
+        setLoading(true)
         if (isReveal) {
             voteService.getVoteRevealUsecase()
                 .reveal(new Vote(voteValue, Number.parseFloat(id), justification), library)
+                .then(() => toast.success(t("succesful-vote-reveal"))) 
+                .catch((error: Error) => toast.error(t(error.message)))
+                .finally(() => setLoading(false))
         }
         else {
             voteService.getVoteCommitUseCase()
                 .commit(new Vote(voteValue, Number.parseFloat(id)), library)
+                .then(() => toast.success(t("succesful-vote-commit"))) 
+                .catch((error: Error) => toast.error(t(error.message)))
+                .finally(() => setLoading(false))
         }
     }
 
@@ -63,11 +73,12 @@ export default function VoteForm({ isReveal }: Props) {
                     isReveal && <TextField className={classes.formControl} label={t("justification")}
                         multiline rows={4} variant="outlined" onChange={(e) => setJustification(e.target.value as string)} />
                 }
-                <div className={classes.rowContainer}>
+                <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.button} onClick={onSummit}
                         disabled={voteValue === undefined || (justification === undefined && isReveal)}>
                         <Typography variant="h6">{t(isReveal ? "reveal" : "vote")}</Typography>
                     </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </Container>
         </div>

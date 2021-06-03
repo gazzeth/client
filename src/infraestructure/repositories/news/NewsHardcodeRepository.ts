@@ -10,6 +10,7 @@ import Protocol from '@assets/abis/Protocol.json';
 import { Web3Provider } from '@ethersproject/providers'
 import { signDaiPermit } from 'eth-permit';
 import IpfsHttpClient from "ipfs-http-client"
+import ErrorMapper from '../ErrorMapper';
 
 @injectable()
 export default class NewsHardcodeRepository implements INewsRepository {
@@ -65,13 +66,18 @@ export default class NewsHardcodeRepository implements INewsRepository {
     }
 
     public async post(news: News, library: Web3Provider): Promise<void> {
-        const client = IpfsHttpClient.create({ host: "ipfs.infura.io", port: 5001, protocol: "https" })
-        const { path } = await client.add(news.content, { pin: true })
-        
-        const contract = new ethers.Contract(NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
-        const senders = await library.listAccounts()
-        const result = await signDaiPermit(window.ethereum, NewsHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
-            NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-        return contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s);
+        try {
+            const client = IpfsHttpClient.create({ host: "ipfs.infura.io", port: 5001, protocol: "https" })
+            const { path } = await client.add(news.content, { pin: true })
+
+            const contract = new ethers.Contract(NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const senders = await library.listAccounts()
+            const result = await signDaiPermit(window.ethereum, NewsHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0],
+                NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
+            const tx = contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s)
+            return await tx.wait();
+        } catch (e) {
+            throw ErrorMapper.toEntity(e)
+        }
     }
 }

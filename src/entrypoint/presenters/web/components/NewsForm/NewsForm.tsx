@@ -12,6 +12,8 @@ import { TYPES } from "@constants/types";
 import News from "@domain/models/News/News";
 import NewsRender from "../NewsRender/NewsRender";
 import BlockchainService from "@configuration/usecases/BlockchainService";
+import { toast } from 'react-toastify';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -23,6 +25,7 @@ export default function NewsForm() {
     const [news, setNews] = useState<{ content: string, topic: Topic }>({ content: undefined, topic: undefined });
     const [preRender, setPreRender] = useState<boolean>(false);
     const [fileName, setFileName] = useState<string>(undefined);
+    const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [ , , , library ] = useActiveBlockchain();
@@ -42,10 +45,12 @@ export default function NewsForm() {
     }
 
     const onSummit = () => {
+        setLoading(true)
         newsService.getNewsPostUseCase()
             .post(new News(undefined, news.content, news.topic, undefined), library)
-            .then(() => console.log("Succesful")) //TODO
-            .catch((error) => console.log(error))
+            .then(() => toast.success(t("succesful-news-post"))) 
+            .catch((error: Error) => toast.error(t(error.message)))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -73,11 +78,12 @@ export default function NewsForm() {
                             control={<Checkbox checked={preRender} onChange={handleChangePreRender} color="primary" />} label={t("pre-render")} />
                     </div>
                     {news.topic && <LockInfo lockCost={news.topic.costPublish} />}
-                    <div className={classes.rowContainer}>
+                    <div className={classes.rowContainer} style={{ position: 'relative', }}>
                         <Button className={classes.buttonPublish} onClick={onSummit}
                             disabled={!news.content || !news.topic}>
                             <Typography variant="h6">{t("publish")}</Typography>
                         </Button>
+                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                     </div>
                 </Container>
             </div>

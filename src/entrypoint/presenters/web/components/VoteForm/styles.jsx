@@ -36,4 +36,12 @@ export default makeStyles(theme => ({
     error: {
         color: "#ff0033"
     },
+    buttonProgress: {
+        color:  theme.palette.primary.light,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }));

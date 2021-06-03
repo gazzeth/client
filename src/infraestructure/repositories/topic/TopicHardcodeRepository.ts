@@ -6,6 +6,7 @@ import { ethers } from "ethers";
 import Protocol from '@assets/abis/Protocol.json';
 import { Web3Provider } from '@ethersproject/providers'
 import { signDaiPermit } from 'eth-permit';
+import ErrorMapper from "../ErrorMapper";
 
 @injectable()
 export default class TopicHardcodeRepository implements ITopicRepository {
@@ -30,10 +31,15 @@ export default class TopicHardcodeRepository implements ITopicRepository {
     }
 
     public async subscribe(topic: { topic: Topic, quantity: number }, library: Web3Provider): Promise<void> {
-        const contract = new ethers.Contract(TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
-        const senders = await library.listAccounts()
-        const result = await signDaiPermit(library, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0], 
-            TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-        return contract.subscribeAsJuror(topic.topic.name, topic.quantity, result.nonce, result.expiry, result.v, result.r, result.s);
+        try {
+            const contract = new ethers.Contract(TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const senders = await library.listAccounts()
+            const result = await signDaiPermit(library, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0],
+                TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
+            const tx = await contract.subscribeAsJuror(topic.topic.name, topic.quantity, result.nonce, result.expiry, result.v, result.r, result.s)
+            return await tx.wait();
+        } catch (e) {
+            throw ErrorMapper.toEntity(e)
+        }
     }
 }
