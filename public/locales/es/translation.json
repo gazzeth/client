@@ -86,5 +86,6 @@
     "times-juror-error": "No puede reducir la cantidad de veces subscrito mas que la cantidad de veces que es juez",
     "unknown-error": "La operacion fallo, intente nuevamente en unos minutos",
     "signature-denied-error": "Cancelo la firma de la transacción",
-    "transaction-denied-error": "Cancelo la transacción" 
+    "transaction-denied-error": "Cancelo la transacción",
+    "insuficient-funds-error": "Fondos insuficientes"
 }

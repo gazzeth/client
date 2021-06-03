@@ -9,4 +9,7 @@ export const TYPES = {
     TopicService: Symbol.for("TopicService"),
     IVoteRepository: Symbol.for("IVoteRepository"),
     VoteService: Symbol.for("VoteService"),
+    IEthRepository: Symbol.for("IEthRepository"),
+    IDaiRepository: Symbol.for("IDaiRepository"),
+    IGazzethRepository: Symbol.for("IGazzethRepository"),
 }

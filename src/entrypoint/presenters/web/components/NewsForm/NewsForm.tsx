@@ -28,7 +28,7 @@ export default function NewsForm() {
     const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
-    const [ , , , library ] = useActiveBlockchain();
+    const [ , account, , library ] = useActiveBlockchain();
 
     const onChange = (t: Topic) => { setNews((n) => { return { ...n, topic: t } }) }
     const handleChangePreRender = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +77,7 @@ export default function NewsForm() {
                         <FormControlLabel
                             control={<Checkbox checked={preRender} onChange={handleChangePreRender} color="primary" />} label={t("pre-render")} />
                     </div>
-                    {news.topic && <LockInfo lockCost={news.topic.costPublish} />}
+                    {news.topic && <LockInfo lockCost={news.topic.costPublish} library={library} account={account} />}
                     <div className={classes.rowContainer} style={{ position: 'relative', }}>
                         <Button className={classes.buttonPublish} onClick={onSummit}
                             disabled={!news.content || !news.topic}>

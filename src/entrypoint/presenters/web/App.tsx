@@ -42,3 +42,5 @@ export default function App() {
     </>
   );
 }
+
+//TODO image logo and validate dai balanceOf

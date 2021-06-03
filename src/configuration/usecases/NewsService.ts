@@ -4,10 +4,12 @@ import INewsRepository from "@application/repositories/INewsRepository";
 import NewsListUsecase from "@application/usecases/news/list/NewsListUsecase";
 import NewsGetUsecase from "@application/usecases/news/get/NewsGetUsecase";
 import NewsPostUsecase from "@application/usecases/news/post/NewsPostUsecase";
+import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
 
 @injectable()
 export default class NewsService {
     @inject(TYPES.INewsRepository) private newsRepository: INewsRepository;
+    @inject(TYPES.IDaiRepository) private daiRepository: ICurrencyRepository;
 
     public getNewsListUseCase() {
         return new NewsListUsecase(this.newsRepository);
@@ -18,6 +20,6 @@ export default class NewsService {
     }
 
     public getNewsPostUseCase() {
-        return new NewsPostUsecase(this.newsRepository);
+        return new NewsPostUsecase(this.newsRepository, this.daiRepository);
     }
 }

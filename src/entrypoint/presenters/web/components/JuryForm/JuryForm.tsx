@@ -31,7 +31,7 @@ export default function JuryForm() {
     const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
-    const [, , , library] = useActiveBlockchain();
+    const [, account, , library] = useActiveBlockchain();
 
     const onChange = (t: Topic) => { setCurrentTopic(t) }
     const onAdd = () => {
@@ -88,7 +88,7 @@ export default function JuryForm() {
                         )
                     })
                 }
-                {selectedTopics.length !== 0 && <LockInfo lockCost={cost} />}
+                {selectedTopics.length !== 0 && <LockInfo lockCost={cost} library={library} account={account} />}
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.buttonRegistry} onClick={onSummit}
                         disabled={loading || selectedTopics.length === 0}>
