@@ -9,7 +9,7 @@ import { signDaiPermit } from 'eth-permit';
 import ErrorMapper from "../ErrorMapper";
 
 @injectable()
-export default class TopicHardcodeRepository implements ITopicRepository {
+export default class TopicGraphRepository implements ITopicRepository {
 
     private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
     private static readonly DAI_CONTRACT_ADDRESS: string = process.env.REACT_APP_DAI_CONTRACT_ADDRESS || "";
@@ -22,7 +22,6 @@ export default class TopicHardcodeRepository implements ITopicRepository {
 
     public async list(pagination: Pagination): Promise<Topic[]> {
         const responce = this.topicList
-        // .slice(pagination.getCurrentPage() * pagination.limit, (pagination.getCurrentPage() + 1) * pagination.limit);
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(responce);
@@ -32,10 +31,10 @@ export default class TopicHardcodeRepository implements ITopicRepository {
 
     public async subscribe(topic: { topic: Topic, quantity: number }, library: Web3Provider): Promise<void> {
         try {
-            const contract = new ethers.Contract(TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const contract = new ethers.Contract(TopicGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
             const senders = await library.listAccounts()
-            const result = await signDaiPermit(library, TopicHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0],
-                TopicHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
+            const result = await signDaiPermit(library, TopicGraphRepository.DAI_CONTRACT_ADDRESS, senders[0],
+                TopicGraphRepository.PROTOCOL_CONTRACT_ADDRESS);
             const tx = await contract.subscribeAsJuror(topic.topic.name, topic.quantity, result.nonce, result.expiry, result.v, result.r, result.s)
             return await tx.wait();
         } catch (e) {

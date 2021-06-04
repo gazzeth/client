@@ -8,17 +8,17 @@ import Vote from '@domain/models/Vote/Vote';
 import ErrorMapper from '../ErrorMapper';
 
 @injectable()
-export default class VoteEthereumRepository implements IVoteRepository {
+export default class VoteGraphRepository implements IVoteRepository {
 
     private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
 
     public async commit(vote: Vote, library: Web3Provider): Promise<void> {
         try {
-            const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const contract = new ethers.Contract(VoteGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
             const sender = (await library.listAccounts())[0]
 
             const nonce = (await contract.getCommitmentNonce(sender, vote.publicationId))._hex;
-            const result = await signVote(library, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
+            const result = await signVote(library, VoteGraphRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, nonce);
             const encode = ethers.utils.defaultAbiCoder.encode(["uint8", "bytes32", "bytes32"], [result.v, result.r, result.s]);
             const commitment = ethers.utils.keccak256(encode);
             const tx = await contract.commitVote(vote.publicationId, commitment, nonce)
@@ -30,10 +30,10 @@ export default class VoteEthereumRepository implements IVoteRepository {
 
     public async reveal(vote: Vote, library: Web3Provider): Promise<void> {
         try {
-            const contract = new ethers.Contract(VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const contract = new ethers.Contract(VoteGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
             const sender = (await library.listAccounts())[0]
             const commitmentNonce = (parseInt((await contract.getCommitmentNonce(sender, vote.publicationId))._hex, 16) - 1).toString(16);
-            const result = await signVote(library, VoteEthereumRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
+            const result = await signVote(library, VoteGraphRepository.PROTOCOL_CONTRACT_ADDRESS, sender, vote.publicationId, vote.value, commitmentNonce);
             const tx = await contract.revealVote(vote.publicationId, vote.value, commitmentNonce, vote.justification, result.v, result.r, result.s)
             return await tx.wait();
         } catch (e) {

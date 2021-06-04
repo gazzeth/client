@@ -15,16 +15,23 @@ import IpfsMapper from './IpfsMapper';
 import NewsMapper from './NewsMapper';
 
 @injectable()
-export default class NewsHardcodeRepository implements INewsRepository {
+export default class NewsGraphRepository implements INewsRepository {
 
     private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
     private static readonly DAI_CONTRACT_ADDRESS: string = process.env.REACT_APP_DAI_CONTRACT_ADDRESS || "";
+    private static readonly API_URL: string = process.env.REACT_APP_API_URL || "";
 
-    private ipfsClient = IpfsHttpClient.create({ host: "ipfs.infura.io", port: 5001, protocol: "https" })
+    private static readonly IPFS_URL: string = process.env.REACT_APP_IPFS_URL || "";
+    private static readonly IPFS_PORT: string = process.env.REACT_APP_IPFS_PORT || "";
+    private static readonly IPFS_PROTOCOL: string = process.env.REACT_APP_IPFS_PROTOCOL || "";
+
+    private ipfsClient = IpfsHttpClient.create({
+        host: NewsGraphRepository.IPFS_URL,
+        port: parseInt(NewsGraphRepository.IPFS_PORT),
+        protocol: NewsGraphRepository.IPFS_PROTOCOL
+    })
 
     public async list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]> {
-        const url = "https://api.thegraph.com/subgraphs/name/gazzeth/protocol-ropsten-v0"
-
         const options: RequestInit = {
             method: "POST",
             body: JSON.stringify({
@@ -34,7 +41,7 @@ export default class NewsHardcodeRepository implements INewsRepository {
             headers: { "Content-Type": "application/json" }
         }
 
-        const result: any[] = (await (await fetch(url, options)).json()).data.publications
+        const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.publications
 
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
@@ -47,7 +54,6 @@ export default class NewsHardcodeRepository implements INewsRepository {
     }
 
     public async get(id: number): Promise<News> {
-        // const responce = this.newsList.filter(n => n.id === id).pop();
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(null);
@@ -59,11 +65,11 @@ export default class NewsHardcodeRepository implements INewsRepository {
         try {
             const { path } = await this.ipfsClient.add(news.content, { pin: true })
 
-            const contract = new ethers.Contract(NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const contract = new ethers.Contract(NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
             const senders = await library.listAccounts()
-            const result = await signDaiPermit(window.ethereum, NewsHardcodeRepository.DAI_CONTRACT_ADDRESS, senders[0],
-                NewsHardcodeRepository.PROTOCOL_CONTRACT_ADDRESS);
-            const tx = await contract.publish(path, "Worldwide/Ethereum/Airdrops", result.nonce, result.expiry, result.v, result.r, result.s)
+            const result = await signDaiPermit(window.ethereum, NewsGraphRepository.DAI_CONTRACT_ADDRESS, senders[0],
+                NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS);
+            const tx = await contract.publish(path, news.topic.name, result.nonce, result.expiry, result.v, result.r, result.s)
             return await tx.wait();
         } catch (e) {
             throw ErrorMapper.toEntity(e)

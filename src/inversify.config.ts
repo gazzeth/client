@@ -15,21 +15,21 @@ import ITopicRepository from "@application/repositories/ITopicRepository";
 import IVoteRepository from "@application/repositories/IVoteRepository";
 import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
 
-import NewsHardcodeRepository from "@infraestructure/repositories/news/NewsHardcodeRepository";
+import NewsGraphRepository from "@infraestructure/repositories/news/NewsGraphRepository";
 import WalletRepository from "@infraestructure/repositories/wallet/WalletRepository";
 import EthereumRepository from "@infraestructure/repositories/blockchain/EthereumRepository";
-import TopicHardcodeRepository from "@infraestructure/repositories/topic/TopicHardcodeRepository";
-import VoteEthereumRepository from "@infraestructure/repositories/vote/VoteEthereumRepository";
+import TopicGraphRepository from "@infraestructure/repositories/topic/TopicGraphRepository";
+import VoteGraphRepository from "@infraestructure/repositories/vote/VoteGraphRepository";
 import DaiEthereumRepository from "@infraestructure/repositories/currency/DaiEthereumRepository";
 
 
 const container = new Container();
 
-container.bind<INewsRepository>(TYPES.INewsRepository).to(NewsHardcodeRepository);
+container.bind<INewsRepository>(TYPES.INewsRepository).to(NewsGraphRepository);
 container.bind<IWalletRepository>(TYPES.IWalletRepository).to(WalletRepository);
 container.bind<IBlockchainRepository>(TYPES.IBlockchainRepository).to(EthereumRepository);
-container.bind<ITopicRepository>(TYPES.ITopicRepository).to(TopicHardcodeRepository);
-container.bind<IVoteRepository>(TYPES.IVoteRepository).to(VoteEthereumRepository);
+container.bind<ITopicRepository>(TYPES.ITopicRepository).to(TopicGraphRepository);
+container.bind<IVoteRepository>(TYPES.IVoteRepository).to(VoteGraphRepository);
 container.bind<ICurrencyRepository>(TYPES.IEthRepository).to(DaiEthereumRepository);
 container.bind<ICurrencyRepository>(TYPES.IDaiRepository).to(DaiEthereumRepository);
 container.bind<ICurrencyRepository>(TYPES.IGazzethRepository).to(DaiEthereumRepository);
