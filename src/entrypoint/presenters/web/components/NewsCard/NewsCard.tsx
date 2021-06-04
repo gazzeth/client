@@ -9,6 +9,7 @@ import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
+import { VOTE_VALUE } from "@constants/vote_value";
 
 interface PropTypes {
     News: NewsPreview;
@@ -24,25 +25,32 @@ export default function NewsCard(props: PropTypes) {
 
     const getStatusBar = () => {
         switch (news.verified) {
-            case undefined:
+            case VOTE_VALUE.None:
                 return (
                     <div className={classnames(classes.statusBar, classes.pendingStatusBar)}>
                         <ErrorOutlineOutlinedIcon className={classes.statusBarIcon} />
                         <span>{t("pending-status-bar-description")}</span>
                     </div>
                 );
-            case true:
+            case VOTE_VALUE.True:
                 return (
                     <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
                         <CheckIcon className={classes.statusBarIcon} />
                         <span>{t("true-status-bar-description")}</span>
                     </div>
                 );
-            case false:
+            case VOTE_VALUE.False:
                 return (
                     <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
                         <CancelOutlinedIcon className={classes.statusBarIcon} />
                         <span>{t("false-status-bar-description")}</span>
+                    </div>
+                );
+            case VOTE_VALUE.Unqualified:
+                return ( 
+                    <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
+                        <CancelOutlinedIcon className={classes.statusBarIcon} />
+                        <span>{t("unqualified-status-bar-description")}</span>
                     </div>
                 );
         }

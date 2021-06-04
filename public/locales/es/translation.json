@@ -18,7 +18,8 @@
     "pending-status-bar-description": "Esta noticia está pendiente de revisión",
     "false-status-bar-description": "Esta noticia fue declarada falsa",
     "true-status-bar-description": "Esta noticia fue declarada verdadera",
-
+    "unqualified-status-bar-description": "Esta noticia no cumple con las normas",
+     
     "connect-to-wallet": "Conectarse a la billetera",
     "back": "Atras",
     "metamask-header": "Metamask",
