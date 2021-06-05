@@ -40,7 +40,7 @@ export default class NewsMapper {
                 return VOTE_VALUE.True
             case 2:
                 return VOTE_VALUE.False
-            case 4:
+            case 3:
                 return VOTE_VALUE.Unqualified
         }
     }
