@@ -10,9 +10,11 @@ export default class News {
     votes: Vote[];
     publishDate: number;
     withdraw: boolean;
+    voteCounter: number[];
 
     constructor(id: number, content: string, topic: Topic, verified: VOTE_VALUE,
-                votes?: Vote[], publishDate?: number, withdraw?: boolean) {
+                votes?: Vote[], publishDate?: number, withdraw?: boolean, 
+                voteCounter?: number[]) {
         this.id = id;
         this.verified = verified;
         this.content = content;
@@ -20,6 +22,7 @@ export default class News {
         this.votes = votes ? votes : [];
         this.publishDate = publishDate;
         this.withdraw = withdraw;
+        this.voteCounter = voteCounter;
     }
 
     public isCommitOver(): boolean {
@@ -31,6 +34,6 @@ export default class News {
     }
 
     public isWithdrawOver(): boolean {
-        return this.withdraw; //TODO
+        return this.withdraw; 
     }
 }

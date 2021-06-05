@@ -76,6 +76,7 @@ export default class NewsGraphRepository implements INewsRepository {
                         voting { 
                             withdrawn 
                             winningVote
+                            voteCounters
                             votes {
                                 id
                                 juror {

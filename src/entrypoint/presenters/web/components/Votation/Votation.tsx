@@ -42,18 +42,18 @@ export default function Votation({ votes }: Props) {
 
     const getColor = (n: { name: string, data: number[] }) => { //TODO
         switch (n.name) {
-            case t('penalized'): return "";
-            case t("vote-value-0"): return "";
-            case t("vote-value-1"): return "";
-            case t("vote-value-2"): return "";
-            case t("vote-value-3"): return "";
+            case t('penalized'):    return "#000000";
+            case t("vote-value-0"): return "#808080";
+            case t("vote-value-1"): return "#008000";
+            case t("vote-value-2"): return "#FF0000";
+            case t("vote-value-3"): return "#FFFF00";
         }
     }
 
     const state: any = {
         series: seriesSorted,
         options: {
-            // colors: seriesSorted.map((n) => getColor(n)),
+            colors: seriesSorted.map((n) => getColor(n)),
             chart: {
                 type: "bar",
                 stacked: true,
