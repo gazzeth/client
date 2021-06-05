@@ -7,6 +7,8 @@ import { Web3Provider } from '@ethersproject/providers'
 export default interface INewsRepository {
     list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]>
 
+    listByAddress(pagination: Pagination, address: string): Promise<NewsPreview[]>
+
     get(id: number): Promise<News>;
 
     post(news: News, library: Web3Provider): Promise<void>;

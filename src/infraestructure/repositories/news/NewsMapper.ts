@@ -3,6 +3,7 @@ import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import Topic from "@domain/models/Topic/Topic";
 import Vote from "@domain/models/Vote/Vote";
+import { ethers } from "ethers";
 
 export default class NewsMapper {
     public static toEntityPreview(dto: any): NewsPreview {
@@ -11,7 +12,10 @@ export default class NewsMapper {
         const image = parts[1].substring(4, parts[1].length - 1);
         const lede = parts[2];
         const winningVote: number = dto.voting.winningVote;
-        return new NewsPreview(parseInt(dto.id), title, lede, image, NewsMapper.toEntityVoteValue(winningVote))
+        const topic: any = dto.topic
+        return new NewsPreview(parseInt(dto.id), title, lede, image, 
+            NewsMapper.toEntityVoteValue(winningVote), NewsMapper.toEntityTopic(topic),
+            parseInt(dto.publishDate))
     }
 
     public static toEntity(dto: any): News {
@@ -27,9 +31,11 @@ export default class NewsMapper {
     public static toEntityVote(dto: any, publicationId: number): Vote {
         return new Vote(NewsMapper.toEntityVoteValue(dto.value), publicationId, dto.justification, dto.penalized, dto.juror.id)
     }
-
+    
     public static toEntityTopic(dto: any): Topic {
-        return new Topic(dto.id, dto.priceToBeJuror, dto.priceToPublish, parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration))
+        return new Topic(dto.id, parseFloat(ethers.utils.formatUnits(dto.priceToBeJuror, 18)), 
+            parseFloat(ethers.utils.formatUnits(dto.priceToPublish, 18)), 
+            parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration))
     }
 
     public static toEntityVoteValue(vote: number): VOTE_VALUE {

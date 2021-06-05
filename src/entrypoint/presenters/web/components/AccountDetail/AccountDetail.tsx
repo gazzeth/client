@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
@@ -10,8 +10,12 @@ import { walletInfo } from "@constants/supported_wallets";
 import Icon from "../Icon/Icon";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import NewsService from "@configuration/usecases/NewsService";
+import Pagination from "@domain/models/Pagination/Pagination";
+import NewsPreview from "@domain/models/News/NewsPreview";
 
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
+const newsService = container.get<NewsService>(TYPES.NewsService);
 
 type Props = {
     onChange: () => void,
@@ -23,6 +27,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [chain, account,] = useActiveBlockchain();
+    const [news, setNews] = useState<NewsPreview[]>([]);
 
     const classes = useStyles();
 
@@ -34,6 +39,15 @@ export default function AccountDetail({ onChange, wallet }: Props) {
     const copyAddress = () => {
         navigator.clipboard.writeText(account)
     }
+
+    useEffect(() => {
+        newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(0, 5), account)
+        .then((newsListResponce) => {
+            setNews(newsListResponce);
+            console.log(newsListResponce)
+        })
+        .catch((error) => console.log(error)) //TODO
+    }, [account])
 
     return (
         <div className={classnames(classes.columnContainer, classes.borderContainer)}>
