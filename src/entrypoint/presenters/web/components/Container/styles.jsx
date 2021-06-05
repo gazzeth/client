@@ -7,7 +7,8 @@ export default makeStyles(theme => ({
         alignItems: "center",
         flexDirection: "column",
         borderRadius: 20,
-        padding: "1rem"
+        padding: "1rem",
+        maxWidth: "800px"
     },
     titleRow: {
         justifyContent: 'space-between',

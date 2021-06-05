@@ -57,7 +57,7 @@
     "vote-news": "Emitir un voto",
     "reveal-news": "Revelar un voto",
     "select-vote-value": "Seleccione un valor para el voto",
-    "vote-value-0": "No voto",
+    "vote-value-0": "No votó",
     "vote-value-1": "Verdadero",
     "vote-value-2": "Falso",
     "vote-value-3": "No clasifica",
@@ -92,5 +92,6 @@
     "insuficient-funds-error": "Fondos insuficientes",
 
     "votation": "Votación",
-    "penalized": "Penalizado"
+    "penalized": "Penalizado",
+    "votes": "Votos"
 }

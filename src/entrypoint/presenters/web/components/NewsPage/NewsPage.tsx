@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import News from "@domain/models/News/News";
 import useStyles from "./styles";
-// import { useTranslation } from 'react-i18next';
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
 import { CircularProgress, Container } from "@material-ui/core";
-// import Pie from "react-chartjs-2";
 import NewsRender from "../NewsRender/NewsRender";
 import Votation from "../Votation/Votation";
 
