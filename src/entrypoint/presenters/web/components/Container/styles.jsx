@@ -12,7 +12,8 @@ export default makeStyles(theme => ({
     titleRow: {
         justifyContent: 'space-between',
         display: 'flex',
-        width: "-moz-available",
+        width: "100%",
+        marginBottom: "1rem"
     },
     button: {
         textTransform: "none",

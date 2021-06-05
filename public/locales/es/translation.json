@@ -57,6 +57,7 @@
     "vote-news": "Emitir un voto",
     "reveal-news": "Revelar un voto",
     "select-vote-value": "Seleccione un valor para el voto",
+    "vote-value-0": "No voto",
     "vote-value-1": "Verdadero",
     "vote-value-2": "Falso",
     "vote-value-3": "No clasifica",
@@ -88,5 +89,8 @@
     "unknown-error": "La operacion fallo, intente nuevamente en unos minutos",
     "signature-denied-error": "Cancelo la firma de la transacción",
     "transaction-denied-error": "Cancelo la transacción",
-    "insuficient-funds-error": "Fondos insuficientes"
+    "insuficient-funds-error": "Fondos insuficientes",
+
+    "votation": "Votación",
+    "penalized": "Penalizado"
 }

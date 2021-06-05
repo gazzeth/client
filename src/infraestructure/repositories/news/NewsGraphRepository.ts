@@ -4,7 +4,6 @@ import Filter from "@domain/models/Filter/NewsFilter";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import News from "@domain/models/News/News";
 import Pagination from "@domain/models/Pagination/Pagination";
-import { VERIFIED_STATUS } from '@constants/verifiedStatus';
 import { ethers } from "ethers";
 import Protocol from '@assets/abis/Protocol.json';
 import { Web3Provider } from '@ethersproject/providers'
@@ -75,7 +74,17 @@ export default class NewsGraphRepository implements INewsRepository {
                         publishDate 
                         voting { 
                             withdrawn 
-                            winningVote 
+                            winningVote
+                            votes {
+                                id
+                                juror {
+                                    id
+                                }
+                                commitment
+                                value
+                                justification
+                                penalized 
+                            }
                         } 
                     } 
                 }`,

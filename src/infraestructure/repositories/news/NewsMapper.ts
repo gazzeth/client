@@ -2,6 +2,7 @@ import { VOTE_VALUE } from "@constants/vote_value";
 import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import Topic from "@domain/models/Topic/Topic";
+import Vote from "@domain/models/Vote/Vote";
 
 export default class NewsMapper {
     public static toEntityPreview(dto: any): NewsPreview {
@@ -10,20 +11,26 @@ export default class NewsMapper {
         const image = parts[1].substring(4, parts[1].length - 1);
         const lede = parts[2];
         const winningVote: number = dto.voting.winningVote;
-        return new NewsPreview(parseInt(dto.id), title, lede, image, NewsMapper.toEntityVote(winningVote))
+        return new NewsPreview(parseInt(dto.id), title, lede, image, NewsMapper.toEntityVoteValue(winningVote))
     }
 
     public static toEntity(dto: any): News {
         const topic: any = dto.topic
         const winningVote: number = dto.voting.winningVote;
-        return new News(parseInt(dto.id), dto.file, NewsMapper.toEntityTopic(topic), NewsMapper.toEntityVote(winningVote))
+        const votes: any[] = dto.voting.votes;
+        return new News(parseInt(dto.id), dto.file, NewsMapper.toEntityTopic(topic), 
+            NewsMapper.toEntityVoteValue(winningVote), votes.map((v) => NewsMapper.toEntityVote(v, parseInt(dto.id))))
+    }
+
+    public static toEntityVote(dto: any, publicationId: number): Vote {
+        return new Vote(NewsMapper.toEntityVoteValue(dto.value), publicationId, dto.justification, dto.penalized, dto.juror.id)
     }
 
     public static toEntityTopic(dto: any): Topic {
         return new Topic(dto.id, dto.priceToBeJuror, dto.priceToPublish)
     }
 
-    public static toEntityVote(vote: number): VOTE_VALUE {
+    public static toEntityVoteValue(vote: number): VOTE_VALUE {
         switch(vote) {
             case 0:
                 return VOTE_VALUE.None

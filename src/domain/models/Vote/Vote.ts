@@ -5,11 +5,13 @@ export default class Vote {
     publicationId: number;
     justification: string;
     penalized: boolean;
+    address: string;
 
-    constructor(value: VOTE_VALUE, publicationId: number, justification?: string, penalized?: boolean) {
+    constructor(value: VOTE_VALUE, publicationId: number, justification?: string, penalized?: boolean, address?: string) {
         this.value = value;
         this.publicationId = publicationId;
         this.justification = justification ? justification : "";
         this.penalized = penalized ? penalized : false;
+        this.address = address ? address : "";
     }
 }

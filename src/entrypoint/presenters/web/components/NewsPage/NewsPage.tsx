@@ -6,15 +6,14 @@ import useStyles from "./styles";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
-import { CircularProgress, Container, Grid, Typography } from "@material-ui/core";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia } from "@material-ui/core";
-import Pie from "react-chartjs-2";
-import classnames from "classnames";
+import { CircularProgress, Container } from "@material-ui/core";
+// import Pie from "react-chartjs-2";
+import NewsRender from "../NewsRender/NewsRender";
+import Votation from "../Votation/Votation";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
 export default function NewsPage() {
-    let votesChartInstance = null;
 
     const { id } = useParams<{ id: string }>();
     const idNumber = Number(id)
@@ -24,42 +23,16 @@ export default function NewsPage() {
     const [news, setNews] = useState<News>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const votesChartOptions = {
-        legend: {
-            display: true,
-            position: "bottom"
-        },
-        elements: {
-            arc: {
-                borderWidth: 2
-            }
-        }
-    };
-
-    const votesChartData = {
-        maintainAspectRatio: false,
-        responsive: true,
-        labels: ["True", "Fake"],
-        datasets: [
-            {
-                data: [3, 7],
-                backgroundColor: ["#10913d", "#ba1833"],
-                hoverBackgroundColor: ["#17d459", "#f52245"],
-                hoverBorderColor: "white"
-            }
-        ]
-    };
-
     useEffect(() => {
-        if (idNumber !== NaN) {
+        if (!isNaN(idNumber)) {
             newsService.getNewsGetUseCase().get(idNumber)
                 .then((newsResponce) => setNews(newsResponce))
                 .catch((error) => console.log(error))//TODO maybe do somethin else
                 .finally(() => setLoading(false))
         }
     }, [idNumber])
-
-    if (idNumber === NaN || (loading === false && news === undefined)) {
+    console.log(news)
+    if (isNaN(idNumber) || (loading === false && news === undefined)) {
         return <>404 para el id:{id}</>//TODO render 404
     }
     if (loading === true) {
@@ -71,39 +44,8 @@ export default function NewsPage() {
     }
     return (
         <Container maxWidth={false}>
-            "PROXIMAMENTE"
-            {/* TODO 
-            <Grid container direction="column" className={classes.gridContainer} spacing={2}>
-                <Grid item>
-                    <Grid container justify="center" className={classes.gridContainer}>
-                        <Card className={classes.card}>
-                            <CardActionArea>
-                                <CardMedia component="img" className={classes.image} image={news.image} />
-                                <CardContent>
-                                    <Typography variant="h1" className={classnames(classes.text, classes.title)}>
-                                        {news.title}
-                                    </Typography>
-                                    <Typography variant="h2" className={classnames(classes.text, classes.lede)}>
-                                        {news.lede}
-                                    </Typography>
-                                    <Typography variant="h3" className={classnames(classes.text, classes.body)}>
-                                        {news.body}
-                                    </Typography>
-                                </CardContent>
-                                <Container maxWidth="sm">
-                                    <Pie
-                                        data={votesChartData}
-                                        options={votesChartOptions}
-                                        ref={input => {
-                                            votesChartInstance = input;
-                                        }}
-                                    />
-                                </Container>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                </Grid >
-            </Grid > */}
+            <NewsRender>{news.content}</NewsRender>
+            <Votation votes={news.votes} />
         </Container>
     )
 }
