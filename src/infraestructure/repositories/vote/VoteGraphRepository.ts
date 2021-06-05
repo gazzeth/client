@@ -48,19 +48,19 @@ const getDomain = async (provider: any, contractAddress: string): Promise<Domain
     return domain;
 };
 
-interface Domain {
-    name: string;
-    version: string;
-    chainId: number;
-    verifyingContract: string;
-}
-
 const EIP712Domain = [
     { name: "name", type: "string" },
     { name: "version", type: "string" },
     { name: "chainId", type: "uint256" },
     { name: "verifyingContract", type: "address" },
 ];
+
+interface Domain {
+    name: string;
+    version: string;
+    chainId: number;
+    verifyingContract: string;
+}
 
 interface VoteMessage {
     publicationId: number;
@@ -86,7 +86,7 @@ const createTypedVoteData = (message: VoteMessage, domain: Domain) => {
     return typedData;
 };
 
-export const signVote = async (
+const signVote = async (
     provider: any,
     contractAddress: string,
     sender: string,
