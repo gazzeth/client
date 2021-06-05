@@ -1,14 +1,26 @@
 import { VOTE_VALUE } from "@constants/vote_value";
+import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
+import Topic from "@domain/models/Topic/Topic";
 
 export default class NewsMapper {
-    public static toEntity(dto: any): NewsPreview {
+    public static toEntityPreview(dto: any): NewsPreview {
         const parts = dto.file.match(/[^\n]+/g);
         const title = parts[0].substring(2, parts[0].length);
         const image = parts[1].substring(4, parts[1].length - 1);
         const lede = parts[2];
         const winningVote: number = dto.voting.winningVote;
         return new NewsPreview(parseInt(dto.id), title, lede, image, NewsMapper.toEntityVote(winningVote))
+    }
+
+    public static toEntity(dto: any): News {
+        const topic: any = dto.topic
+        const winningVote: number = dto.voting.winningVote;
+        return new News(parseInt(dto.id), dto.file, NewsMapper.toEntityTopic(topic), NewsMapper.toEntityVote(winningVote))
+    }
+
+    public static toEntityTopic(dto: any): Topic {
+        return new Topic(dto.id, dto.priceToBeJuror, dto.priceToPublish)
     }
 
     public static toEntityVote(vote: number): VOTE_VALUE {

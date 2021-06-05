@@ -42,37 +42,67 @@ export default class NewsGraphRepository implements INewsRepository {
         }
 
         const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.publications
-
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
             const element = result[i];
             element.file = await IpfsMapper.toEntity(this.ipfsClient.cat(element.hash))
-            resultWithFile.push(NewsMapper.toEntity(element))
+            resultWithFile.push(NewsMapper.toEntityPreview(element))
         }
 
         return resultWithFile;
     }
 
     public async get(id: number): Promise<News> {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(null);
-            }, 1 * 1000)
-        });
+        const options: RequestInit = {
+            method: "POST",
+            body: JSON.stringify({
+                query: 
+                `{ 
+                    publications(where: {id: "0x${id.toString(16)}"}) { 
+                        id 
+                        hash 
+                        author 
+                        topic { 
+                            id
+                            priceToPublish
+                            priceToBeJuror
+                            authorReward
+                            jurorReward
+                            commitPhaseDuration
+                            revealPhaseDuration
+                            selectableJurorsQuantity 
+                        } 
+                        publishDate 
+                        voting { 
+                            withdrawn 
+                            winningVote 
+                        } 
+                    } 
+                }`,
+                variables: null
+            }),
+            headers: { "Content-Type": "application/json" }
+        }
+
+        const result: any = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.publications[0]
+
+        result.file = await IpfsMapper.toEntity(this.ipfsClient.cat(result.hash))    
+
+        return NewsMapper.toEntity(result)
     }
 
-    public async post(news: News, library: Web3Provider): Promise<void> {
-        try {
-            const { path } = await this.ipfsClient.add(news.content, { pin: true })
+    public async post(news: News, library: Web3Provider): Promise < void> {
+    try {
+        const { path } = await this.ipfsClient.add(news.content, { pin: true })
 
             const contract = new ethers.Contract(NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
-            const senders = await library.listAccounts()
+        const senders = await library.listAccounts()
             const result = await signDaiPermit(window.ethereum, NewsGraphRepository.DAI_CONTRACT_ADDRESS, senders[0],
-                NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS);
-            const tx = await contract.publish(path, news.topic.name, result.nonce, result.expiry, result.v, result.r, result.s)
+            NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS);
+        const tx = await contract.publish(path, news.topic.name, result.nonce, result.expiry, result.v, result.r, result.s)
             return await tx.wait();
-        } catch (e) {
-            throw ErrorMapper.toEntity(e)
-        }
+    } catch(e) {
+        throw ErrorMapper.toEntity(e)
     }
+}
 }
