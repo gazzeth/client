@@ -38,7 +38,7 @@ export default function Votation({ votes }: Props) {
         }
     })
 
-    const seriesSorted = series.sort((n1, n2) => n1.data[0] - n2.data[0])
+    const seriesSorted = series.sort((n1, n2) => n2.data[0] - n1.data[0])
 
     const getColor = (n: { name: string, data: number[] }) => { //TODO
         switch (n.name) {
