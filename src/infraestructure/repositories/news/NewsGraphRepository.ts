@@ -60,7 +60,8 @@ export default class NewsGraphRepository implements INewsRepository {
                     publications(where: {id: "0x${id.toString(16)}"}) { 
                         id 
                         hash 
-                        author 
+                        author
+                        publishDate 
                         topic { 
                             id
                             priceToPublish

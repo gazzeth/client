@@ -43,7 +43,7 @@ export default function NewsPage() {
     return (
         <Container maxWidth={false}>
             <NewsRender>{news.content}</NewsRender>
-            <Votation votes={news.votes} />
+            {news.isRevealOver() && <Votation votes={news.votes} />}
         </Container>
     )
 }

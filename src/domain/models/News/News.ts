@@ -8,12 +8,29 @@ export default class News {
     topic: Topic;
     content: string;
     votes: Vote[];
+    publishDate: number;
+    withdraw: boolean;
 
-    constructor(id: number, content: string, topic: Topic, verified: VOTE_VALUE, votes?: Vote[]) {
+    constructor(id: number, content: string, topic: Topic, verified: VOTE_VALUE,
+                votes?: Vote[], publishDate?: number, withdraw?: boolean) {
         this.id = id;
         this.verified = verified;
         this.content = content;
         this.topic = topic;
         this.votes = votes ? votes : [];
+        this.publishDate = publishDate;
+        this.withdraw = withdraw;
+    }
+
+    public isCommitOver(): boolean {
+        return Date.now() > this.publishDate + this.topic.commitPhaseDuration; 
+    }
+
+    public isRevealOver(): boolean {
+        return Date.now() > this.publishDate + this.topic.revealPhaseDuration; 
+    }
+
+    public isWithdrawOver(): boolean {
+        return this.withdraw; //TODO
     }
 }

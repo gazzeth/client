@@ -19,7 +19,8 @@ export default class NewsMapper {
         const winningVote: number = dto.voting.winningVote;
         const votes: any[] = dto.voting.votes;
         return new News(parseInt(dto.id), dto.file, NewsMapper.toEntityTopic(topic), 
-            NewsMapper.toEntityVoteValue(winningVote), votes.map((v) => NewsMapper.toEntityVote(v, parseInt(dto.id))))
+            NewsMapper.toEntityVoteValue(winningVote), votes.map((v) => NewsMapper.toEntityVote(v, parseInt(dto.id))),
+            parseInt(dto.publishDate), dto.voting.withdrawn)
     }
 
     public static toEntityVote(dto: any, publicationId: number): Vote {
@@ -27,7 +28,7 @@ export default class NewsMapper {
     }
 
     public static toEntityTopic(dto: any): Topic {
-        return new Topic(dto.id, dto.priceToBeJuror, dto.priceToPublish)
+        return new Topic(dto.id, dto.priceToBeJuror, dto.priceToPublish, parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration))
     }
 
     public static toEntityVoteValue(vote: number): VOTE_VALUE {
