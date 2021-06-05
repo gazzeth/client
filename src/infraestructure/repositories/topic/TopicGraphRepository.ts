@@ -7,26 +7,41 @@ import Protocol from '@assets/abis/Protocol.json';
 import { Web3Provider } from '@ethersproject/providers'
 import { signDaiPermit } from 'eth-permit';
 import ErrorMapper from "../ErrorMapper";
+import TopicMapper from './TopicMapper';
 
 @injectable()
 export default class TopicGraphRepository implements ITopicRepository {
 
     private static readonly PROTOCOL_CONTRACT_ADDRESS: string = process.env.REACT_APP_PROTOCOL_CONTRACT_ADDRESS || "";
     private static readonly DAI_CONTRACT_ADDRESS: string = process.env.REACT_APP_DAI_CONTRACT_ADDRESS || "";
+    private static readonly API_URL: string = process.env.REACT_APP_API_URL || "";
 
-    private topicList = [
-        new Topic("Worldwide/Ethereum/Airdrops", 0.1, 0.1), new Topic("Politica", 14, 15), new Topic("Espectaculo", 11, 12),
-        new Topic("Geografia", 20, 21), new Topic("Biologia", 50, 51), new Topic("Fisica", 10, 11),
-        new Topic("Economia", 20, 21), new Topic("Argentina", 24, 25), new Topic("Uruguay", 16, 17),
-    ]
+    public async list(pagination: Pagination): Promise<Topic[]> { //TODO pagination
+        const options: RequestInit = {
+            method: "POST",
+            body: JSON.stringify({
+                query: 
+                `{ 
+                    topics(skip: ${0}, first: ${100}) 
+                    { 
+                        id
+                        priceToPublish
+                        priceToBeJuror
+                        authorReward
+                        jurorReward
+                        commitPhaseDuration
+                        revealPhaseDuration
+                        selectableJurorsQuantity 
+                    }
+                }`,
+                variables: null
+            }),
+            headers: { "Content-Type": "application/json" }
+        }
 
-    public async list(pagination: Pagination): Promise<Topic[]> {
-        const responce = this.topicList
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(responce);
-            }, 1 * 1000)
-        });
+        const result: any[] = (await (await fetch(TopicGraphRepository.API_URL, options)).json()).data.topics
+
+        return result.map((r) => TopicMapper.toEntity(r));
     }
 
     public async subscribe(topic: { topic: Topic, quantity: number }, library: Web3Provider): Promise<void> {
