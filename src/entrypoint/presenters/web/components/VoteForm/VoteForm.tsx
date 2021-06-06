@@ -37,14 +37,14 @@ export default function VoteForm({ isReveal }: Props) {
         if (isReveal) {
             voteService.getVoteRevealUsecase()
                 .reveal(new Vote(voteValue, Number.parseFloat(id), justification), library)
-                .then(() => toast.success(t("succesful-vote-reveal"))) 
+                .then(() => toast.success(t("succesful-vote-reveal")))
                 .catch((error: Error) => toast.error(t(error.message)))
                 .finally(() => setLoading(false))
         }
         else {
             voteService.getVoteCommitUseCase()
                 .commit(new Vote(voteValue, Number.parseFloat(id)), library)
-                .then(() => toast.success(t("succesful-vote-commit"))) 
+                .then(() => toast.success(t("succesful-vote-commit")))
                 .catch((error: Error) => toast.error(t(error.message)))
                 .finally(() => setLoading(false))
         }
@@ -70,8 +70,12 @@ export default function VoteForm({ isReveal }: Props) {
                     </FormControl>
                 </div>
                 {
-                    isReveal && <TextField className={classes.formControl} label={t("justification")}
-                        multiline rows={4} variant="outlined" onChange={(e) => setJustification(e.target.value as string)} />
+                    isReveal && (
+                        <div className={classes.rowContainer}>
+                            <TextField className={classes.formControl} label={t("justification")}
+                                multiline rows={4} variant="outlined" onChange={(e) => setJustification(e.target.value as string)} />
+                        </div>
+                    )
                 }
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.button} onClick={onSummit}

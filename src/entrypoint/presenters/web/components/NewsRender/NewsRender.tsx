@@ -15,7 +15,9 @@ export default function NewsRender({ children }: Props) {
     return (
         <div className={classes.rowContainer}>
             <Container>
-                <ReactMarkdown remarkPlugins={[gfm]}>{children}</ReactMarkdown>
+                <div className={classes.container}>
+                    <ReactMarkdown remarkPlugins={[gfm]}>{children}</ReactMarkdown>
+                </div>
             </Container>
         </div>
     )

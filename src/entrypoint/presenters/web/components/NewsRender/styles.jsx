@@ -16,4 +16,7 @@ export default makeStyles(theme => ({
             borderRadius: 15,
         },
     },
+    container: {
+        padding: "1.1rem"
+    }
 }));

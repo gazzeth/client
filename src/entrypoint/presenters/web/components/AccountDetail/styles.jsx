@@ -23,9 +23,15 @@ export default makeStyles(theme => ({
         padding: "1.1rem",
     },
     borderContainer: {
+        marginBottom: "1rem",
+        marginLeft: "1rem",
+        marginRight: "1rem",
         backgroundColor: "#FFFFFF",
         border: `1px solid #ced0d9`,
         borderRadius: 20,
+    },
+    colorContainer: {
+        backgroundColor: "#edeef2",
     },
     rightContainer: {
         display: "flex",

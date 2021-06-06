@@ -5,8 +5,7 @@ export default makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        paddingTop: "1.1rem",
-        paddingBottom: "1.1rem",
+        padding: "1.1rem",
         "& .MuiOutlinedInput-root": {
             borderRadius: 15,
         },

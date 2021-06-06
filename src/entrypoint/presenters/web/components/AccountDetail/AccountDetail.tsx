@@ -42,47 +42,78 @@ export default function AccountDetail({ onChange, wallet }: Props) {
 
     useEffect(() => {
         newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(0, 5), account)
-        .then((newsListResponce) => {
-            setNews(newsListResponce);
-            console.log(newsListResponce)
-        })
-        .catch((error) => console.log(error)) //TODO
+            .then((newsListResponce) => {
+                setNews(newsListResponce);
+                console.log(newsListResponce)
+            })
+            .catch((error) => console.log(error)) //TODO
     }, [account])
 
     return (
-        <div className={classnames(classes.columnContainer, classes.borderContainer)}>
-            <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
-                <div className={classnames(classes.leftContainer, classes.text)}>
-                    <Typography variant="body2">{t("connected-with", { wallet: wallet.type })}</Typography>
+        <>
+            <div className={classnames(classes.columnContainer, classes.borderContainer)}>
+                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                    <div className={classnames(classes.leftContainer, classes.text)}>
+                        <Typography variant="body2">{t("connected-with", { wallet: wallet.type })}</Typography>
+                    </div>
+                    <div className={classes.rightContainer}>
+                        <Button className={classes.buttonChange} onClick={onChange}>
+                            <Typography variant="body2">{t("change")}</Typography>
+                        </Button>
+                    </div>
                 </div>
-                <div className={classes.rightContainer}>
-                    <Button className={classes.buttonChange} onClick={onChange}>
-                        <Typography variant="body2">{t("change")}</Typography>
-                    </Button>
+                <div className={classnames(classes.rowContainer, classes.start)}>
+                    <div className={classes.leftContainer}>
+                        <Icon account={account} />
+                    </div>
+                    <div className={classes.rightContainer}>
+                        <Typography className={classes.textAccount} variant="h4">{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
+                    </div>
+                </div>
+                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                    <div className={classnames(classes.leftContainer, classes.text)}>
+                        <Button className={classes.button} onClick={copyAddress}>
+                            <FileCopyOutlinedIcon className={classes.text} />
+                            <Typography className={classes.text} variant="body2">{t("copy-address")}</Typography>
+                        </Button>
+                    </div>
+                    <div className={classes.rightContainer}>
+                        <Button className={classes.button} onClick={goToLink}>
+                            <ExitToAppOutlinedIcon className={classes.text} />
+                            <Typography className={classes.text} variant="body2">{t("view-etherscan")}</Typography>
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <div className={classnames(classes.rowContainer, classes.start)}>
-                <div className={classes.leftContainer}>
-                    <Icon account={account} />
+            <div className={classnames(classes.columnContainer, classes.colorContainer)}>
+                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                    <div className={classnames(classes.leftContainer, classes.text)}>
+                        <Typography variant="body2">{t("publications-participate")}</Typography>
+                    </div>
                 </div>
-                <div className={classes.rightContainer}>
-                    <Typography className={classes.textAccount} variant="h4">{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
+                <div className={classnames(classes.rowContainer, classes.start)}>
+                    <div className={classes.leftContainer}>
+                        <Icon account={account} />
+                    </div>
+                    <div className={classes.rightContainer}>
+                        <Typography className={classes.textAccount} variant="h4">{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
+                    </div>
+                </div>
+                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                    <div className={classnames(classes.leftContainer, classes.text)}>
+                        <Button className={classes.button} onClick={copyAddress}>
+                            <FileCopyOutlinedIcon className={classes.text} />
+                            <Typography className={classes.text} variant="body2">{t("copy-address")}</Typography>
+                        </Button>
+                    </div>
+                    <div className={classes.rightContainer}>
+                        <Button className={classes.button} onClick={goToLink}>
+                            <ExitToAppOutlinedIcon className={classes.text} />
+                            <Typography className={classes.text} variant="body2">{t("view-etherscan")}</Typography>
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
-                <div className={classnames(classes.leftContainer, classes.text)}>
-                    <Button className={classes.button} onClick={copyAddress}>
-                        <FileCopyOutlinedIcon className={classes.text} />
-                        <Typography className={classes.text} variant="body2">{t("copy-address")}</Typography>
-                    </Button>
-                </div>
-                <div className={classes.rightContainer}>
-                    <Button className={classes.button} onClick={goToLink}>
-                        <ExitToAppOutlinedIcon className={classes.text} />
-                        <Typography className={classes.text} variant="body2">{t("view-etherscan")}</Typography>
-                    </Button>
-                </div>
-            </div>
-        </div>
+        </>
     )
 }
