@@ -26,11 +26,11 @@ export default class News {
     }
 
     public isCommitOver(): boolean {
-        return Date.now() > this.publishDate + this.topic.commitPhaseDuration * 1000; 
+        return Date.now() > this.publishDate * 1000 + this.topic.commitPhaseDuration * 1000; 
     }
 
     public isRevealOver(): boolean {
-        return Date.now() > this.publishDate + this.topic.revealPhaseDuration * 1000; 
+        return Date.now() > this.publishDate * 1000 + this.topic.revealPhaseDuration * 1000; 
     }
 
     public isWithdrawOver(): boolean {
