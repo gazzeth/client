@@ -6,6 +6,7 @@ import NewsGetUsecase from "@application/usecases/news/get/NewsGetUsecase";
 import NewsPostUsecase from "@application/usecases/news/post/NewsPostUsecase";
 import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
 import NewsListByAddressUsecase from "@application/usecases/news/listByAddress/NewsListByAddressUsecase";
+import NewsWithdrawUsecase from "@application/usecases/news/withdraw/NewsWithdrawUsecase";
 
 @injectable()
 export default class NewsService {
@@ -26,5 +27,9 @@ export default class NewsService {
 
     public getNewsListByAddressUsecase() {
         return new NewsListByAddressUsecase(this.newsRepository);
+    }
+
+    public getNewsWithdrawUsecase() {
+        return new NewsWithdrawUsecase(this.newsRepository);
     }
 }

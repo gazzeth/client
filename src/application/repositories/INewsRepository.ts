@@ -12,4 +12,6 @@ export default interface INewsRepository {
     get(id: number): Promise<News>;
 
     post(news: News, library: Web3Provider): Promise<void>;
+
+    withdraw(id: number, library: Web3Provider): Promise<void>;
 }

@@ -40,4 +40,22 @@ export default makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "flex-end",
     },
+    button: {
+        textTransform: "none",
+        color: theme.palette.primary.main,
+        borderRadius: 20,
+        border: `1px solid ${theme.palette.primary.main}`,
+        "&:hover": {
+            backgroundColor: "none",
+            textDecoration: "underline"
+        }
+    },
+    buttonProgress: {
+        color:  theme.palette.primary.light,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }));

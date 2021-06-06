@@ -185,4 +185,14 @@ export default class NewsGraphRepository implements INewsRepository {
             throw ErrorMapper.toEntity(e)
         }
     }
+
+    public async withdraw(id: number, library: Web3Provider): Promise<void> {
+        try {
+            const contract = new ethers.Contract(NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
+            const tx = await contract.withdrawRewards(id)
+            return await tx.wait();
+        } catch (e) {
+            throw ErrorMapper.toEntity(e)
+        }
+    }
 }
