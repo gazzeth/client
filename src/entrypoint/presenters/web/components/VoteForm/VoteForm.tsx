@@ -68,6 +68,7 @@ export default function VoteForm({ isReveal }: Props) {
                                     </div>
                                     )
                                 }
+                                return null
                             })
                         }
                         </div>
