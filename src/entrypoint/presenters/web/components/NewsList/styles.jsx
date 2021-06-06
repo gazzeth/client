@@ -5,6 +5,5 @@ export default makeStyles(theme => ({
     },
     gridContainer: {
         justify:"center",
-        alignItems:"center",
     }
 }));
