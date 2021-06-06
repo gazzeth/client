@@ -21,7 +21,7 @@ export default function SelectLanguage() {
                 <Typography variant="h6">{t(i18n.language)}</Typography>
                 <ExpandMoreIcon />
             </Button>
-            <Modal isOpen={isModalOpen} onClose={onClose} title={t("select-topic")}>
+            <Modal isOpen={isModalOpen} onClose={onClose} title={t("select-language")}>
                 {/* TODO style={{ overflowY: 'auto', height: 'calc(100vh - 127px)' }} */}
                 <div>
                     {
