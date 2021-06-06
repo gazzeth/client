@@ -8,6 +8,7 @@ import BlockchainService from "@configuration/usecases/BlockchainService";
 import Icon from "../Icon/Icon";
 import { Link } from "react-router-dom";
 import { URLS } from "@constants/urls";
+import SelectLanguage from "../Translation/SelectLanguage";
 
 type Props = {
     onClick: () => void
@@ -35,14 +36,18 @@ export default function AccountStatus({ onClick }: Props) {
                     <Typography variant="h4" className={classes.text}>{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
                     <Icon account={account} />
                 </Button>
+                <SelectLanguage />
             </>
         )
     }
     else {
         return (
-            <Button className={classes.connectButton} onClick={onClick} >
-                <Typography variant="h4" className={classes.text}>{t("connect-to-wallet")}</Typography>
-            </Button>
+            <>
+                <Button className={classes.connectButton} onClick={onClick} >
+                    <Typography variant="h4" className={classes.text}>{t("connect-to-wallet")}</Typography>
+                </Button>
+                <SelectLanguage />
+            </>
         )
     }
 }
