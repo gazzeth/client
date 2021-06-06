@@ -99,5 +99,10 @@
     "news-status-message-0": "La publicación fue validada como verdadera",
     "news-status-message-1": "La publicación fue validada como falsa",
     "news-status-message-2": "La publicación fue validada no cumple con las reglas",
-    "news-status-message-3": "No se logro llegar a un resultado"
+    "news-status-message-3": "No se logro llegar a un resultado",
+
+    "publications-participate": "Publicaciones en las que participas",
+    "go-to-publication": "Ir a publicación",
+    "go-to-reveal": "Ir a revelar",
+    "go-to-vote": "Ir a votar"
 }

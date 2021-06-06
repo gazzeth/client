@@ -25,4 +25,12 @@ export default class NewsPreview {
         return new NewsPreview(this.id, this.title, lede, this.image, this.verified, 
             this.topic, this.publishDate);
     }  
+
+    public isCommitOver(): boolean {
+        return Date.now() > this.publishDate + this.topic.commitPhaseDuration * 1000; 
+    }
+
+    public isRevealOver(): boolean {
+        return Date.now() > this.publishDate + this.topic.revealPhaseDuration * 1000; 
+    }
 }

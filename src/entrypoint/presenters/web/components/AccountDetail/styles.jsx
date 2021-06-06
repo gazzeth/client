@@ -32,6 +32,8 @@ export default makeStyles(theme => ({
     },
     colorContainer: {
         backgroundColor: "#edeef2",
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,      
     },
     rightContainer: {
         display: "flex",
@@ -39,6 +41,9 @@ export default makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "flex-start",
         paddingLeft: "1rem"
+    },
+    newLine: {
+        marginBottom: "1rem",  
     },
     leftContainer: {
         display: "flex",
