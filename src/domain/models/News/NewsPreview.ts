@@ -29,8 +29,8 @@ export default class NewsPreview {
     public isCommitOver(): boolean {
         return Date.now() > this.publishDate * 1000 + this.topic.commitPhaseDuration * 1000; 
     }
-
+    
     public isRevealOver(): boolean {
-        return Date.now() > this.publishDate * 1000 + this.topic.revealPhaseDuration * 1000; 
+        return Date.now() > this.publishDate * 1000 + this.topic.commitPhaseDuration * 1000 + this.topic.revealPhaseDuration * 1000; 
     }
 }
