@@ -58,7 +58,7 @@ export default function Votation({ votes, id }: Props) {
             case t("vote-value-0"): return "#808080";
             case t("vote-value-1"): return "#008000";
             case t("vote-value-2"): return "#FF0000";
-            case t("vote-value-3"): return "#FFFF00";
+            case t("vote-value-3"): return "#e6ac00";
         }
     }
 

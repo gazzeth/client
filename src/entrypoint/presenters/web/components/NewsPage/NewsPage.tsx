@@ -62,7 +62,7 @@ export default function NewsPage() {
                 break;
             case VOTE_VALUE.Unqualified:
                 message = "news-status-message-2"
-                backColor = "#FFFF00"
+                backColor = "#e6ac00"
                 color = "#FFFFFF"
                 break;
             default:

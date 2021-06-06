@@ -32,5 +32,8 @@ export default makeStyles(theme => ({
     },
     trueStatusBar: {
         backgroundColor: theme.palette.status.true
+    },
+    unqualifiedStatusBar: {
+        backgroundColor: "#e6ac00"
     }
 }));
