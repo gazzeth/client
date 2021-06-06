@@ -66,6 +66,13 @@
     "reveal": "Revelar",
     "justification": "Justificación",
 
+    "vote-rule-label-1": "Verdadera",
+    "vote-rule-label-2": "Falsa",
+    "vote-rule-label-3": "No cualificada",
+    "vote-rule-description-1": "La publicación es una noticia, se encuentra en el tópico correcto y es completamente contrastable como verdadera.",
+    "vote-rule-description-2": "La publicación es una noticia, se encuentra en el tópico correcto y contiene al menos un dato que no es posible contrastar como verdadero.",
+    "vote-rule-description-3": "Cualquier otro caso. Por ejemplo: la publicación no es una noticia, no se encuentra en el tópico correcto, no se comprende, etc.",
+
     "succesful-news-post": "Se publico exitosamente",
     "succesful-vote-commit": "Se envio el voto exitosamente",
     "succesful-vote-reveal": "Se revelo el voto exitosamente",
