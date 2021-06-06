@@ -107,5 +107,10 @@
     "go-to-reveal": "Ir a revelar",
     "go-to-vote": "Ir a votar",
 
-    "withdraw": "Retirar"
+    "withdraw": "Retirar",
+
+    "vote-state-value-0": "Pendiente",
+    "vote-state-value-1": "Verdadero",
+    "vote-state-value-2": "Falso",
+    "vote-state-value-3": "No clasifica"
 }

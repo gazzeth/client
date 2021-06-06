@@ -1,13 +1,13 @@
-import { VERIFIED_STATUS } from "@constants/verifiedStatus";
+import { VOTE_VALUE } from "@constants/vote_value";
 
 export default class NewsFilter {
-    public verified?: VERIFIED_STATUS;
+    public verified?: VOTE_VALUE;
 
-    constructor(verified?: VERIFIED_STATUS) {
+    constructor(verified?: VOTE_VALUE) {
         this.verified = verified;
     }
 
-    setVerified(verified?: VERIFIED_STATUS) {
+    setVerified(verified?: VOTE_VALUE) {
         return new NewsFilter(verified);
     }
 }

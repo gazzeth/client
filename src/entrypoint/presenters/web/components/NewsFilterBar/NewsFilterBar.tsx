@@ -2,8 +2,8 @@ import React from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import NewsFilter from "@domain/models/Filter/NewsFilter";
-import { InputLabel, FormControl, FormHelperText, MenuItem, Paper, Select, Typography, Container } from "@material-ui/core";
-import { VERIFIED_STATUS } from "@constants/verifiedStatus";
+import { InputLabel, FormControl, Paper, Select, Typography, Container } from "@material-ui/core";
+import { VOTE_VALUE, VOTE_VALUES } from "@constants/vote_value";
 
 interface PropTypes {
     filter: NewsFilter,
@@ -19,23 +19,27 @@ export default function NewsFilterBar({ filter, onChange }: PropTypes) {
         if (value === "undefined") {
             value = undefined;
         }
-        onChange(filter.setVerified(value as (VERIFIED_STATUS | undefined)));
+        onChange(filter.setVerified(value as (VOTE_VALUE | undefined)));
     }
 
     return (
         <Paper elevation={3}>
             <Container fixed>
                 <Typography variant="h5">{t("filter-bar-title")}</Typography>
-                <FormControl className={classes.formControl}>
-                    <InputLabel shrink>{t("verified-title")}</InputLabel>
-                    <Select displayEmpty value={filter.verified} onChange={handleVerifiedChange}>
-                        <MenuItem value={"undefined"}><em>{t("none")}</em></MenuItem>
-                        <MenuItem value={VERIFIED_STATUS.true}>{t("verified")}</MenuItem>
-                        <MenuItem value={VERIFIED_STATUS.false}>{t("not-verified")}</MenuItem>
-                        <MenuItem value={VERIFIED_STATUS.pending}>{t("pending")}</MenuItem>
-                    </Select>
-                    <FormHelperText>{t("verified-title")}</FormHelperText>
-                </FormControl>
+                <div className={classes.rowContainer}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel>{t("verified-title")}</InputLabel>
+                        <Select native value={filter.verified} label={t("verified-title")}
+                            onChange={handleVerifiedChange}>
+                            <option aria-label="None" value={undefined} />
+                            {
+                                VOTE_VALUES.map((voteValue) => {
+                                    return <option value={voteValue}>{t("vote-state-value-" + voteValue)}</option>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                </div>
             </Container>
         </Paper>
     );
