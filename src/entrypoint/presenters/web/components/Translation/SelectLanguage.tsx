@@ -4,7 +4,6 @@ import i18n from "./I18next";
 import { useTranslation } from 'react-i18next';
 import useStyles from "./styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import clsx from 'clsx';
 import Modal from "../Modal/Modal";
 
 export default function SelectLanguage() {
@@ -18,7 +17,7 @@ export default function SelectLanguage() {
 
     return (
         <>
-            <Button onClick={onOpen} component="span" className={clsx(classes.button, { [classes.buttonSelected]: i18n.language })}>
+            <Button onClick={onOpen} component="span" className={classes.button}>
                 <Typography variant="h6">{t(i18n.language)}</Typography>
                 <ExpandMoreIcon />
             </Button>

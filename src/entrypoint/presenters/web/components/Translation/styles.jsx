@@ -5,20 +5,10 @@ export default makeStyles(theme => ({
         textTransform: "none",
         color: "#FFFFFF",
         backgroundColor: theme.palette.primary.main,
-        borderRadius: 15,
-        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: 20,
+        border: `1px solid #FFFFFF`,
         "&:hover": {
             backgroundColor: theme.palette.primary.light
-        }
-    },
-    buttonSelected: {
-        textTransform: "none",
-        color: theme.palette.primary.main,
-        borderRadius: 15,
-        border: `1px solid ${theme.palette.primary.main}`,
-        backgroundColor: "#FFFFFF",
-        "&:hover": {
-            backgroundColor: "#edeef2",
         }
     },
     container: {
