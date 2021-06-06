@@ -13,6 +13,16 @@ export default makeStyles(theme => ({
             borderRadius: 15,
         },
     },
+    buttonPublication: {
+        textTransform: "none",
+        color: theme.palette.primary.main,
+        borderRadius: 20,
+        border: `1px solid ${theme.palette.primary.main}`,
+        "&:hover": {
+            backgroundColor: "none",
+            textDecoration: "underline"
+        }
+    },
     button: {
         textTransform: "none",
         color: "#FFFFFF",

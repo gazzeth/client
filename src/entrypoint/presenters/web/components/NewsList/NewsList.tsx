@@ -51,6 +51,6 @@ export default function NewsList() {
                     </Grid>
                 </Grid>
             </Grid>
-        </Container >
+        </Container>
     )
 }
