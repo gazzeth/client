@@ -53,6 +53,26 @@ export default function VoteForm({ isReveal }: Props) {
     return (
         <div className={classes.rowContainer}>
             <Container title={t(`${isReveal ? "reveal" : "vote"}-news`)}>
+                {
+                    !isReveal && (
+                        <div>
+                        {
+                            VOTE_VALUES.map((voteValue) => {
+                                if (voteValue !== VOTE_VALUE.None) {
+                                    return (
+                                    <div className={classes.rowRuleContainer}>
+                                        <Typography>
+                                            <span className={classes.ruleLabel}>{t("vote-rule-label-" + voteValue)}: </span>
+                                            {t("vote-rule-description-" + voteValue)}
+                                        </Typography>
+                                    </div>
+                                    )
+                                }
+                            })
+                        }
+                        </div>
+                    )
+                }
                 <div className={classes.rowContainer}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel>{t("select-vote-value")}</InputLabel>

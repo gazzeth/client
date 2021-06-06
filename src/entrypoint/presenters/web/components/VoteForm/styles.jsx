@@ -43,4 +43,18 @@ export default makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    rowRuleContainer: {
+        display: "flex",
+        flexDirection: "row",
+        padding: "1.1rem",
+        "& .MuiOutlinedInput-root": {
+            borderRadius: 15,
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+            borderRadius: 15,
+        },
+    },
+    ruleLabel: {
+        fontWeight: 'bold'
+    }
 }));
