@@ -7,6 +7,7 @@ import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typo
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
 import { VOTE_VALUE } from "@constants/vote_value";
@@ -48,8 +49,8 @@ export default function NewsCard(props: PropTypes) {
                 );
             case VOTE_VALUE.Unqualified:
                 return ( 
-                    <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
-                        <CancelOutlinedIcon className={classes.statusBarIcon} />
+                    <div className={classnames(classes.statusBar, classes.unqualifiedStatusBar)}>
+                        <ReportProblemOutlinedIcon className={classes.statusBarIcon} />
                         <span>{t("unqualified-status-bar-description")}</span>
                     </div>
                 );
