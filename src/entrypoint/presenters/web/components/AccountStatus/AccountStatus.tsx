@@ -25,6 +25,9 @@ export default function AccountStatus({ onClick }: Props) {
     if (account) {
         return (
             <>
+                <Button className={classes.connectButton} component={Link} to={URLS.newsForm} >
+                    <Typography variant="h4" className={classes.text}>{t("publish-news")}</Typography>
+                </Button>
                 <Button className={classes.connectButton} component={Link} to={URLS.juryForm} >
                     <Typography variant="h4" className={classes.text}>{t("jurror-inscription")}</Typography>
                 </Button>
