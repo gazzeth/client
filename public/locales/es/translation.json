@@ -70,6 +70,7 @@
     "succesful-vote-commit": "Se envio el voto exitosamente",
     "succesful-vote-reveal": "Se revelo el voto exitosamente",
     "succesful-sucribe-topic": "Se sucribio exitosamente",
+    "succesful-withdraw": "Se retiro el dinero exitosamente",
 
     "publication-not-exist-error": "La publicacion no existe",
     "not-juror-of-publication": "No es jurado de la publicacion",
@@ -104,5 +105,7 @@
     "publications-participate": "Publicaciones en las que participas",
     "go-to-publication": "Ir a publicación",
     "go-to-reveal": "Ir a revelar",
-    "go-to-vote": "Ir a votar"
+    "go-to-vote": "Ir a votar",
+
+    "withdraw": "Retirar"
 }

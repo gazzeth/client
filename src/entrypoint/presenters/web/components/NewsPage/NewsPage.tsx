@@ -82,7 +82,7 @@ export default function NewsPage() {
             {getStatusMessage(news)}
             <Container maxWidth={false}>
                 <NewsRender>{news.content}</NewsRender>
-                {news.isRevealOver() && <Votation votes={news.votes} />}
+                {news.isRevealOver() && <Votation votes={news.votes} id={!news.withdraw ? news.id : undefined} />}
             </Container>
         </>
     )
