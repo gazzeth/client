@@ -80,7 +80,7 @@ export default function NewsForm() {
                     {news.topic && <LockInfo lockCost={news.topic.costPublish} library={library} account={account} />}
                     <div className={classes.rowContainer} style={{ position: 'relative', }}>
                         <Button className={classes.buttonPublish} onClick={onSummit}
-                            disabled={!news.content || !news.topic}>
+                            disabled={loading || !news.content || !news.topic}>
                             <Typography variant="h6">{t("publish")}</Typography>
                         </Button>
                         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

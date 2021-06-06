@@ -32,7 +32,8 @@ const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]
                 }
             })
         }, defaultPagination, pageState.filter);
-    }, [pageState.filter]); //TODO check warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pageState.filter]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -57,7 +58,8 @@ const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [])//TODO check warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return [pageState.loading, pageState.pagination, pageState.filter, setFilter, newsList]
 }

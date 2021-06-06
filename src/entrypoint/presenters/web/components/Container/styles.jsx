@@ -7,12 +7,13 @@ export default makeStyles(theme => ({
         alignItems: "center",
         flexDirection: "column",
         borderRadius: 20,
-        padding: "1rem"
+        maxWidth: "1000px"
     },
     titleRow: {
         justifyContent: 'space-between',
         display: 'flex',
-        width: "-moz-available",
+        width: "100%",
+        padding: "1rem",
     },
     button: {
         textTransform: "none",

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import News from "@domain/models/News/News";
 import useStyles from "./styles";
-// import { useTranslation } from 'react-i18next';
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
 import NewsService from "@configuration/usecases/NewsService";
-import { CircularProgress, Container, Grid, Typography } from "@material-ui/core";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia } from "@material-ui/core";
-import Pie from "react-chartjs-2";
-import classnames from "classnames";
+import { CircularProgress, Container, Typography } from "@material-ui/core";
+import NewsRender from "../NewsRender/NewsRender";
+import Votation from "../Votation/Votation";
+import { VOTE_VALUE } from "@constants/vote_value";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
 export default function NewsPage() {
-    let votesChartInstance = null;
+    const { t } = useTranslation();
 
     const { id } = useParams<{ id: string }>();
     const idNumber = Number(id)
@@ -24,34 +24,8 @@ export default function NewsPage() {
     const [news, setNews] = useState<News>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const votesChartOptions = {
-        legend: {
-            display: true,
-            position: "bottom"
-        },
-        elements: {
-            arc: {
-                borderWidth: 2
-            }
-        }
-    };
-
-    const votesChartData = {
-        maintainAspectRatio: false,
-        responsive: true,
-        labels: ["True", "Fake"],
-        datasets: [
-            {
-                data: [3, 7],
-                backgroundColor: ["#10913d", "#ba1833"],
-                hoverBackgroundColor: ["#17d459", "#f52245"],
-                hoverBorderColor: "white"
-            }
-        ]
-    };
-
     useEffect(() => {
-        if (idNumber !== NaN) {
+        if (!isNaN(idNumber)) {
             newsService.getNewsGetUseCase().get(idNumber)
                 .then((newsResponce) => setNews(newsResponce))
                 .catch((error) => console.log(error))//TODO maybe do somethin else
@@ -59,7 +33,7 @@ export default function NewsPage() {
         }
     }, [idNumber])
 
-    if (idNumber === NaN || (loading === false && news === undefined)) {
+    if (isNaN(idNumber) || (loading === false && news === undefined)) {
         return <>404 para el id:{id}</>//TODO render 404
     }
     if (loading === true) {
@@ -69,41 +43,47 @@ export default function NewsPage() {
             </div>
         );
     }
+
+    const getStatusMessage = (n: News) => {
+        let message, backColor, color;
+        if (!n.isRevealOver()) {
+            return null
+        }
+        switch (n.verified) {
+            case VOTE_VALUE.True:
+                message = "news-status-message-0"
+                backColor = "#008000"
+                color = "#FFFFFF"
+                break;
+            case VOTE_VALUE.False:
+                message = "news-status-message-1"
+                backColor = "#FF0000"
+                color = "#FFFFFF"
+                break;
+            case VOTE_VALUE.Unqualified:
+                message = "news-status-message-2"
+                backColor = "#FFFF00"
+                color = "#FFFFFF"
+                break;
+            default:
+                message = "news-status-message-3"
+                backColor = "#000000"
+                color = "#FFFFFF"
+        }
+        return (
+            <div style={{ backgroundColor: backColor, width: "100%", padding: "1rem", color: color }}>
+                <Typography variant="body2" >{t(message)}</Typography>
+            </div>
+        )
+    }
+
     return (
-        <Container maxWidth={false}>
-            "PROXIMAMENTE"
-            {/* TODO 
-            <Grid container direction="column" className={classes.gridContainer} spacing={2}>
-                <Grid item>
-                    <Grid container justify="center" className={classes.gridContainer}>
-                        <Card className={classes.card}>
-                            <CardActionArea>
-                                <CardMedia component="img" className={classes.image} image={news.image} />
-                                <CardContent>
-                                    <Typography variant="h1" className={classnames(classes.text, classes.title)}>
-                                        {news.title}
-                                    </Typography>
-                                    <Typography variant="h2" className={classnames(classes.text, classes.lede)}>
-                                        {news.lede}
-                                    </Typography>
-                                    <Typography variant="h3" className={classnames(classes.text, classes.body)}>
-                                        {news.body}
-                                    </Typography>
-                                </CardContent>
-                                <Container maxWidth="sm">
-                                    <Pie
-                                        data={votesChartData}
-                                        options={votesChartOptions}
-                                        ref={input => {
-                                            votesChartInstance = input;
-                                        }}
-                                    />
-                                </Container>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                </Grid >
-            </Grid > */}
-        </Container>
+        <>
+            {getStatusMessage(news)}
+            <Container maxWidth={false}>
+                <NewsRender>{news.content}</NewsRender>
+                {news.isRevealOver() && <Votation votes={news.votes} id={!news.withdraw ? news.id : undefined} />}
+            </Container>
+        </>
     )
 }

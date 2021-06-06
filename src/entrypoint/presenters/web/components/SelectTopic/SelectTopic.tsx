@@ -41,7 +41,8 @@ export default function SelectTopic({ selectedOption, onChange }: Props) {
                 <ExpandMoreIcon />
             </Button>
             <Modal isOpen={isModalOpen} onClose={onClose} title={t("select-topic")}>
-                <div style={{ overflowY: 'auto', height: 'calc(100vh - 127px)' }}>
+            {/* TODO style={{ overflowY: 'auto', height: 'calc(100vh - 127px)' }} */}
+                <div> 
                     {
                         topics.map((t: Topic) => {
                             return (

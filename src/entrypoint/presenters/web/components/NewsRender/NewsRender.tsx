@@ -12,10 +12,20 @@ export default function NewsRender({ children }: Props) {
 
     const classes = useStyles();
 
+    const renderers = {
+        image: (props: any) => {
+            return (
+                <img alt={props.alt} src={props.src} title={props.title} style={{ width: "100%" }} />
+            )
+        },
+    }
+
     return (
         <div className={classes.rowContainer}>
             <Container>
-                <ReactMarkdown remarkPlugins={[gfm]}>{children}</ReactMarkdown>
+                <div className={classes.container}>
+                    <ReactMarkdown remarkPlugins={[gfm]} components={{ img: renderers.image }}>{children}</ReactMarkdown>
+                </div>
             </Container>
         </div>
     )

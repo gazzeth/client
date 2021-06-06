@@ -23,9 +23,17 @@ export default makeStyles(theme => ({
         padding: "1.1rem",
     },
     borderContainer: {
+        marginBottom: "1rem",
+        marginLeft: "1rem",
+        marginRight: "1rem",
         backgroundColor: "#FFFFFF",
         border: `1px solid #ced0d9`,
         borderRadius: 20,
+    },
+    colorContainer: {
+        backgroundColor: "#edeef2",
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,      
     },
     rightContainer: {
         display: "flex",
@@ -33,6 +41,9 @@ export default makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "flex-start",
         paddingLeft: "1rem"
+    },
+    newLine: {
+        marginBottom: "1rem",  
     },
     leftContainer: {
         display: "flex",

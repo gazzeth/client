@@ -18,8 +18,10 @@
     "pending-status-bar-description": "Esta noticia está pendiente de revisión",
     "false-status-bar-description": "Esta noticia fue declarada falsa",
     "true-status-bar-description": "Esta noticia fue declarada verdadera",
-
+    "unqualified-status-bar-description": "Esta noticia no cumple con las normas",
+     
     "connect-to-wallet": "Conectarse a la billetera",
+    "jurror-inscription": "Inscribirse como jurado",
     "back": "Atras",
     "metamask-header": "Metamask",
     "metamask-subheader": "Extension de navegador facil de usar",
@@ -56,6 +58,7 @@
     "vote-news": "Emitir un voto",
     "reveal-news": "Revelar un voto",
     "select-vote-value": "Seleccione un valor para el voto",
+    "vote-value-0": "No votó",
     "vote-value-1": "Verdadero",
     "vote-value-2": "Falso",
     "vote-value-3": "No clasifica",
@@ -63,10 +66,18 @@
     "reveal": "Revelar",
     "justification": "Justificación",
 
+    "vote-rule-label-1": "Verdadera",
+    "vote-rule-label-2": "Falsa",
+    "vote-rule-label-3": "No cualificada",
+    "vote-rule-description-1": "La publicación es una noticia, se encuentra en el tópico correcto y es completamente contrastable como verdadera.",
+    "vote-rule-description-2": "La publicación es una noticia, se encuentra en el tópico correcto y contiene al menos un dato que no es posible contrastar como verdadero.",
+    "vote-rule-description-3": "Cualquier otro caso. Por ejemplo: la publicación no es una noticia, no se encuentra en el tópico correcto, no se comprende, etc.",
+
     "succesful-news-post": "Se publico exitosamente",
     "succesful-vote-commit": "Se envio el voto exitosamente",
     "succesful-vote-reveal": "Se revelo el voto exitosamente",
     "succesful-sucribe-topic": "Se sucribio exitosamente",
+    "succesful-withdraw": "Se retiro el dinero exitosamente",
 
     "publication-not-exist-error": "La publicacion no existe",
     "not-juror-of-publication": "No es jurado de la publicacion",
@@ -87,5 +98,26 @@
     "unknown-error": "La operacion fallo, intente nuevamente en unos minutos",
     "signature-denied-error": "Cancelo la firma de la transacción",
     "transaction-denied-error": "Cancelo la transacción",
-    "insuficient-funds-error": "Fondos insuficientes"
+    "insuficient-funds-error": "Fondos insuficientes",
+
+    "votation": "Votación",
+    "penalized": "Penalizado",
+    "votes": "Votos",
+
+    "news-status-message-0": "La publicación fue validada como verdadera",
+    "news-status-message-1": "La publicación fue validada como falsa",
+    "news-status-message-2": "La publicación fue validada no cumple con las reglas",
+    "news-status-message-3": "No se logro llegar a un resultado",
+
+    "publications-participate": "Publicaciones en las que participas",
+    "go-to-publication": "Ir a publicación",
+    "go-to-reveal": "Ir a revelar",
+    "go-to-vote": "Ir a votar",
+
+    "withdraw": "Retirar",
+
+    "vote-state-value-0": "Pendiente",
+    "vote-state-value-1": "Verdadero",
+    "vote-state-value-2": "Falso",
+    "vote-state-value-3": "No clasifica"
 }

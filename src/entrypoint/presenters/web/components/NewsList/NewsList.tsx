@@ -31,19 +31,25 @@ export default function NewsList() {
 
     return (
         <Container maxWidth={false}>
-            <Grid container className={classes.gridContainer} spacing={2}>
-                <Grid item/>
+            <Grid container className={classes.gridContainer} spacing={2} alignItems="stretch">
+                <Grid item />
                 <Grid item xs={12}>
                     <NewsFilterBar filter={filter} onChange={(f) => setFilter(f)} />
                 </Grid>
             </Grid>
             <Grid container direction="column" className={classes.gridContainer} spacing={3}>
                 <Grid item>
-                    <Grid container justify="center" className={classes.gridContainer} spacing={3}>
+                    <Grid container justify="center" direction="row-reverse" className={classes.gridContainer} spacing={3}>
                         {newsList.map(news => <Grid item><NewsCard News={news} /></Grid>)}
                     </Grid>
                 </Grid>
-                {loading && <Grid item><CircularProgress color="primary" /></Grid>}
+            </Grid>
+            <Grid container direction="column" className={classes.gridContainer} spacing={3}>
+                <Grid item>
+                    <Grid container justify="center" className={classes.gridContainer} spacing={3}>
+                        {loading && <Grid item><CircularProgress color="primary" size={200} /></Grid>}
+                    </Grid>
+                </Grid>
             </Grid>
         </Container>
     )

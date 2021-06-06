@@ -5,14 +5,23 @@ export default makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        paddingTop: "1.1rem",
-        paddingBottom: "1.1rem",
+        padding: "1.1rem",
         "& .MuiOutlinedInput-root": {
             borderRadius: 15,
         },
         "& .MuiOutlinedInput-notchedOutline": {
             borderRadius: 15,
         },
+    },
+    buttonPublication: {
+        textTransform: "none",
+        color: theme.palette.primary.main,
+        borderRadius: 20,
+        border: `1px solid ${theme.palette.primary.main}`,
+        "&:hover": {
+            backgroundColor: "none",
+            textDecoration: "underline"
+        }
     },
     button: {
         textTransform: "none",
@@ -44,4 +53,18 @@ export default makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    rowRuleContainer: {
+        display: "flex",
+        flexDirection: "row",
+        padding: "1.1rem",
+        "& .MuiOutlinedInput-root": {
+            borderRadius: 15,
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+            borderRadius: 15,
+        },
+    },
+    ruleLabel: {
+        fontWeight: 'bold'
+    }
 }));
