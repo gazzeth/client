@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
     rowContainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         padding: "1.1rem",
         "& .MuiOutlinedInput-root": {
             borderRadius: 15,
@@ -16,5 +16,13 @@ export default makeStyles(theme => ({
         "& .MuiOutlinedInput-notchedOutline": {
             borderRadius: 15,
         },
+    },
+    paper: {
+        boxShadow: theme.customShadows.widgetDark,
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        borderRadius: 20,
+        minWidth: "600px"
     },
 }));

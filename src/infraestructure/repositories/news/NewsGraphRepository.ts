@@ -31,29 +31,34 @@ export default class NewsGraphRepository implements INewsRepository {
     })
 
     public async list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]> {
+        const queries = NewsMapper.toQuery(filter)
         const options: RequestInit = {
             method: "POST",
             body: JSON.stringify({
                 query: `
                 { 
-                    publications(skip: ${pagination.offset}, first: ${pagination.limit}) { 
-                        id 
-                        hash 
-                        author 
-                        topic { 
-                            id
-                            priceToPublish
-                            priceToBeJuror
-                            authorReward
-                            jurorReward
-                            commitPhaseDuration
-                            revealPhaseDuration
-                            selectableJurorsQuantity  
-                        } 
-                        publishDate 
-                        voting { 
-                            withdrawn 
-                            winningVote 
+                    topics${queries[1]} {
+                        votings(skip: ${pagination.offset}, first: ${pagination.limit}${queries[0]}) { 
+                            publication { 
+                                id 
+                                hash 
+                                author 
+                                topic { 
+                                    id
+                                    priceToPublish
+                                    priceToBeJuror
+                                    authorReward
+                                    jurorReward
+                                    commitPhaseDuration
+                                    revealPhaseDuration
+                                    selectableJurorsQuantity  
+                                } 
+                                publishDate 
+                                voting { 
+                                    withdrawn 
+                                    winningVote 
+                                } 
+                            }
                         } 
                     } 
                 }`,
@@ -62,7 +67,8 @@ export default class NewsGraphRepository implements INewsRepository {
             headers: { "Content-Type": "application/json" }
         }
 
-        const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.publications
+        const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json())
+            .data.topics.flatMap((t: any) => t.votings.map((v: any) => v.publication))
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
             const element = result[i];

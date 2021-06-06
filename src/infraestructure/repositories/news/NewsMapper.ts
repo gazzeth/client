@@ -1,4 +1,5 @@
 import { VOTE_VALUE } from "@constants/vote_value";
+import NewsFilter from "@domain/models/Filter/NewsFilter";
 import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import Topic from "@domain/models/Topic/Topic";
@@ -49,5 +50,23 @@ export default class NewsMapper {
             case 3:
                 return VOTE_VALUE.Unqualified
         }
+    }
+
+    public static toQuery(filter: NewsFilter): string[] {
+        let queries: string[] = [];
+        console.log(filter)
+        if (filter.verified === undefined) {
+            queries.push("")
+        }
+        else {
+            queries.push(`, where: {winningVote: ${filter.verified}}`)
+        }
+        if (filter.topic === undefined) {
+            queries.push("")
+        }
+        else {
+            queries.push(`(where: {id: "${filter.topic}"})`)
+        } 
+        return queries; 
     }
 }
