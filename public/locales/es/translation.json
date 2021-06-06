@@ -1,5 +1,7 @@
 {
-    "select-language": "ES 🇪🇸",
+    "select-language": "Seleccioná un lenguaje",
+    "en": "English 🇬🇧",
+    "es": "Español 🇪🇸",
 
     "loading": "Cargando",
 

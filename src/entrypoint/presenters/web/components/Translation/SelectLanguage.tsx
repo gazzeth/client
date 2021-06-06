@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Typography } from "@material-ui/core";
-import i18n from "./I18next";
+import i18n, { languages } from "./I18next";
 import { useTranslation } from 'react-i18next';
 import useStyles from "./styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -25,7 +25,7 @@ export default function SelectLanguage() {
                 {/* TODO style={{ overflowY: 'auto', height: 'calc(100vh - 127px)' }} */}
                 <div>
                     {
-                        i18n.languages.map((l: string) => {
+                        languages.map((l: string) => {
                             return (
                                 <div className={classes.container}>
                                     <Button className={classes.buttonOption} onClick={() => { i18n.changeLanguage(l); onClose(); }}
