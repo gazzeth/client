@@ -44,6 +44,41 @@ export default class TopicGraphRepository implements ITopicRepository {
         return result.map((r) => TopicMapper.toEntity(r));
     }
 
+    public async listByAddress(pagination: Pagination, address: string): Promise<{ topic: Topic, quantity: number }[]> {
+        const options: RequestInit = {
+            method: "POST",
+            body: JSON.stringify({
+                query: 
+                `{
+                    jurors(where: {id: "${address.toLocaleLowerCase()}"}) {
+                      id
+                      subscriptions {
+                        topic {
+                          id
+                          priceToPublish
+                          priceToBeJuror
+                          authorReward
+                          jurorReward
+                          commitPhaseDuration
+                          revealPhaseDuration
+                          selectableJurorsQuantity 
+                        }
+                        times
+                      }
+                    }
+                }`,
+                variables: null
+            }),
+            headers: { "Content-Type": "application/json" }
+        }
+
+        const result: any[] = (await (await fetch(TopicGraphRepository.API_URL, options)).json()).data.jurors[0].subscriptions
+
+        return result.map((r) => {
+            return { topic: TopicMapper.toEntity(r.topic), quantity: parseInt(r.times) }
+        });
+    }
+
     public async subscribe(topic: { topic: Topic, quantity: number }, library: Web3Provider): Promise<void> {
         try {
             const contract = new ethers.Contract(TopicGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, library.getSigner());
