@@ -123,5 +123,7 @@
     "vote-state-value-0": "Pendiente",
     "vote-state-value-1": "Verdadero",
     "vote-state-value-2": "Falso",
-    "vote-state-value-3": "No clasifica"
+    "vote-state-value-3": "No clasifica",
+
+    "suscriptions": "Suscripciones del usuario"
 }

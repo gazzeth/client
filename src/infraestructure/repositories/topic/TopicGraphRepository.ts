@@ -72,9 +72,13 @@ export default class TopicGraphRepository implements ITopicRepository {
             headers: { "Content-Type": "application/json" }
         }
 
-        const result: any[] = (await (await fetch(TopicGraphRepository.API_URL, options)).json()).data.jurors[0].subscriptions
+        const result: any[] = (await (await fetch(TopicGraphRepository.API_URL, options)).json()).data.jurors
 
-        return result.map((r) => {
+        if (result.length === 0) {
+            return [];
+        }
+
+        return result[0].subscriptions.map((r: any) => {
             return { topic: TopicMapper.toEntity(r.topic), quantity: parseInt(r.times) }
         });
     }

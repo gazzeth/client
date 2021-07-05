@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Container/Container";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,7 @@ import TopicService from "@configuration/usecases/TopicService";
 import BlockchainService from "@configuration/usecases/BlockchainService";
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Pagination from "@domain/models/Pagination/Pagination";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -25,6 +26,7 @@ export default function JuryForm() {
 
     const [currentTopic, setCurrentTopic] = useState<Topic>(undefined);
     const [currentQuantity, setCurrentQuantity] = useState<string>(undefined);
+    const [suscribeTopics, setSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<{ topic: Topic, quantity: number }[]>([])
     const [errorMenssage, setErorMenssage] = useState<string>(undefined)
     const [cost, setCost] = useState<number>(0);
@@ -54,50 +56,75 @@ export default function JuryForm() {
             .finally(() => setLoading(false))
     }
 
+    useEffect(() => {
+        topicService.getTopicListByAddressUseCase().listByAddress(new Pagination(5, 0), account)
+            .then((topics) => setSuscribeTopics(topics))
+            .catch((error) => toast.error(t(error.message)))
+    }, [account, t])
+
     return (
-        <div className={classes.rowContainer}>
-            <Container title={t("registry")}>
+        <>
+            <div className={classes.rowContainer}>
+                <Container title={t("registry")}>
+                    <div className={classes.rowContainer}>
+                        <SelectTopic selectedOption={currentTopic} onChange={onChange} />
+                        <TextField variant="outlined" label={t("quantity")} value={currentQuantity}
+                            onChange={(event) => { setCurrentQuantity(event.target.value) }}
+                            InputProps={{ inputComponent: NumberFormatCustom as any }} />
+                        <Button onClick={onAdd} className={classes.button}>
+                            <Typography variant="h6">{t("add")}</Typography>
+                        </Button>
+                    </div>
+                    {errorMenssage && <Typography className={classes.error}>{errorMenssage}</Typography>}
+                    {
+                        selectedTopics.map((t, i) => {
+                            const onRemove = () => {
+                                setSelectedTopics(topic => {
+                                    const newTopics = [...topic]
+                                    newTopics.splice(i, 1)
+                                    setCost(c => c - t.topic.costJury * t.quantity)
+                                    return newTopics
+                                })
+                            }
+                            return (
+                                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                                    <Typography variant="h6">{t.topic.name}</Typography>
+                                    <Typography variant="h6">{t.quantity}</Typography>
+                                    <IconButton className={classes.iconButton} onClick={onRemove}>
+                                        <CloseIcon />
+                                    </IconButton>
+                                </div>
+                            )
+                        })
+                    }
+                    {selectedTopics.length !== 0 && <LockInfo lockCost={cost} library={library} account={account} />}
+                    <div className={classes.rowContainer} style={{ position: 'relative', }}>
+                        <Button className={classes.buttonRegistry} onClick={onSummit}
+                            disabled={loading || selectedTopics.length === 0}>
+                            <Typography variant="h6">{t("regiter-jury")}</Typography>
+                        </Button>
+                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    </div>
+                </Container>
+            </div>
+            {
+                suscribeTopics &&
                 <div className={classes.rowContainer}>
-                    <SelectTopic selectedOption={currentTopic} onChange={onChange} />
-                    <TextField variant="outlined" label={t("quantity")} value={currentQuantity}
-                        onChange={(event) => { setCurrentQuantity(event.target.value) }}
-                        InputProps={{ inputComponent: NumberFormatCustom as any }} />
-                    <Button onClick={onAdd} className={classes.button}>
-                        <Typography variant="h6">{t("add")}</Typography>
-                    </Button>
-                </div>
-                {errorMenssage && <Typography className={classes.error}>{errorMenssage}</Typography>}
-                {
-                    selectedTopics.map((t, i) => {
-                        const onRemove = () => {
-                            setSelectedTopics(topic => {
-                                const newTopics = [...topic]
-                                newTopics.splice(i, 1)
-                                setCost(c => c - t.topic.costJury * t.quantity)
-                                return newTopics
+                    <Container title={t("suscriptions")}>
+                        {
+                            suscribeTopics.map((t, i) => {
+                                return (
+                                    <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
+                                        <Typography variant="h6" style={{marginRight:"1rem"}}>{t.topic.name}</Typography>
+                                        <Typography variant="h6" style={{marginLeft:"1rem"}}>{t.quantity}</Typography>
+                                    </div>
+                                )
                             })
                         }
-                        return (
-                            <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
-                                <Typography variant="h6">{t.topic.name}</Typography>
-                                <Typography variant="h6">{t.quantity}</Typography>
-                                <IconButton className={classes.iconButton} onClick={onRemove}>
-                                    <CloseIcon />
-                                </IconButton>
-                            </div>
-                        )
-                    })
-                }
-                {selectedTopics.length !== 0 && <LockInfo lockCost={cost} library={library} account={account} />}
-                <div className={classes.rowContainer} style={{ position: 'relative', }}>
-                    <Button className={classes.buttonRegistry} onClick={onSummit}
-                        disabled={loading || selectedTopics.length === 0}>
-                        <Typography variant="h6">{t("regiter-jury")}</Typography>
-                    </Button>
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    </Container>
                 </div>
-            </Container>
-        </div>
+            }
+        </>
     )
 }
 
