@@ -123,5 +123,7 @@
     "vote-state-value-0": "Pending",
     "vote-state-value-1": "True",
     "vote-state-value-2": "False",
-    "vote-state-value-3": "Unqualified"
+    "vote-state-value-3": "Unqualified",
+
+    "suscriptions": "Suscriptions of user"
 }
