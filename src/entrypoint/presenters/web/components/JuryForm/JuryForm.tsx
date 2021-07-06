@@ -112,7 +112,9 @@ export default function JuryForm() {
                 <div className={classes.rowContainer}>
                     <Container title={t("suscriptions")}>
                         {
-                            suscribeTopics.map((t, i) => {
+                            suscribeTopics.filter(t => {
+                                return t.quantity !== 0
+                            }).map((t, i) => {
                                 return (
                                     <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
                                         <Typography variant="h6" style={{marginRight:"1rem"}}>{t.topic.name}</Typography>
