@@ -8,13 +8,16 @@ export const languages = ['es', 'en'];
 i18n
     .use(Backend)
     .use(LanguageDetector)
-    .use(initReactI18next) 
+    .use(initReactI18next)
     .init({
+        backend: {
+            loadPath: process.env.REACT_APP_PUBLIC_URL + "/locales/{{lng}}/{{ns}}.json",
+        },
         fallbackLng: 'es',
         debug: false,
         supportedLngs: languages,
         interpolation: {
-            escapeValue: false, 
+            escapeValue: false,
         },
     })
 
