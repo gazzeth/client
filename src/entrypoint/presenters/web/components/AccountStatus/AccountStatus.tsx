@@ -9,6 +9,7 @@ import Icon from "../Icon/Icon";
 import { Link } from "react-router-dom";
 import { URLS } from "@constants/urls";
 import SelectLanguage from "../Translation/SelectLanguage";
+import BalanceInfo from "../BalanceInfo/BalanceInfo";
 
 type Props = {
     onClick: () => void
@@ -32,7 +33,8 @@ export default function AccountStatus({ onClick }: Props) {
                 <Button className={classes.connectButton} component={Link} to={URLS.juryForm} >
                     <Typography variant="h4" className={classes.text}>{t("jurror-inscription")}</Typography>
                 </Button>
-                <Button className={classes.connectButton} onClick={onClick} >
+                <BalanceInfo />
+                <Button className={classes.addressButton} onClick={onClick} >
                     <Typography variant="h4" className={classes.text}>{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
                     <Icon account={account} />
                 </Button>
