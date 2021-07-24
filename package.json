@@ -1,4 +1,5 @@
 {
+  "homepage":"https://gazzeth.github.io/client/",
   "name": "pf-front",
   "version": "0.1.0",
   "private": true,
@@ -7,11 +8,14 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
-    "test-react": "react-app-rewired test"
+    "test-react": "react-app-rewired test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
     "@types/react-router-dom": "^5.1.7",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.2.1",
     "react-app-rewire-alias": "^0.2.0"
   },
