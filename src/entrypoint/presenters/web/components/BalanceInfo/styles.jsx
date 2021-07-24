@@ -4,29 +4,12 @@ import tinycolor from "tinycolor2";
 const white = "#FFFFFF";
 
 export default makeStyles(theme => ({
-    connectButton: {
-        backgroundColor: theme.palette.primary.main,
-        border: "none",
-        fontWeight: 500,
-        borderRadius: 20,
-        marginLeft: "0.25rem",
-        marginRight: "0.25rem",
-        textTransform: "none",
-        "&:hover": {
-            border: `1px solid ${tinycolor(white)
-                .darken(50)
-                .toHexString()}`,
-            color: tinycolor(white)
-                .darken(50)
-                .toHexString()
-        },
-        "&:focus": {
-            border: `1px solid ${tinycolor(white)
-                .darken(50)
-                .toHexString()}`,
-        }
+    image: {
+        height: "24px",
+        width: "24px",
+        marginRight: "0.5rem"
     },
-    addressButton: {
+    connectButton: {
         backgroundColor: theme.palette.primary.main,
         fontWeight: 500,
         borderRadius: 20,
@@ -40,9 +23,7 @@ export default makeStyles(theme => ({
             .darken(50)
             .toHexString(),
         "&:hover": {
-            backgroundColor: tinycolor(theme.palette.primary.main)
-                .lighten(30)
-                .toHexString(),
+
         },
         "&:focus": {
 

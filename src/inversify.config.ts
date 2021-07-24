@@ -20,7 +20,9 @@ import WalletRepository from "@infraestructure/repositories/wallet/WalletReposit
 import EthereumRepository from "@infraestructure/repositories/blockchain/EthereumRepository";
 import TopicGraphRepository from "@infraestructure/repositories/topic/TopicGraphRepository";
 import VoteGraphRepository from "@infraestructure/repositories/vote/VoteGraphRepository";
+import EthEthereumRepository from "@infraestructure/repositories/currency/EthEthereumRepository";
 import DaiEthereumRepository from "@infraestructure/repositories/currency/DaiEthereumRepository";
+import GztEthereumRepository from "@infraestructure/repositories/currency/GztEthereumRepository";
 
 
 const container = new Container();
@@ -30,9 +32,9 @@ container.bind<IWalletRepository>(TYPES.IWalletRepository).to(WalletRepository);
 container.bind<IBlockchainRepository>(TYPES.IBlockchainRepository).to(EthereumRepository);
 container.bind<ITopicRepository>(TYPES.ITopicRepository).to(TopicGraphRepository);
 container.bind<IVoteRepository>(TYPES.IVoteRepository).to(VoteGraphRepository);
-container.bind<ICurrencyRepository>(TYPES.IEthRepository).to(DaiEthereumRepository);
+container.bind<ICurrencyRepository>(TYPES.IEthRepository).to(EthEthereumRepository);
 container.bind<ICurrencyRepository>(TYPES.IDaiRepository).to(DaiEthereumRepository);
-container.bind<ICurrencyRepository>(TYPES.IGazzethRepository).to(DaiEthereumRepository);
+container.bind<ICurrencyRepository>(TYPES.IGazzethRepository).to(GztEthereumRepository);
 
 container.bind<NewsService>(TYPES.NewsService).to(NewsService);
 container.bind<WalletService>(TYPES.WalletService).to(WalletService);
