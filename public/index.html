@@ -7,10 +7,47 @@
 
     <link rel="shortcut icon" type="image/jpeg" href="https://raw.githubusercontent.com/gazzeth/docs/master/logos/gzt_light_gray.png" />
 
+    <!-- Primary Meta Tags -->
     <title>Gazzeth</title>
-
+    <meta name="title" content="Gazzeth">
     <meta name="description" content="Decentralized news platform">
-    <meta name="keywords" content="">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gazzeth.com/">
+    <meta property="og:title" content="Gazzeth">
+    <meta property="og:description" content="Decentralized news platform">
+    <meta property="og:image" content="https://raw.githubusercontent.com/gazzeth/docs/master/logos/gzt_light_gray.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gazzeth.com/">
+    <meta property="twitter:title" content="Gazzeth">
+    <meta property="twitter:description" content="Decentralized news platform">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/gazzeth/docs/master/logos/gzt_light_gray.png">
+
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
   <body style="font-family: 'Roboto', sans-serif;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
