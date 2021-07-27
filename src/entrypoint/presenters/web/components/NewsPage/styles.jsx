@@ -13,4 +13,4 @@ export default makeStyles(theme => ({
     spinner: {
         width: '20%'
     },
-}));
+}), {index: 1});

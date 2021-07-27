@@ -61,4 +61,4 @@ export default makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
-}));
+}), {index: 1});

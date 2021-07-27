@@ -40,4 +40,4 @@ export default makeStyles(theme => ({
         fontWeight: 500,
         color: white,
     }
-}));
+}), {index: 1});

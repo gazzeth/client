@@ -36,4 +36,4 @@ export default makeStyles(theme => ({
     unqualifiedStatusBar: {
         backgroundColor: "#e6ac00"
     }
-}));
+}), {index: 1});

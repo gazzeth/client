@@ -77,4 +77,4 @@ export default makeStyles(theme => ({
             textDecoration: "underline"
         }
     }
-}));
+}), {index: 1});

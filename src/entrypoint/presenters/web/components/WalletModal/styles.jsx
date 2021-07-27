@@ -41,4 +41,4 @@ export default makeStyles(theme => ({
             backgroundColor: "#a8abb3"
         }
     },
-}));
+}), {index: 1});

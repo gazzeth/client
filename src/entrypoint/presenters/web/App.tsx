@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   toast: {
     borderRadius: "20px"
   },
-}));
+}), {index: 1});
 
 export default function App() {
 

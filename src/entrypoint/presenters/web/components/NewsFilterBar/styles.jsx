@@ -25,4 +25,4 @@ export default makeStyles(theme => ({
         borderRadius: 20,
         minWidth: "600px"
     },
-}));
+}), {index: 1});

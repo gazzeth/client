@@ -41,4 +41,4 @@ export default makeStyles(theme => ({
         height: "24px",
         width: "24px",
     }
-}));
+}), {index: 1});

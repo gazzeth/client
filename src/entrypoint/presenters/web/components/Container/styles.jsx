@@ -26,4 +26,4 @@ export default makeStyles(theme => ({
         float: "right",
         padding: "0",
     }
-}));
+}), {index: 1});

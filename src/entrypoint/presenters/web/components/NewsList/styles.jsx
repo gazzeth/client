@@ -6,4 +6,4 @@ export default makeStyles(theme => ({
     gridContainer: {
         justify:"center",
     }
-}));
+}), {index: 1});

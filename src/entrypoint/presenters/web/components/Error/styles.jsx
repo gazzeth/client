@@ -64,4 +64,4 @@ export default makeStyles(theme => ({
     boxShadow: theme.customShadows.widget,
     textTransform: "none",
   },
-}));
+}), {index: 1});
