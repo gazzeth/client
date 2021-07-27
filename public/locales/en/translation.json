@@ -34,7 +34,7 @@
     "loading-wallet": "Loading wallet...",
     "try-again": "Retry",
     "error-wallet": "Error connecting to wallet",
-    "error-chain": "Please connect to the correct network.",
+    "error-chain": "Please connect to the Ropsten network.",
     "error-connecting": "Error connecting to wallet. Refresh page.",
     "account": "Account",
     "wallet": "Wallets",

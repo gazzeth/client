@@ -34,7 +34,7 @@
     "loading-wallet": "Cargando la billetera...",
     "try-again": "Volver a intentar",
     "error-wallet": "Error al conectarse a la billetera",
-    "error-chain": "Por favor conectate a la red apropiada.",
+    "error-chain": "Por favor conectate a la red Ropsten.",
     "error-connecting": "Error al conectar la billetera. Refrescá la página.",
     "account": "Cuenta",
     "wallet": "Billeteras",
