@@ -20,7 +20,6 @@ export default makeStyles(theme => ({
     },
     statusBar: {
         color: 'white',
-        fontWeight: 'bold',
         display: 'flex',
         alignItems: 'center'
     },
