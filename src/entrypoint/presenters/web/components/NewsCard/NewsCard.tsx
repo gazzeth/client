@@ -64,7 +64,7 @@ export default function NewsCard(props: PropTypes) {
 
     return (
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea component={Link} to={URLS.news.replace(":id", `${news.id}`)} style={{height:"100%"}}>
                 <CardMedia component="img" className={classes.image} image={news.image} />
                 {getStatusBar()}
                 <CardContent>
@@ -73,7 +73,7 @@ export default function NewsCard(props: PropTypes) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary" component={Link} to={URLS.news.replace(":id", `${news.id}`)}>{t("see-more")}</Button>
+                <Button size="small" color="primary" onClick={() => navigator.clipboard.writeText(window.location.hostname + URLS.news.replace(":id", `${news.id}`))}>{t("copy")}</Button>
             </CardActions>
         </Card>
     )
