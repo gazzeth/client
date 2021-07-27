@@ -126,5 +126,7 @@
     "vote-state-value-2": "Falso",
     "vote-state-value-3": "No clasifica",
 
-    "suscriptions": "Suscripciones del usuario"
+    "suscriptions": "Suscripciones del usuario",
+
+    "succesful-copy": "Informacion copiada al portapapeles"
 }

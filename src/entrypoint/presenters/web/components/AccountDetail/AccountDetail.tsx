@@ -15,6 +15,7 @@ import Pagination from "@domain/models/Pagination/Pagination";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import { Link } from "react-router-dom";
 import { URLS } from "@constants/urls";
+import { toast } from 'react-toastify';
 
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 const newsService = container.get<NewsService>(TYPES.NewsService);
@@ -40,6 +41,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
 
     const copyAddress = () => {
         navigator.clipboard.writeText(account)
+        toast.success(t("succesful-copy"))
     }
 
     useEffect(() => {

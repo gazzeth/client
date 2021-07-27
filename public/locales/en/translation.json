@@ -126,5 +126,7 @@
     "vote-state-value-2": "False",
     "vote-state-value-3": "Unqualified",
 
-    "suscriptions": "Suscriptions of user"
+    "suscriptions": "Suscriptions of user",
+
+    "succesful-copy": "Information copy to clipboard"
 }

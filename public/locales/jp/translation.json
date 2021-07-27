@@ -122,5 +122,7 @@
       "vote-state-value-2": "正しくない",
       "vote-state-value-3": "資格を満たさない",
 
-      "suscriptions": "ユーザーの登録"
+      "suscriptions": "ユーザーの登録",
+
+      "succesful-copy": "Information copy to clipboard"
 }

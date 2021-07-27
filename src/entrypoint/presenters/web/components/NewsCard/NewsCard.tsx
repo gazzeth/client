@@ -11,6 +11,8 @@ import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined'
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
 import { VOTE_VALUE } from "@constants/vote_value";
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import { toast } from 'react-toastify';
 
 interface PropTypes {
     News: NewsPreview;
@@ -48,7 +50,7 @@ export default function NewsCard(props: PropTypes) {
                     </div>
                 );
             case VOTE_VALUE.Unqualified:
-                return ( 
+                return (
                     <div className={classnames(classes.statusBar, classes.unqualifiedStatusBar)}>
                         <ReportProblemOutlinedIcon className={classes.statusBarIcon} />
                         <span>{t("unqualified-status-bar-description")}</span>
@@ -62,9 +64,14 @@ export default function NewsCard(props: PropTypes) {
         news = news.setLede(shortLede)
     }
 
+    const copy = () => {
+        navigator.clipboard.writeText(window.location.hostname + URLS.news.replace(":id", `${news.id}`))
+        toast.success(t("succesful-copy"))
+    }
+
     return (
         <Card className={classes.root}>
-            <CardActionArea component={Link} to={URLS.news.replace(":id", `${news.id}`)} style={{height:"100%"}}>
+            <CardActionArea component={Link} to={URLS.news.replace(":id", `${news.id}`)} style={{ height: "100%" }}>
                 <CardMedia component="img" className={classes.image} image={news.image} />
                 {getStatusBar()}
                 <CardContent>
@@ -72,8 +79,11 @@ export default function NewsCard(props: PropTypes) {
                     <Typography variant="body2" color="textSecondary" component="p">{news.lede}</Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary" onClick={() => navigator.clipboard.writeText(window.location.hostname + URLS.news.replace(":id", `${news.id}`))}>{t("copy")}</Button>
+            <CardActions style={{justifyContent: "end"}}>
+                <Button size="small" color="primary" onClick={copy}>
+                    <FileCopyOutlinedIcon />
+                    <Typography variant="body2">{t("copy")}</Typography>
+                </Button>
             </CardActions>
         </Card>
     )
