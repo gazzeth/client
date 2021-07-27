@@ -25,7 +25,7 @@ export default function Votation({ votes, id }: Props) {
     const { t } = useTranslation();
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
-    const [, , , library] = useActiveBlockchain();
+    const [, account, , library] = useActiveBlockchain();
 
     const getState = (v: Vote) => {
         if (v.penalized) {
@@ -147,7 +147,7 @@ export default function Votation({ votes, id }: Props) {
                 </Container>
             </div>
             <div className={classes.root} >
-                <Container title={t("votes")} titleVariant={"h2"} icon={id !== undefined ? (
+                <Container title={t("votes")} titleVariant={"h2"} icon={(!!account && id !== undefined) ? (
                     <Button className={classes.button} onClick={onChange} disabled={loading} style={{ position: 'relative', }}>
                         <Typography variant="body2">{t("withdraw")}</Typography>
                         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
