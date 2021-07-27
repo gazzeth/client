@@ -9,10 +9,11 @@ type Props = {
     onClose: () => void,
     onClickTitle?: () => void,
     title?: string,
+    explanation?: string,
     children: React.ReactNode
 }
 
-export default function CustomModal({ isOpen, onClose, onClickTitle, title, children }: Props) {
+export default function CustomModal({ isOpen, onClose, onClickTitle, title, explanation, children }: Props) {
 
     const classes = useStyles();
 
@@ -21,7 +22,7 @@ export default function CustomModal({ isOpen, onClose, onClickTitle, title, chil
             className={classes.modal}
             open={isOpen}
             onClose={onClose}>
-                <Container onClick={onClose} onClickTitle={onClickTitle} title={title} icon={<CloseIcon />}>
+                <Container onClick={onClose} onClickTitle={onClickTitle} title={title} explanation={explanation} icon={<CloseIcon />}>
                     {children}
                 </Container>
         </Modal>

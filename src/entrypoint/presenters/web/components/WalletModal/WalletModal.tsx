@@ -170,7 +170,7 @@ export default function WalletModal({ isOpen, onClose, onOpen }: Props) {
             }
         }
         return (
-            <Modal isOpen={isOpen} onClose={onCloseWrapper} title={t(title)}
+            <Modal isOpen={isOpen} onClose={onCloseWrapper} title={t(title)} explanation={t("wallet-explanation")}
                 onClickTitle={onClickTitle}>
                 {state === "options" ? getOptions() : getPendingView()}
             </Modal>

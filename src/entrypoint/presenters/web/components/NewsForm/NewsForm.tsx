@@ -56,7 +56,7 @@ export default function NewsForm() {
     return (
         <>
             <div className={classes.rowContainer}>
-                <Container title={t("publish-news")}>
+                <Container title={t("publish-news")} explanation={t("news-explanation")}>
                     <div className={classes.rowContainer}>
                         <div className={classes.textContainer}>
                             <Typography className={classes.text} variant="h6">{fileName ? fileName : t("select-markdown")}</Typography>

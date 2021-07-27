@@ -54,7 +54,7 @@ export default function VoteForm({ isReveal }: Props) {
 
     return (
         <div className={classes.rowContainer}>
-            <Container title={t(`${isReveal ? "reveal" : "vote"}-news`)} icon={(
+            <Container title={t(`${isReveal ? "reveal" : "vote"}-news`)} explanation={t(`${isReveal ? "reveal" : "vote"}-explanation`)} icon={(
                 <Button className={classes.buttonPublication} component={Link} to={URLS.news.replace(":id", ""+id)}>
                     <Typography variant="body2">{t("go-to-publication")}</Typography>
                 </Button>

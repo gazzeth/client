@@ -124,5 +124,10 @@
 
       "suscriptions": "ユーザーの登録",
 
-      "succesful-copy": "Information copy to clipboard"
+      "succesful-copy": "Information copy to clipboard",
+
+      "wallet-explanation": "TODO wallet-explanation",
+      "news-explanation": "TODO news-explanation",
+      "reveal-explanation": "TODO reveal-explanation",
+      "vote-explanation": "TODO vote-explanation" 
 }

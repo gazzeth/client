@@ -128,5 +128,10 @@
 
     "suscriptions": "Suscripciones del usuario",
 
-    "succesful-copy": "Informacion copiada al portapapeles"
+    "succesful-copy": "Informacion copiada al portapapeles",
+
+    "wallet-explanation": "TODO wallet-explanation",
+    "news-explanation": "TODO news-explanation",
+    "reveal-explanation": "TODO reveal-explanation",
+    "vote-explanation": "TODO vote-explanation" 
 }

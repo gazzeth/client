@@ -128,5 +128,10 @@
 
     "suscriptions": "Suscriptions of user",
 
-    "succesful-copy": "Information copy to clipboard"
+    "succesful-copy": "Information copy to clipboard",
+
+    "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for these reason is necesary to have a wallet. Please choose a option from below.",
+    "news-explanation": "TODO news-explanation",
+    "reveal-explanation": "TODO reveal-explanation",
+    "vote-explanation": "TODO vote-explanation"    
 }
