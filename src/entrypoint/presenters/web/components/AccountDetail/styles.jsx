@@ -76,5 +76,11 @@ export default makeStyles(theme => ({
             backgroundColor: "none",
             textDecoration: "underline"
         }
+    },
+    icon: {
+        height: "1.5rem",
+        width: "1.5rem",
+        borderRadius: "3rem",
+        backgroundColor: "#888D9B"
     }
 }), {index: 1});

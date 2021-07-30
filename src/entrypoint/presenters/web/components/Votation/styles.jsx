@@ -21,12 +21,16 @@ export default makeStyles(theme => ({
         flexDirection: "row",
         justifyContent: "space-between",
         padding: "1.1rem",
-        marginLeft: "1rem",
-        marginRight: "1rem",
+        margin: "1rem",
         backgroundColor: "#edeef2",
         border: `1px solid #ced0d9`,
         borderRadius: 20,
         minWidth:"700px"
+    },
+    container: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
     },
     leftContainer: {
         display: "flex",
@@ -58,4 +62,15 @@ export default makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    icon: {
+        height: "2.5rem",
+        width: "2.5rem",
+        borderRadius: "3rem",
+        backgroundColor: "#888D9B",
+        marginRight: "1rem"
+    },
+    user: {
+        fontWeight: "bold",
+        fontSize: "0.90rem"
+    }
 }), {index: 1});

@@ -88,7 +88,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
                 </div>
                 <div className={classnames(classes.rowContainer, classes.start)}>
                     <div className={classes.leftContainer}>
-                        <Icon account={account} />
+                        <Icon account={account} size={26} className={classes.icon}/>
                     </div>
                     <div className={classes.rightContainer}>
                         <Typography className={classes.textAccount} variant="h4">{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>

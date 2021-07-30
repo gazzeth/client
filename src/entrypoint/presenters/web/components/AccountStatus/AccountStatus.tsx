@@ -36,7 +36,7 @@ export default function AccountStatus({ onClick }: Props) {
                 <BalanceInfo />
                 <Button className={classes.addressButton} onClick={onClick} >
                     <Typography variant="h4" className={classes.text}>{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
-                    <Icon account={account} />
+                    <Icon account={account} size={16} className={classes.icon}/>
                 </Button>
                 <SelectLanguage />
             </>

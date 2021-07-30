@@ -58,5 +58,11 @@ export default makeStyles(theme => ({
         width: "fit-content",
         fontWeight: 500,
         color: white,
+    },
+    icon: {
+        height: "1rem",
+        width: "1rem",
+        borderRadius: "1.125rem",
+        backgroundColor: "#888D9B"
     }
 }), {index: 1});
