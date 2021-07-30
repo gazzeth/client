@@ -34,7 +34,7 @@
     "loading-wallet": "Loading wallet...",
     "try-again": "Retry",
     "error-wallet": "Error connecting to wallet",
-    "error-chain": "Please connect to the correct network.",
+    "error-chain": "Please connect to the Ropsten network.",
     "error-connecting": "Error connecting to wallet. Refresh page.",
     "account": "Account",
     "wallet": "Wallets",
@@ -126,5 +126,12 @@
     "vote-state-value-2": "False",
     "vote-state-value-3": "Unqualified",
 
-    "suscriptions": "Suscriptions of user"
+    "suscriptions": "Suscriptions of user",
+
+    "succesful-copy": "Information copy to clipboard",
+
+    "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for these reason is necesary to have a wallet. Please choose a option from below.",
+    "news-explanation": "TODO news-explanation",
+    "reveal-explanation": "TODO reveal-explanation",
+    "vote-explanation": "TODO vote-explanation"    
 }

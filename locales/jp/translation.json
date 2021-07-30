@@ -31,7 +31,7 @@
       "loading-wallet": "ウォレットをロード中",
       "try-again": "再試行する",
       "error-wallet": "ウォレットの接続にエラーが発生しました",
-      "error-chain": "Por favor conectate a la red apropiada.",
+      "error-chain": "Por favor conectate a la red Ropsten.",
       "error-connecting": "接続にエラーが発生しました。ページを更新してください。",
       "account": "アカウント",
       "wallet": "ウォレット",
@@ -122,5 +122,12 @@
       "vote-state-value-2": "正しくない",
       "vote-state-value-3": "資格を満たさない",
 
-      "suscriptions": "ユーザーの登録"
+      "suscriptions": "ユーザーの登録",
+
+      "succesful-copy": "Information copy to clipboard",
+
+      "wallet-explanation": "TODO wallet-explanation",
+      "news-explanation": "TODO news-explanation",
+      "reveal-explanation": "TODO reveal-explanation",
+      "vote-explanation": "TODO vote-explanation" 
 }
