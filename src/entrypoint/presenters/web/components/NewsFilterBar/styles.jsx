@@ -25,4 +25,7 @@ export default makeStyles(theme => ({
         borderRadius: 20,
         minWidth: "600px"
     },
+    gridContainer: {
+        justify:"center",
+    }
 }), {index: 1});
