@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import NewsFilter from "@domain/models/Filter/NewsFilter";
-import { InputLabel, FormControl, Paper, Select, Typography, Container, CircularProgress, Grid } from "@material-ui/core";
+import { InputLabel, FormControl, Paper, Select, Typography, CircularProgress, Grid } from "@material-ui/core";
 import { VOTE_VALUE, VOTE_VALUES } from "@constants/vote_value";
 import Topic from "@domain/models/Topic/Topic";
 import TopicService from "@configuration/usecases/TopicService";
@@ -46,39 +46,37 @@ export default function NewsFilterBar({ filter, onChange }: PropTypes) {
 
     return (
         <Paper className={classes.paper}>
-            <Container fixed>
-                <Typography variant="h5">{t("filter-bar-title")}</Typography>
-                <div className={classes.rowContainer}>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel>{t("verified-title")}</InputLabel>
-                        <Select native value={filter.verified} label={t("verified-title")}
-                            onChange={handleVerifiedChange}>
+            <div className={classes.rowContainer}>
+                <Typography className={classes.title} variant="h5">{t("filter-bar-title")}</Typography>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel>{t("verified-title")}</InputLabel>
+                    <Select native value={filter.verified} label={t("verified-title")}
+                        onChange={handleVerifiedChange}>
+                        <option aria-label="None" value={undefined} />
+                        {
+                            VOTE_VALUES.map((voteValue) => {
+                                return <option value={voteValue}>{t("vote-state-value-" + voteValue)}</option>
+                            })
+                        }
+                    </Select>
+                </FormControl>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel>{t("select-topic")}</InputLabel>
+                    {topics.length === 0 ?
+                        <Grid container justify="center" className={classes.gridContainer} spacing={3}>
+                            <Grid item><CircularProgress color="primary" size={50} /></Grid>
+                        </Grid> :
+                        <Select native value={filter.topic} label={t("select-topic")}
+                            onChange={handleTopicChange}>
                             <option aria-label="None" value={undefined} />
                             {
-                                VOTE_VALUES.map((voteValue) => {
-                                    return <option value={voteValue}>{t("vote-state-value-" + voteValue)}</option>
+                                topics.map((topic) => {
+                                    return <option value={topic.name}>{topic.name}</option>
                                 })
                             }
-                        </Select>
-                    </FormControl>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel>{t("select-topic")}</InputLabel>
-                        {topics.length === 0 ?
-                            <Grid container justify="center" className={classes.gridContainer} spacing={3}>
-                                <Grid item><CircularProgress color="primary" size={50} /></Grid>
-                            </Grid> :
-                            <Select native value={filter.topic} label={t("select-topic")}
-                                onChange={handleTopicChange}>
-                                <option aria-label="None" value={undefined} />
-                                {
-                                    topics.map((topic) => {
-                                        return <option value={topic.name}>{topic.name}</option>
-                                    })
-                                }
-                            </Select>}
-                    </FormControl>
-                </div>
-            </Container>
+                        </Select>}
+                </FormControl>
+            </div>
         </Paper>
     );
 }
