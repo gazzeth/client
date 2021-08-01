@@ -10,6 +10,8 @@ import { CircularProgress, Container, Typography } from "@material-ui/core";
 import NewsRender from "../NewsRender/NewsRender";
 import Votation from "../Votation/Votation";
 import { VOTE_VALUE } from "@constants/vote_value";
+import { useDispatch } from 'react-redux';
+import allActions from "@entrypoint/presenters/web/actions/allActions";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
@@ -20,6 +22,7 @@ export default function NewsPage() {
     const idNumber = Number(id)
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [news, setNews] = useState<News>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
@@ -34,7 +37,8 @@ export default function NewsPage() {
     }, [idNumber])
 
     if (isNaN(idNumber) || (loading === false && news === undefined)) {
-        return <>404 para el id:{id}</>//TODO render 404
+        dispatch(allActions.errorActions.setCode("404"))
+        return null
     }
     if (loading === true) {
         return (

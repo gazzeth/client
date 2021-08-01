@@ -10,7 +10,7 @@ type Action = {
     wallet: walletInfo
 }
 
-const notificationReducer = (state: WalletState  = { wallet: undefined }, action: Action) => {
+const walletReducer = (state: WalletState  = { wallet: undefined }, action: Action) => {
     switch (action.type) {
         case TYPES.SET_WALLET:
             return { ...state, wallet: action.wallet }
@@ -19,4 +19,4 @@ const notificationReducer = (state: WalletState  = { wallet: undefined }, action
     }
 }
 
-export default notificationReducer
+export default walletReducer
