@@ -24,7 +24,9 @@
     "false-status-bar-description": "Esta noticia fue declarada falsa",
     "true-status-bar-description": "Esta noticia fue declarada verdadera",
     "unqualified-status-bar-description": "Esta noticia no cumple con las normas",
-     
+    "insufficient-status-bar-description": "Esta noticia no tiene suficientes votos",
+    "no-consent-status-bar-description": "Los jurados no llegaron a un veredicto",
+
     "connect-to-wallet": "Conectarse a la billetera",
     "jurror-inscription": "Inscribirse como jurado",
     "back": "Atrás",
@@ -112,7 +114,9 @@
     "news-status-message-0": "La publicación fue validada como verdadera",
     "news-status-message-1": "La publicación fue validada como falsa",
     "news-status-message-2": "La publicación fue validada como que no cumple las reglas",
-    "news-status-message-3": "No se logró llegar a un resultado",
+    "news-status-message-3": "No se logró llegar a un resultado por falta de votos",
+    "news-status-message-4": "La votacion no termino",
+    "news-status-message-5": "No se logró llegar a un resultado por los votos de los jurados",
 
     "publications-participate": "Publicaciones en las que participás",
     "go-to-publication": "Ir a publicación",

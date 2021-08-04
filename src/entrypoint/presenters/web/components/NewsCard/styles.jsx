@@ -33,6 +33,12 @@ export default makeStyles(theme => ({
         backgroundColor: theme.palette.status.true
     },
     unqualifiedStatusBar: {
-        backgroundColor: "#e6ac00"
-    }
+        backgroundColor: theme.palette.status.unqualified
+    },
+    noConsentStatusBar: {
+        backgroundColor: theme.palette.status.noConsent
+    },
+    insufficientStatusBar: {
+        backgroundColor: theme.palette.status.insufficient
+    },
 }), {index: 1});

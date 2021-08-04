@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import CheckIcon from '@material-ui/icons/Check';
-import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { Link } from 'react-router-dom';
 import { URLS } from "@constants/urls";
-import { VOTE_VALUE } from "@constants/vote_value";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import { toast } from 'react-toastify';
 
@@ -27,35 +28,53 @@ export default function NewsCard(props: PropTypes) {
     const MAX_LEDE = 500;
 
     const getStatusBar = () => {
-        switch (news.verified) {
-            case VOTE_VALUE.None:
-                return (
-                    <div className={classnames(classes.statusBar, classes.pendingStatusBar)}>
-                        <ErrorOutlineOutlinedIcon className={classes.statusBarIcon} />
-                        <span>{t("pending-status-bar-description")}</span>
-                    </div>
-                );
-            case VOTE_VALUE.True:
-                return (
-                    <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
-                        <CheckIcon className={classes.statusBarIcon} />
-                        <span>{t("true-status-bar-description")}</span>
-                    </div>
-                );
-            case VOTE_VALUE.False:
-                return (
-                    <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
-                        <CancelOutlinedIcon className={classes.statusBarIcon} />
-                        <span>{t("false-status-bar-description")}</span>
-                    </div>
-                );
-            case VOTE_VALUE.Unqualified:
-                return (
-                    <div className={classnames(classes.statusBar, classes.unqualifiedStatusBar)}>
-                        <ReportProblemOutlinedIcon className={classes.statusBarIcon} />
-                        <span>{t("unqualified-status-bar-description")}</span>
-                    </div>
-                );
+        if (!news.isRevealOver()) {
+            return (
+                <div className={classnames(classes.statusBar, classes.pendingStatusBar)}>
+                    <QueryBuilderIcon className={classes.statusBarIcon} />
+                    <span>{t("pending-status-bar-description")}</span>
+                </div>
+            );
+        }
+        else if (news.hasEnoughtVotes()) {
+            return (
+                <div className={classnames(classes.statusBar, classes.insufficientStatusBar)}>
+                    <RadioButtonUncheckedIcon className={classes.statusBarIcon} />
+                    <span>{t("insufficient-status-bar-description")}</span>
+                </div>
+            );
+        }
+        else if(news.isTrue()) {
+            return (
+                <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
+                    <CheckIcon className={classes.statusBarIcon} />
+                    <span>{t("true-status-bar-description")}</span>
+                </div>
+            );
+        }
+        else if(news.isFalse()) {
+            return (
+                <div className={classnames(classes.statusBar, classes.falseStatusBar)}>
+                    <CancelOutlinedIcon className={classes.statusBarIcon} />
+                    <span>{t("false-status-bar-description")}</span>
+                </div>
+            );
+        }
+        else if(news.isUnqualified()) {
+            return (
+                <div className={classnames(classes.statusBar, classes.unqualifiedStatusBar)}>
+                    <RemoveCircleOutlineIcon className={classes.statusBarIcon} />
+                    <span>{t("unqualified-status-bar-description")}</span>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div className={classnames(classes.statusBar, classes.noConsentStatusBar)}>
+                    <ErrorOutlineIcon className={classes.statusBarIcon} />
+                    <span>{t("no-consent-status-bar-description")}</span>
+                </div>
+            );
         }
     }
 

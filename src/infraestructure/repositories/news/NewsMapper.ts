@@ -14,9 +14,10 @@ export default class NewsMapper {
         const lede = parts[2];
         const winningVote: number = dto.voting.winningVote;
         const topic: any = dto.topic
+        const voteCounters: string[] = dto.voting.voteCounters;
         return new NewsPreview(parseInt(dto.id), title, lede, image, 
             NewsMapper.toEntityVoteValue(winningVote), NewsMapper.toEntityTopic(topic),
-            parseInt(dto.publishDate))
+            parseInt(dto.publishDate), voteCounters.map(vc => parseInt(vc)))
     }
 
     public static toEntity(dto: any): News {

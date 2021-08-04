@@ -55,6 +55,7 @@ export default class NewsGraphRepository implements INewsRepository {
                                 } 
                                 publishDate 
                                 voting { 
+                                    voteCounters
                                     withdrawn 
                                     winningVote 
                                 } 

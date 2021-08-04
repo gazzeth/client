@@ -1,5 +1,5 @@
 export enum VOTE_VALUE {
-    None,
+    None = 0,
     True,
     False,
     Unqualified
