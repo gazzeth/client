@@ -133,5 +133,9 @@
       "wallet-explanation": "TODO wallet-explanation",
       "news-explanation": "TODO news-explanation",
       "reveal-explanation": "TODO reveal-explanation",
-      "vote-explanation": "TODO vote-explanation" 
+      "vote-explanation": "TODO vote-explanation",
+      
+      "gzt-explanation": "TODO gzt-explanation",
+      "dai-explanation": "TODO dai-explanation",
+      "eth-explanation": "TODO eth-explanation"
 }

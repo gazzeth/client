@@ -27,6 +27,9 @@ export default makeStyles(theme => ({
         },
         "&:focus": {
 
+        },
+        "&.Mui-disabled": {
+            pointerEvents: "auto"
         }
     },
     text: {
@@ -39,5 +42,11 @@ export default makeStyles(theme => ({
         width: "fit-content",
         fontWeight: 500,
         color: white,
-    }
-}), {index: 1});
+    },
+    arrow: {
+        color: "#000000",
+    },
+    tooltip: {
+        backgroundColor: "#000000",
+    },
+}), { index: 1 });
