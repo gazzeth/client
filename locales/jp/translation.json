@@ -21,6 +21,8 @@
       "false-status-bar-description": "このニュースは正しくないとして判断されました",
       "true-status-bar-description": "このニュースは正しいとして判断されました",
       "unqualified-status-bar-description": "このニュースはルール反則です",
+      "insufficient-status-bar-description": "TODO",
+      "no-consent-status-bar-description": "TODO",
 
       "connect-to-wallet": "ウォレットに接続する",
       "jurror-inscription": "陪審員として申し込む",
@@ -109,6 +111,8 @@
       "news-status-message-1": "掲載は正しくないとして判断されました。",
       "news-status-message-2": "掲載はルール反則として判断されました。",
       "news-status-message-3": "決断が出ませんでした",
+      "news-status-message-4": "TODO",
+      "news-status-message-5": "TODO",
 
       "publications-participate": "参加している採決",
       "go-to-publication": "掲載に行きます",
@@ -129,5 +133,9 @@
       "wallet-explanation": "TODO wallet-explanation",
       "news-explanation": "TODO news-explanation",
       "reveal-explanation": "TODO reveal-explanation",
-      "vote-explanation": "TODO vote-explanation" 
+      "vote-explanation": "TODO vote-explanation",
+      
+      "gzt-explanation": "TODO gzt-explanation",
+      "dai-explanation": "TODO dai-explanation",
+      "eth-explanation": "TODO eth-explanation"
 }

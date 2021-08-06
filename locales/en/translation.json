@@ -24,6 +24,8 @@
     "false-status-bar-description": "This publication was declared as false",
     "true-status-bar-description": "This publication was declared as true",
     "unqualified-status-bar-description": "This publication does not follow the rules",
+    "insufficient-status-bar-description": "This publication does not have enought votes",
+    "no-consent-status-bar-description": "Juries could not reach a veredict",
      
     "connect-to-wallet": "Connect wallet",
     "jurror-inscription": "Subscribe as juror",
@@ -112,7 +114,9 @@
     "news-status-message-0": "Publication has been validated as true",
     "news-status-message-1": "Publication has been validated as false",
     "news-status-message-2": "Publication has been validated as not complying with the rules",
-    "news-status-message-3": "No result was achieved",
+    "news-status-message-3": "No result was achieved because there are not enought votes",
+    "news-status-message-4": "The votation is not over",
+    "news-status-message-5": "A result was not achieved because of the juries votes",
 
     "publications-participate": "Publications in which you participate",
     "go-to-publication": "Go to publication",
@@ -133,5 +137,9 @@
     "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for these reason is necesary to have a wallet. Please choose a option from below.",
     "news-explanation": "TODO news-explanation",
     "reveal-explanation": "TODO reveal-explanation",
-    "vote-explanation": "TODO vote-explanation"    
+    "vote-explanation": "TODO vote-explanation",
+    
+    "gzt-explanation": "TODO gzt-explanation",
+    "dai-explanation": "TODO dai-explanation",
+    "eth-explanation": "TODO eth-explanation"
 }
