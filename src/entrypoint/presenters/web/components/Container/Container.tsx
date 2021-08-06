@@ -35,7 +35,7 @@ export default function Container({ onClick, onClickTitle, title, icon, titleVar
                     </IconButton>
                 }
             </div>
-            <div>
+            <div style={{width: "100%"}}>
                 {children}
             </div>
         </Paper>
