@@ -25,7 +25,7 @@
       "no-consent-status-bar-description": "TODO",
 
       "connect-to-wallet": "ウォレットに接続する",
-      "jurror-inscription": "陪審員として申し込む",
+      "jurror-inscription": "TODO",
       "back": "戻る",
       "metamask-header": "Metamask",
       "metamask-subheader": "使いやすいブラウザの拡張機能",
@@ -47,11 +47,10 @@
       "browse-files": "ファイルを開く",
       "select-topic": "テーマを選んでください",
 
-      "registry": "陪審員として申し込む",
-      "quantity": "回数",
-      "add": "加える",
-      "jury-form-incomplete": "テーマと回数を選ぶ必要があります。",
-      "regiter-jury": "陪審員として申し込む",
+      "registry": "TODO",
+      "regiter-jury": "TODO",
+      "topic": "TODO",
+      "quantity": "TODO",
 
       "balance": "バランス: {{value}}",
 
@@ -125,8 +124,6 @@
       "vote-state-value-1": "正しい",
       "vote-state-value-2": "正しくない",
       "vote-state-value-3": "資格を満たさない",
-
-      "suscriptions": "ユーザーの登録",
 
       "succesful-copy": "Information copy to clipboard",
 

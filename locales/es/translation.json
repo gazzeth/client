@@ -28,7 +28,7 @@
     "no-consent-status-bar-description": "Los jurados no llegaron a un veredicto",
 
     "connect-to-wallet": "Conectarse a la billetera",
-    "jurror-inscription": "Inscribirse como jurado",
+    "jurror-inscription": "Manejar suscripciones",
     "back": "Atrás",
     "metamask-header": "Metamask",
     "metamask-subheader": "Extensión de navegador fácil de usar",
@@ -50,11 +50,10 @@
     "browse-files": "Examinar un archivo",
     "select-topic": "Seleccioná un tópico",
 
-    "registry": "Inscribirse como jurado",
-    "quantity": "Cantidad de veces",
-    "add": "Agregar",
-    "jury-form-incomplete": "Es necesario que elijas un tópico y la cantidad de veces",
-    "regiter-jury": "Inscribirse como jurado",
+    "registry": "Manejar suscripciones",
+    "regiter-jury": "Actualizar suscrpciones",
+    "topic": "Topicos",
+    "quantity": "Cantidad",
 
     "balance": "Balance: {{value}}",
 
@@ -129,8 +128,6 @@
     "vote-state-value-1": "Verdadero",
     "vote-state-value-2": "Falso",
     "vote-state-value-3": "No clasifica",
-
-    "suscriptions": "Suscripciones del usuario",
 
     "succesful-copy": "Informacion copiada al portapapeles",
 

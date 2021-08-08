@@ -28,7 +28,7 @@
     "no-consent-status-bar-description": "Juries could not reach a veredict",
      
     "connect-to-wallet": "Connect wallet",
-    "jurror-inscription": "Subscribe as juror",
+    "jurror-inscription": "Manage suscriptions",
     "back": "Back",
     "metamask-header": "Metamask",
     "metamask-subheader": "Easy to use browser extension",
@@ -50,11 +50,10 @@
     "browse-files": "Browse file",
     "select-topic": "Select topic",
 
-    "registry": "Subscribe as juror",
-    "quantity": "Cantidad de veces",
-    "add": "Add",
-    "jury-form-incomplete": "You must select a topic and times",
-    "regiter-jury": "Subscribe as juror",
+    "registry": "Manage suscriptions",
+    "regiter-jury": "Update suscriptions",
+    "topic": "Topics",
+    "quantity": "Quantity",
 
     "balance": "Balance: {{value}}",
 
@@ -129,8 +128,6 @@
     "vote-state-value-1": "True",
     "vote-state-value-2": "False",
     "vote-state-value-3": "Unqualified",
-
-    "suscriptions": "Suscriptions of user",
 
     "succesful-copy": "Information copy to clipboard",
 
