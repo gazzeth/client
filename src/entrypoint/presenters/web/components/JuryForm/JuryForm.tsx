@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import Topic from "@domain/models/Topic/Topic";
 import NumberFormat from 'react-number-format';
 import { Button, TextField, Typography } from "@material-ui/core";
-import clsx from 'clsx';
 import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
