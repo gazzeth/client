@@ -18,7 +18,7 @@ export default function Container({ onClick, onClickTitle, title, icon, titleVar
     const classes = useStyles();
 
     return (
-        <Paper className={classes.paper} style={{ minWidth: "700px" }}>
+        <Paper className={classes.paper}>
             <div className={classes.titleRow}>
                 <div className={classes.container}>
                     <Button className={classes.button} onClick={onClickTitle}>
