@@ -6,7 +6,7 @@ import NewsPreview from "@domain/models/News/NewsPreview";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import CheckIcon from '@material-ui/icons/Check';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -47,7 +47,7 @@ export default function NewsCard(props: PropTypes) {
         else if(news.isTrue()) {
             return (
                 <div className={classnames(classes.statusBar, classes.trueStatusBar)}>
-                    <CheckIcon className={classes.statusBarIcon} />
+                    <CheckCircleOutlineIcon className={classes.statusBarIcon} />
                     <span>{t("true-status-bar-description")}</span>
                 </div>
             );
