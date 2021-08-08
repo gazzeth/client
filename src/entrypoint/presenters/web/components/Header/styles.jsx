@@ -38,5 +38,5 @@ export default makeStyles(theme => ({
     height: "50px",
     width: "50px",
     marginRight: "0.5rem"
-},
-}), {index: 1});
+  },
+}), { index: 1 });

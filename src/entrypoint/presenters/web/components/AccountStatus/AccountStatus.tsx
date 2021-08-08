@@ -11,6 +11,8 @@ import { URLS } from "@constants/urls";
 import SelectLanguage from "../Translation/SelectLanguage";
 import BalanceInfo from "../BalanceInfo/BalanceInfo";
 
+const logoGitHub = "https://github.githubassets.com/favicons/favicon-dark.svg";
+
 type Props = {
     onClick: () => void
 }
@@ -36,9 +38,14 @@ export default function AccountStatus({ onClick }: Props) {
                 <BalanceInfo />
                 <Button className={classes.addressButton} onClick={onClick} >
                     <Typography variant="h4" className={classes.text}>{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
-                    <Icon account={account} size={16} className={classes.icon}/>
+                    <Icon account={account} size={16} className={classes.icon} />
                 </Button>
                 <SelectLanguage />
+                <Button target="_blank" href={"https://github.com/gazzeth"}>
+                    <div className={classes.logo}>
+                        <img src={logoGitHub} alt={'Icon'} className={classes.image} />
+                    </div>
+                </Button>
             </>
         )
     }

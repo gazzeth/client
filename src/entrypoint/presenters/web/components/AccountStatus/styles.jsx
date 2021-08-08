@@ -64,5 +64,15 @@ export default makeStyles(theme => ({
         width: "1rem",
         borderRadius: "1.125rem",
         backgroundColor: "#888D9B"
-    }
+    },
+    logo: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+      },
+      image: {
+        height: "35px",
+        width: "35px",
+      },
 }), {index: 1});
