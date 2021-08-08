@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Topic from "@domain/models/Topic/Topic";
 import NumberFormat from 'react-number-format';
 import { Button, TextField, Typography } from "@material-ui/core";
-import classnames from "classnames";
+import clsx from 'clsx';
 import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
@@ -69,27 +69,37 @@ export default function JuryForm() {
     return (
         <div className={classes.rowContainer}>
             <Container title={t("registry")}>
-                <table style={{ width: "100%" }}>
-                    <tr>
-                        <th><Typography variant="h6">{t("topic")}</Typography></th>
-                        <th><Typography variant="h6">{t("quantity")}</Typography></th>
-                    </tr>
+                <div className={classes.columnContainer}>
+                    <table className={classes.container}>
+                        <tr>
+                            <th style={{ background: "#edeef2", borderTopLeftRadius: 20, }}>
+                                <Typography variant="h6">{t("topic")}</Typography>
+                            </th>
+                            <th style={{ background: "#edeef2", borderTopRightRadius: 20, }}>
+                                <Typography variant="h6">{t("quantity")}</Typography>
+                            </th>
+                        </tr>
+                        {
+                            newSuscribeTopics.map((t, i) => {
+                                return (
+                                    <tr>
+                                        <td style={{ paddingRight: "1rem" }}>
+                                            <Typography variant="h6">{t.topic.name}</Typography>
+                                        </td>
+                                        <td>
+                                            <TextField variant="outlined" value={t.quantity}
+                                                onChange={(event) => { setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: +event.target.value } })) }}
+                                                InputProps={{ inputComponent: NumberFormatCustom as any }} />
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </table>
                     {
-                        newSuscribeTopics.map((t, i) => {
-                            return (
-                                <tr>
-                                    <td><Typography variant="h6">{t.topic.name}</Typography></td>
-                                    <td><TextField variant="outlined" value={t.quantity}
-                                        onChange={(event) => { setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: +event.target.value } })) }}
-                                        InputProps={{ inputComponent: NumberFormatCustom as any }} /></td>
-                                </tr>
-                            )
-                        })
+                        changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} />
                     }
-                </table>
-                {
-                    changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} />
-                }
+                </div>
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.buttonRegistry} onClick={onSummit}
                         disabled={loading || changeSuscription.length === 0}>

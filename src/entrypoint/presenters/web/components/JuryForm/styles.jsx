@@ -6,6 +6,8 @@ export default makeStyles(theme => ({
         flexDirection: "row",
         justifyContent: "center",
         padding: "1.1rem",
+        margin: "1rem",
+        marginTop: "0rem",
         "& .MuiOutlinedInput-root": {
             borderRadius: 15,
         },
@@ -13,29 +15,27 @@ export default makeStyles(theme => ({
             borderRadius: 15,
         },
     },
-    button: {
-        textTransform: "none",
-        backgroundColor: "none",
-        color: "#000000",
-        borderRadius: 15,
-        border: `1px solid ${theme.palette.primary.main}`,
-        "&:hover": {
-            backgroundColor: "#edeef2",
-            border: `1px solid ${theme.palette.primary.main}`,
-        }
+    left: {
+        borderBottomLeftRadius: 20,
     },
-    error: {
-        color: "#ff0033"
+    right: {
+        borderBottomRightRadius: 20,
     },
-    iconButton: {
-        float: "right",
-        padding: "0",
-    },
-    spaceBetween: {
-        justifyContent: 'space-between',
-        borderRadius: 15,
-        border: `1px solid ${theme.palette.primary.main}`,
+    container: {
+        padding: "0rem",
+        border: `1px solid #edeef2`,
+        borderRadius: 20,
+        backgroundColor: "#f7f8fa",
         marginBottom: "0.5rem",
+        width: "100%",
+        borderCollapse: "collapse",
+        borderStyle: "hidden", 
+        boxShadow: "0 0 0 1px #edeef2"  
+    },
+    columnContainer: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         padding: "1.1rem",
     },
     buttonRegistry: {
