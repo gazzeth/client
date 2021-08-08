@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
         textTransform: "none",
         border: `1px solid #ced0d9`,
         borderRadius: 20,
-
+        margin: "1rem",
         "&$disabled": {
             color: "#000000"
         }

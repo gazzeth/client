@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import Container from "../Container/Container";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
-import SelectTopic from "../SelectTopic/SelectTopic";
 import Topic from "@domain/models/Topic/Topic";
 import NumberFormat from 'react-number-format';
-import { Button, IconButton, TextField, Typography } from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import { Button, TextField, Typography } from "@material-ui/core";
 import classnames from "classnames";
 import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
@@ -24,109 +22,83 @@ export default function JuryForm() {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const [currentTopic, setCurrentTopic] = useState<Topic>(undefined);
-    const [currentQuantity, setCurrentQuantity] = useState<string>(undefined);
     const [suscribeTopics, setSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
-    const [selectedTopics, setSelectedTopics] = useState<{ topic: Topic, quantity: number }[]>([])
-    const [errorMenssage, setErorMenssage] = useState<string>(undefined)
-    const [cost, setCost] = useState<number>(0);
+    const [newSuscribeTopics, setNewSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
+    const [topics, setTopics] = useState<Topic[]>([]);
     const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [, account, , library] = useActiveBlockchain();
 
-    const onChange = (t: Topic) => { setCurrentTopic(t) }
-    const onAdd = () => {
-        if (currentTopic && currentQuantity) {
-            setSelectedTopics(topics => {
-                setErorMenssage(undefined)
-                setCost(c => c + currentTopic.costJury * (+currentQuantity))
-                return [...topics, { topic: currentTopic, quantity: +currentQuantity }]
-            })
-        }
-        else {
-            setErorMenssage(t("jury-form-incomplete"))
-        }
-    }
+    const changeSuscription = newSuscribeTopics.filter((t, i) => t.quantity !== suscribeTopics[i].quantity)
+
     const onSummit = () => {
         setLoading(true)
-        topicService.getTopicSubscribeUsecase().subscribe(selectedTopics, library)
-            .then(() => toast.success(t("succesful-sucribe-topic"))) //TODO improve Promise.All
+        topicService.getTopicSubscribeUsecase().subscribe(changeSuscription, library)
+            .then(() => { setSuscribeTopics(newSuscribeTopics); toast.success(t("succesful-sucribe-topic")); }) //TODO improve Promise.All
             .catch((error) => toast.error(t(error.message)))
             .finally(() => setLoading(false))
     }
 
     useEffect(() => {
         topicService.getTopicListByAddressUseCase().listByAddress(new Pagination(5, 0), account)
-            .then((topics) => setSuscribeTopics(topics))
+            .then((topics) => setSuscribeTopics(t => { setNewSuscribeTopics(topics); return topics; }))
             .catch((error) => toast.error(t(error.message)))
     }, [account, t])
 
+    useEffect(() => {
+        topicService.getTopicListUseCase().list(new Pagination(5, 0))
+            .then((topics) => setTopics(topics))
+            .catch((error) => toast.error(t(error.message)))
+    }, [t])
+
+    const addedTopics = topics
+        .filter((t) => suscribeTopics.find((tq) => tq.topic.name === t.name) === undefined)
+        .map((t) => { return { topic: t, quantity: 0 } })
+    if (addedTopics.length !== 0) {
+        setSuscribeTopics((t) => { const newT = t.concat(addedTopics); setNewSuscribeTopics(newT); return newT; })
+    }
+
+    const costOld = suscribeTopics
+        .map((t, i) => t.topic.costJury * t.quantity)
+        .reduce((p, c, cI, a) => p + c, 0)
+    const costNew = newSuscribeTopics
+        .map((t, i) => t.topic.costJury * t.quantity)
+        .reduce((p, c, cI, a) => p + c, 0)
+
     return (
-        <>
-            <div className={classes.rowContainer}>
-                <Container title={t("registry")}>
-                    <div className={classes.rowContainer}>
-                        <SelectTopic selectedOption={currentTopic} onChange={onChange} />
-                        <TextField variant="outlined" label={t("quantity")} value={currentQuantity}
-                            onChange={(event) => { setCurrentQuantity(event.target.value) }}
-                            InputProps={{ inputComponent: NumberFormatCustom as any }} />
-                        <Button onClick={onAdd} className={classes.button}>
-                            <Typography variant="h6">{t("add")}</Typography>
-                        </Button>
-                    </div>
-                    {errorMenssage && <Typography className={classes.error}>{errorMenssage}</Typography>}
+        <div className={classes.rowContainer}>
+            <Container title={t("registry")}>
+                <table style={{ width: "100%" }}>
+                    <tr>
+                        <th><Typography variant="h6">{t("topic")}</Typography></th>
+                        <th><Typography variant="h6">{t("quantity")}</Typography></th>
+                    </tr>
                     {
-                        selectedTopics.map((t, i) => {
-                            const onRemove = () => {
-                                setSelectedTopics(topic => {
-                                    const newTopics = [...topic]
-                                    newTopics.splice(i, 1)
-                                    setCost(c => c - t.topic.costJury * t.quantity)
-                                    return newTopics
-                                })
-                            }
+                        newSuscribeTopics.map((t, i) => {
                             return (
-                                <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
-                                    <Typography variant="h6">{t.topic.name}</Typography>
-                                    <Typography variant="h6">{t.quantity}</Typography>
-                                    <IconButton className={classes.iconButton} onClick={onRemove}>
-                                        <CloseIcon />
-                                    </IconButton>
-                                </div>
+                                <tr>
+                                    <td><Typography variant="h6">{t.topic.name}</Typography></td>
+                                    <td><TextField variant="outlined" value={t.quantity}
+                                        onChange={(event) => { setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: +event.target.value } })) }}
+                                        InputProps={{ inputComponent: NumberFormatCustom as any }} /></td>
+                                </tr>
                             )
                         })
                     }
-                    {selectedTopics.length !== 0 && <LockInfo lockCost={cost} library={library} account={account} />}
-                    <div className={classes.rowContainer} style={{ position: 'relative', }}>
-                        <Button className={classes.buttonRegistry} onClick={onSummit}
-                            disabled={loading || selectedTopics.length === 0}>
-                            <Typography variant="h6">{t("regiter-jury")}</Typography>
-                        </Button>
-                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                    </div>
-                </Container>
-            </div>
-            {
-                suscribeTopics &&
-                <div className={classes.rowContainer}>
-                    <Container title={t("suscriptions")}>
-                        {
-                            suscribeTopics.filter(t => {
-                                return t.quantity !== 0
-                            }).map((t, i) => {
-                                return (
-                                    <div className={classnames(classes.rowContainer, classes.spaceBetween)}>
-                                        <Typography variant="h6" style={{marginRight:"1rem"}}>{t.topic.name}</Typography>
-                                        <Typography variant="h6" style={{marginLeft:"1rem"}}>{t.quantity}</Typography>
-                                    </div>
-                                )
-                            })
-                        }
-                    </Container>
+                </table>
+                {
+                    changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} />
+                }
+                <div className={classes.rowContainer} style={{ position: 'relative', }}>
+                    <Button className={classes.buttonRegistry} onClick={onSummit}
+                        disabled={loading || changeSuscription.length === 0}>
+                        <Typography variant="h6">{t("regiter-jury")}</Typography>
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
-            }
-        </>
+            </Container>
+        </div>
     )
 }
 
