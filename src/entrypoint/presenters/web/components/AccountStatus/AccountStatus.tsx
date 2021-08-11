@@ -56,6 +56,11 @@ export default function AccountStatus({ onClick }: Props) {
                     <Typography variant="h4" className={classes.text}>{t("connect-to-wallet")}</Typography>
                 </Button>
                 <SelectLanguage />
+                <Button target="_blank" href={"https://github.com/gazzeth"}>
+                    <div className={classes.logo}>
+                        <img src={logoGitHub} alt={'Icon'} className={classes.image} />
+                    </div>
+                </Button>
             </>
         )
     }
