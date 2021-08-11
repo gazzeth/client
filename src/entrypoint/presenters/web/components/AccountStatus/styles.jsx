@@ -70,9 +70,9 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
-      },
-      image: {
+    },
+    image: {
         height: "35px",
         width: "35px",
-      },
-}), {index: 1});
+    },
+}), { index: 1 });

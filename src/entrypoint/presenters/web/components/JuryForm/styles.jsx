@@ -4,10 +4,8 @@ export default makeStyles(theme => ({
     rowContainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
-        padding: "1.1rem",
-        margin: "1rem",
-        marginTop: "0rem",
+        padding: "1rem",
+        justifyContent: "space-around",
         "& .MuiOutlinedInput-root": {
             borderRadius: 15,
         },
@@ -29,8 +27,8 @@ export default makeStyles(theme => ({
         marginBottom: "0.5rem",
         width: "100%",
         borderCollapse: "collapse",
-        borderStyle: "hidden", 
-        boxShadow: "0 0 0 1px #edeef2"  
+        borderStyle: "hidden",
+        boxShadow: "0 0 0 1px #edeef2"
     },
     columnContainer: {
         display: "flex",
@@ -54,11 +52,29 @@ export default makeStyles(theme => ({
         }
     },
     buttonProgress: {
-        color:  theme.palette.primary.light,
+        color: theme.palette.primary.light,
         position: 'absolute',
         top: '50%',
         left: '50%',
         marginTop: -12,
         marginLeft: -12,
     },
-}), {index: 1});
+    button: {
+        textTransform: "none",
+        backgroundColor: "none",
+        color: "#000000",
+        borderRadius: 15,
+        border: `1px solid ${theme.palette.primary.main}`,
+        "&:hover": {
+            backgroundColor: "#edeef2",
+            border: `1px solid ${theme.palette.primary.main}`,
+        }
+    },
+    error: {
+        color: "#ff0033"
+    },
+    iconButton: {
+        float: "right",
+        padding: "0",
+    },
+}), { index: 1 });

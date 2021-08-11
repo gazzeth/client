@@ -4,7 +4,8 @@ import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import Topic from "@domain/models/Topic/Topic";
 import NumberFormat from 'react-number-format';
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Button, TextField, IconButton, Typography } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import LockInfo from "../LockInfo/LockInfo";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
@@ -13,6 +14,7 @@ import BlockchainService from "@configuration/usecases/BlockchainService";
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Pagination from "@domain/models/Pagination/Pagination";
+import SelectTopic from "../SelectTopic/SelectTopic";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -21,9 +23,12 @@ export default function JuryForm() {
     const { t } = useTranslation();
     const classes = useStyles();
 
+    const [currentTopic, setCurrentTopic] = useState<Topic>(undefined);
+    const [currentQuantity, setCurrentQuantity] = useState<string>(undefined);
+    const [errorMenssage, setErorMenssage] = useState<string>(undefined);
+
     const [suscribeTopics, setSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
     const [newSuscribeTopics, setNewSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
-    const [topics, setTopics] = useState<Topic[]>([]);
     const [loading, setLoading] = React.useState(false);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
@@ -39,24 +44,36 @@ export default function JuryForm() {
             .finally(() => setLoading(false))
     }
 
+    const onChange = (t: Topic) => { setCurrentTopic(t) }
+    const onAdd = () => {
+        if (currentTopic && currentQuantity) {
+            if (+currentQuantity === 0) {
+                setErorMenssage(t("jury-form-quantity"))
+            }
+            else {
+                setErorMenssage(undefined)
+                const index = newSuscribeTopics.findIndex((t) => t.topic.name === currentTopic.name)
+                if (index !== -1) {
+                    setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [index]: { topic: currentTopic, quantity: +currentQuantity } }))
+                }
+                else {
+                    setNewSuscribeTopics((nst) => {
+                        setSuscribeTopics((st) => [...st, { topic: currentTopic, quantity: 0 }]);
+                        return [...nst, { topic: currentTopic, quantity: +currentQuantity }];
+                    })
+                }
+            }
+        }
+        else {
+            setErorMenssage(t("jury-form-incomplete"))
+        }
+    }
+
     useEffect(() => {
         topicService.getTopicListByAddressUseCase().listByAddress(new Pagination(5, 0), account)
             .then((topics) => setSuscribeTopics(t => { setNewSuscribeTopics(topics); return topics; }))
             .catch((error) => toast.error(t(error.message)))
     }, [account, t])
-
-    useEffect(() => {
-        topicService.getTopicListUseCase().list(new Pagination(5, 0))
-            .then((topics) => setTopics(topics))
-            .catch((error) => toast.error(t(error.message)))
-    }, [t])
-
-    const addedTopics = topics
-        .filter((t) => suscribeTopics.find((tq) => tq.topic.name === t.name) === undefined)
-        .map((t) => { return { topic: t, quantity: 0 } })
-    if (addedTopics.length !== 0) {
-        setSuscribeTopics((t) => { const newT = t.concat(addedTopics); setNewSuscribeTopics(newT); return newT; })
-    }
 
     const costOld = suscribeTopics
         .map((t, i) => t.topic.costJury * t.quantity)
@@ -65,34 +82,71 @@ export default function JuryForm() {
         .map((t, i) => t.topic.costJury * t.quantity)
         .reduce((p, c, cI, a) => p + c, 0)
 
+    let noSuscriptions = true;
+
     return (
         <div className={classes.rowContainer}>
             <Container title={t("registry")}>
+                <div className={classes.rowContainer}>
+                    <SelectTopic selectedOption={currentTopic} onChange={onChange} />
+                    <div style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
+                        <TextField variant="outlined" label={t("quantity")} value={currentQuantity}
+                            onChange={(event) => { setCurrentQuantity(event.target.value) }}
+                            InputProps={{ inputComponent: NumberFormatCustom as any }} />
+                    </div>
+                    <Button onClick={onAdd} className={classes.button}>
+                        <Typography variant="h6">{t("add")}</Typography>
+                    </Button>
+                </div>
+                {errorMenssage && <div className={classes.rowContainer}><Typography className={classes.error}>{errorMenssage}</Typography></div>}
                 <div className={classes.columnContainer}>
                     <table className={classes.container}>
                         <tr>
                             <th style={{ background: "#edeef2", borderTopLeftRadius: 20, }}>
                                 <Typography variant="h6">{t("topic")}</Typography>
                             </th>
-                            <th style={{ background: "#edeef2", borderTopRightRadius: 20, }}>
+                            <th style={{ background: "#edeef2", }}>
                                 <Typography variant="h6">{t("quantity")}</Typography>
                             </th>
+                            <th style={{ background: "#edeef2", borderTopRightRadius: 20, }}></th>
                         </tr>
                         {
-                            newSuscribeTopics.map((t, i) => {
-                                return (
-                                    <tr>
-                                        <td style={{ paddingRight: "1rem" }}>
-                                            <Typography variant="h6">{t.topic.name}</Typography>
-                                        </td>
-                                        <td>
-                                            <TextField variant="outlined" value={t.quantity}
-                                                onChange={(event) => { setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: +event.target.value } })) }}
-                                                InputProps={{ inputComponent: NumberFormatCustom as any }} />
-                                        </td>
-                                    </tr>
-                                )
-                            })
+                            newSuscribeTopics
+                                .map((t, i) => {
+                                    if (t.quantity === 0) {
+                                        return null
+                                    }
+                                    noSuscriptions = false
+                                    return (
+                                        <tr>
+                                            <td style={{ paddingRight: "1rem" }}>
+                                                <Typography variant="h6">{t.topic.name}</Typography>
+                                            </td>
+                                            <td style={{ paddingRight: "1rem" }}>
+                                                <TextField variant="outlined" value={t.quantity} style={{ width: "100%" }}
+                                                    onChange={(event) => {
+                                                        if (+event.target.value !== 0) {
+                                                            setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: +event.target.value } }));
+                                                        }
+                                                    }}
+                                                    InputProps={{ inputComponent: NumberFormatCustom as any }} />
+                                            </td>
+                                            <td style={{ paddingRight: "1rem" }}>
+                                                <IconButton className={classes.iconButton} onClick={() => setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [i]: { ...t, quantity: 0 } }))}>
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                        }
+                        {
+                            noSuscriptions &&
+                            <tr>
+                                <th colSpan={2} style={{ paddingRight: "1rem" }}>
+                                    <Typography variant="h6">{t("no-suscription")}</Typography>
+                                </th>
+                            </tr>
                         }
                     </table>
                     {
@@ -107,7 +161,7 @@ export default function JuryForm() {
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </Container>
-        </div>
+        </div >
     )
 }
 

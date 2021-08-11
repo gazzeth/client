@@ -51,6 +51,10 @@
       "regiter-jury": "TODO",
       "topic": "TODO",
       "quantity": "TODO",
+      "add": "TODO",
+      "jury-form-quantity": "TODO",
+      "jury-form-incomplete": "TODO",
+      "no-suscription": "TODO",
 
       "balance": "バランス: {{value}}",
 
