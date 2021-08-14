@@ -38,7 +38,7 @@ export default class NewsGraphRepository implements INewsRepository {
                 query: `
                 { 
                     topics${queries[1]} {
-                        votings(skip: ${pagination.offset}, first: ${pagination.limit}${queries[0]}) { 
+                        votings(skip: ${pagination.offset}, first: ${pagination.limit}${queries[0]}, orderBy: id, orderDirection: desc) { 
                             publication { 
                                 id 
                                 hash 
@@ -88,7 +88,7 @@ export default class NewsGraphRepository implements INewsRepository {
             body: JSON.stringify({
                 query: `
                 { 
-                    jurors(where: {id: "${address.toLocaleLowerCase()}"}) { 
+                    jurors(where: {id: "${address.toLocaleLowerCase()}, orderBy: id, orderDirection: desc"}) { 
                         id
                         votes(skip: ${0}, first: ${100}, where: {withdrawn: false}) {
                             voting {

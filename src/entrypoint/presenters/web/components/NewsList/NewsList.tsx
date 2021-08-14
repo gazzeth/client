@@ -61,7 +61,7 @@ export default function NewsList() {
             </Grid>
             <Grid container direction="column" className={classes.gridContainer} spacing={3}>
                 <Grid item>
-                    <Grid container justify="center" direction="row-reverse" className={classes.gridContainer} spacing={3}>
+                    <Grid container justify="center" className={classes.gridContainer} spacing={3}>
                         {newsList.map(news => <Grid item><NewsCard News={news} /></Grid>)}
                     </Grid>
                 </Grid>
