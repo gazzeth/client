@@ -48,7 +48,6 @@ export default function AccountDetail({ onChange, wallet }: Props) {
         newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(0, 5), account)
             .then((newsListResponce) => {
                 setNews(newsListResponce);
-                console.log(newsListResponce)
             })
             .catch((error) => console.log(error)) //TODO
     }, [account])

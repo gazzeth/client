@@ -68,11 +68,13 @@ export default class NewsGraphRepository implements INewsRepository {
             headers: { "Content-Type": "application/json" }
         }
 
+        let quantity = await this.getTotalJuries();
         const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json())
             .data.topics.flatMap((t: any) => t.votings.map((v: any) => v.publication))
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
             const element = result[i];
+            element.topic.selectableJurorsQuantity = quantity
             element.file = await IpfsMapper.toEntity(this.ipfsClient.cat(element.hash))
             resultWithFile.push(NewsMapper.toEntityPreview(element))
         }
@@ -91,12 +93,9 @@ export default class NewsGraphRepository implements INewsRepository {
                         votes(skip: ${0}, first: ${100}, where: {withdrawn: false}) {
                             voting {
                                 publication {
-                                    id
-                                    hash
-                                    publishDate
-                                    voting { 
-                                        winningVote 
-                                    } 
+                                    id 
+                                    hash 
+                                    author 
                                     topic { 
                                         id
                                         priceToPublish
@@ -105,7 +104,13 @@ export default class NewsGraphRepository implements INewsRepository {
                                         jurorReward
                                         commitPhaseDuration
                                         revealPhaseDuration
-                                        selectableJurorsQuantity 
+                                        selectableJurorsQuantity  
+                                    } 
+                                    publishDate 
+                                    voting { 
+                                        voteCounters
+                                        withdrawn 
+                                        winningVote 
                                     } 
                                 }
                             }
@@ -117,11 +122,14 @@ export default class NewsGraphRepository implements INewsRepository {
             headers: { "Content-Type": "application/json" }
         }
 
+        let quantity = await this.getTotalJuries();
+
         const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.jurors[0].votes.map((m: any) => m.voting.publication)
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
             const element = result[i];
             element.file = await IpfsMapper.toEntity(this.ipfsClient.cat(element.hash))
+            element.topic.selectableJurorsQuantity = quantity
             resultWithFile.push(NewsMapper.toEntityPreview(element))
         }
 
@@ -174,6 +182,7 @@ export default class NewsGraphRepository implements INewsRepository {
         const result: any = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.publications[0]
 
         result.file = await IpfsMapper.toEntity(this.ipfsClient.cat(result.hash))
+        result.topic.selectableJurorsQuantity = await this.getTotalJuries()
 
         return NewsMapper.toEntity(result)
     }
@@ -201,5 +210,11 @@ export default class NewsGraphRepository implements INewsRepository {
         } catch (e) {
             throw ErrorMapper.toEntity(e)
         }
+    }
+
+    private async getTotalJuries(): Promise<string> {
+        let provider = new ethers.providers.EtherscanProvider("ropsten"); //TODO
+        const contract = new ethers.Contract(NewsGraphRepository.PROTOCOL_CONTRACT_ADDRESS, Protocol, provider);
+        return await contract.VOTING_JURORS_QTY().then((result: any) => result._hex);
     }
 }

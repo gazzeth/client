@@ -54,7 +54,7 @@ export default function NewsPage() {
             message = "news-status-message-4"
             className = classes.pendingStatusBar
         }
-        else if (n.hasEnoughtVotes()) {
+        else if (!n.hasEnoughtVotes()) {
             message = "news-status-message-3"
             className = classes.insufficientStatusBar
         }

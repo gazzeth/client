@@ -37,7 +37,8 @@ export default class NewsMapper {
     public static toEntityTopic(dto: any): Topic {
         return new Topic(dto.id, parseFloat(ethers.utils.formatUnits(dto.priceToBeJuror, 18)), 
             parseFloat(ethers.utils.formatUnits(dto.priceToPublish, 18)), 
-            parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration))
+            parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration),
+            parseInt(dto.selectableJurorsQuantity))
     }
 
     public static toEntityVoteValue(vote: number): VOTE_VALUE {
@@ -55,7 +56,6 @@ export default class NewsMapper {
 
     public static toQuery(filter: NewsFilter): string[] {
         let queries: string[] = [];
-        console.log(filter)
         if (filter.verified === undefined) {
             queries.push("")
         }

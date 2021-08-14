@@ -36,7 +36,7 @@ export default function NewsCard(props: PropTypes) {
                 </div>
             );
         }
-        else if (news.hasEnoughtVotes()) {
+        else if (!news.hasEnoughtVotes()) {
             return (
                 <div className={classnames(classes.statusBar, classes.insufficientStatusBar)}>
                     <RadioButtonUncheckedIcon className={classes.statusBarIcon} />

@@ -38,7 +38,9 @@ export default class News {
     }
 
     public hasEnoughtVotes(): boolean {
-        return this.voteCounters[0] / this.voteCounters.reduce((p, c, cI, a) => p + c) > 0.35
+        return (this.topic.selectableJurorsQuantity - this.voteCounters[1] 
+            - this.voteCounters[2] - this.voteCounters[3])  
+            / this.topic.selectableJurorsQuantity < 0.35
     }
 
     public isTrue(): boolean {
@@ -54,7 +56,6 @@ export default class News {
     }
 
     private isStateValid(state: VOTE_VALUE): boolean {
-        console.log(this.voteCounters[state] / this.voteCounters.reduce((p, c, cI, a) => p + c))
-        return this.verified === state && this.voteCounters[state] / this.voteCounters.reduce((p, c, cI, a) => p + c) >= 0.60
+        return this.verified === state && this.voteCounters[state] / this.topic.selectableJurorsQuantity >= 0.60
     }
 }
