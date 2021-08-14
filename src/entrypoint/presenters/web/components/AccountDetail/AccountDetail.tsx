@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import classnames from "classnames";
-import { Button, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Typography } from "@material-ui/core";
 import BlockchainService from "@configuration/usecases/BlockchainService";
 import { container } from "@container-inversify";
 import { TYPES } from "@constants/types";
@@ -31,6 +31,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [chain, account,] = useActiveBlockchain();
     const [news, setNews] = useState<NewsPreview[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const classes = useStyles();
 
@@ -45,8 +46,10 @@ export default function AccountDetail({ onChange, wallet }: Props) {
     }
 
     useEffect(() => {
+        setLoading(true)
         newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(0, 5), account)
             .then((newsListResponce) => {
+                setLoading(false);
                 setNews(newsListResponce);
             })
             .catch((error) => console.log(error)) //TODO
@@ -87,7 +90,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
                 </div>
                 <div className={classnames(classes.rowContainer, classes.start)}>
                     <div className={classes.leftContainer}>
-                        <Icon account={account} size={26} className={classes.icon}/>
+                        <Icon account={account} size={26} className={classes.icon} />
                     </div>
                     <div className={classes.rightContainer}>
                         <Typography className={classes.textAccount} variant="h4">{blockchainService.getBlockchainGetAddressUsecase().shortenAddress(account)}</Typography>
@@ -121,7 +124,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
                                     <Typography className={classes.textAccount} variant="body2">{n.title}</Typography>
                                 </div>
                                 <div className={classes.rightContainer}>
-                                    <Button className={classes.buttonChange} component={Link} to={getUrl(n).replace(":id", ""+n.id)}>
+                                    <Button className={classes.buttonChange} component={Link} to={getUrl(n).replace(":id", "" + n.id)}>
                                         <Typography variant="body2">{t(getMessage(n))}</Typography>
                                     </Button>
                                 </div>
@@ -129,6 +132,10 @@ export default function AccountDetail({ onChange, wallet }: Props) {
                         )
                     })
                 }
+                {loading && 
+                <div className={classnames(classes.rowContainer, classes.center)}>
+                    <CircularProgress color="primary" size={100} />
+                </div>}
             </div>
         </>
     )

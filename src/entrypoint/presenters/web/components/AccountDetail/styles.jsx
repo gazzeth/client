@@ -12,6 +12,10 @@ export default makeStyles(theme => ({
         justifyContent: "space-between",
         padding: "0rem"
     },
+    center: {
+        justifyContent: "center",
+        padding: "0rem"
+    },
     start: {
         justifyContent: "flex-start",
         padding: "0rem"
