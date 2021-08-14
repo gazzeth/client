@@ -58,4 +58,7 @@ export default makeStyles(theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    error: {
+        color: "#ff0033"
+    },
 }), {index: 1});

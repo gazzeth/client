@@ -11,12 +11,13 @@ import { Web3Provider } from '@ethersproject/providers'
 type Props = {
     lockCost: number,
     library: Web3Provider,
-    account: string
+    account: string,
+    onChange?: (b: boolean) => void,
 }
 
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 
-export default function LockInfo({ lockCost, library, account }: Props) {
+export default function LockInfo({ lockCost, library, account, onChange }: Props) {
     const classes = useStyles();
     const { t } = useTranslation();    
     const [balance, setBalance] = useState("-")
@@ -27,9 +28,12 @@ export default function LockInfo({ lockCost, library, account }: Props) {
             .getBlockchainGetBalanceOfUsecase()
             .getBalanceOf(SUPPORTED_CURRENCY.Dai, library)
             .then((balance) => {
+                if (onChange !== undefined) {
+                    onChange(balance < lockCost)
+                }
                 setBalance("" + balance)
             })
-    }, [library, account])
+    }, [library, account, lockCost, onChange])
     
     return (
         <div className={classes.container}>

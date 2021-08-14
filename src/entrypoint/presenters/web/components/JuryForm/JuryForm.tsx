@@ -25,7 +25,7 @@ export default function JuryForm() {
 
     const [currentTopic, setCurrentTopic] = useState<Topic>(undefined);
     const [currentQuantity, setCurrentQuantity] = useState<string>(undefined);
-    const [errorMenssage, setErorMenssage] = useState<string>(undefined);
+    const [errorMenssage, setErrorMenssage] = useState<string>(undefined);
 
     const [suscribeTopics, setSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
     const [newSuscribeTopics, setNewSuscribeTopics] = useState<{ topic: Topic, quantity: number }[]>([]);
@@ -48,10 +48,10 @@ export default function JuryForm() {
     const onAdd = () => {
         if (currentTopic && currentQuantity) {
             if (+currentQuantity === 0) {
-                setErorMenssage(t("jury-form-quantity"))
+                setErrorMenssage(t("jury-form-quantity"))
             }
             else {
-                setErorMenssage(undefined)
+                setErrorMenssage(undefined)
                 const index = newSuscribeTopics.findIndex((t) => t.topic.name === currentTopic.name)
                 if (index !== -1) {
                     setNewSuscribeTopics(Object.assign([], newSuscribeTopics, { [index]: { topic: currentTopic, quantity: +currentQuantity } }))
@@ -65,7 +65,7 @@ export default function JuryForm() {
             }
         }
         else {
-            setErorMenssage(t("jury-form-incomplete"))
+            setErrorMenssage(t("jury-form-incomplete"))
         }
     }
 
@@ -83,6 +83,15 @@ export default function JuryForm() {
         .reduce((p, c, cI, a) => p + c, 0)
 
     let noSuscriptions = true;
+
+    const handleInsufficientBalance = (b: boolean) => {
+        if (b) {
+            setErrorMenssage(t("insuficient-balance-dai"))
+        }
+        else if (errorMenssage === t("insuficient-balance-dai")) {
+            setErrorMenssage(undefined)
+        }
+    }
 
     return (
         <div className={classes.rowContainer}>
@@ -150,12 +159,12 @@ export default function JuryForm() {
                         }
                     </table>
                     {
-                        changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} />
+                        changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} onChange={handleInsufficientBalance} />
                     }
                 </div>
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>
                     <Button className={classes.buttonRegistry} onClick={onSummit}
-                        disabled={loading || changeSuscription.length === 0}>
+                        disabled={loading || changeSuscription.length === 0 || !!errorMenssage}>
                         <Typography variant="h6">{t("regiter-jury")}</Typography>
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

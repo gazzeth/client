@@ -138,5 +138,7 @@
       
       "gzt-explanation": "TODO gzt-explanation",
       "dai-explanation": "TODO dai-explanation",
-      "eth-explanation": "TODO eth-explanation"
+      "eth-explanation": "TODO eth-explanation",
+
+      "insuficient-balance-dai": "TODO" 
 }
