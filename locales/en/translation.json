@@ -54,6 +54,10 @@
     "regiter-jury": "Update suscriptions",
     "topic": "Topics",
     "quantity": "Quantity",
+    "add": "Add",
+    "jury-form-quantity": "Quantity must be greate then zero",
+    "jury-form-incomplete": "You must select a topic and quantity",
+    "no-suscription": "There are no suscriptions",
 
     "balance": "Balance: {{value}}",
 

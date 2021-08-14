@@ -51,9 +51,13 @@
     "select-topic": "Seleccioná un tópico",
 
     "registry": "Manejar suscripciones",
-    "regiter-jury": "Actualizar suscrpciones",
+    "regiter-jury": "Actualizar suscripciones",
     "topic": "Topicos",
     "quantity": "Cantidad",
+    "add": "Agregar",
+    "jury-form-quantity": "La cantidad debe ser mayor a cero",
+    "jury-form-incomplete": "Es necesario que elijas un tópico y la cantidad de veces",
+    "no-suscription": "No hay suscripciones",
 
     "balance": "Balance: {{value}}",
 
