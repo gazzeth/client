@@ -63,7 +63,7 @@ export default function VoteForm({ isReveal }: Props) {
                     !isReveal && (
                     <div>
                         {
-                            VOTE_VALUES.map((voteValue) => {
+                            VOTE_VALUES.filter((v, i) => i < 4).map((voteValue) => {
                                 if (voteValue !== VOTE_VALUE.None) {
                                     return (
                                         <div className={classes.rowRuleContainer}>
@@ -86,7 +86,7 @@ export default function VoteForm({ isReveal }: Props) {
                 <Select native value={voteValue} label={t("select-vote-value")}
                     onChange={(e) => setVoteValue(e.target.value as VOTE_VALUE)} >
                     {
-                        VOTE_VALUES.map((voteValue) => {
+                        VOTE_VALUES.filter((v, i) => i < 4).map((voteValue) => {
                             if (voteValue === VOTE_VALUE.None) {
                                 return <option aria-label="None" value={undefined} />
                             }

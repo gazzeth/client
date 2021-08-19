@@ -54,6 +54,27 @@ export default class NewsPreview {
         return this.isStateValid(VOTE_VALUE.Unqualified)
     }
 
+    public getState(): VOTE_VALUE {
+        if (!this.isRevealOver()) {
+            return VOTE_VALUE.Pending
+        }
+        else if (!this.hasEnoughtVotes()) {
+            return VOTE_VALUE.Insufficient
+        }
+        else if(this.isTrue()) {
+            return VOTE_VALUE.True
+        }
+        else if(this.isFalse()) {
+            return VOTE_VALUE.False
+        }
+        else if(this.isUnqualified()) {
+            return VOTE_VALUE.Unqualified
+        }
+        else {
+            return VOTE_VALUE.NoConsent
+        }
+    }
+
     private isStateValid(state: VOTE_VALUE): boolean {
         return this.verified === state && this.voteCounters[state] / this.topic.selectableJurorsQuantity >= 0.60
     }

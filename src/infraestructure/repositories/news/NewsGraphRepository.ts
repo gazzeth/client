@@ -124,7 +124,8 @@ export default class NewsGraphRepository implements INewsRepository {
 
         let quantity = await this.getTotalJuries();
 
-        const result: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.jurors[0].votes.map((m: any) => m.voting.publication)
+        const data: any[] = (await (await fetch(NewsGraphRepository.API_URL, options)).json()).data.jurors
+        const result: any[] = (data.length === 0) ? [] : data[0].votes.map((m: any) => m.voting.publication)
         const resultWithFile: NewsPreview[] = []
         for (let i = 0; i < result.length; i++) {
             const element = result[i];

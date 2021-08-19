@@ -25,6 +25,9 @@ export default function NewsFilterBar({ filter, onChange }: PropTypes) {
         if (value === "") {
             value = undefined;
         }
+        else {
+            value = +value;
+        }
         onChange(filter.setVerified(value as (VOTE_VALUE | undefined)));
     }
 

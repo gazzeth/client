@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { VOTE_VALUES } from "@constants/vote_value";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
+const newsListUseCase = newsService.getNewsListUseCase();
 
 export default function NewsList() {
     const PAGE_SIZE = 5; //TODO maybe put in constnants?
@@ -22,7 +23,7 @@ export default function NewsList() {
 
     const getPage = async (handleNewList: ((newsList: NewsPreview[]) => void),
         pagination: Pagination, filter: Filter) => {
-        newsService.getNewsListUseCase().list(pagination, filter)
+        newsListUseCase.list(pagination, filter)
             .then((newsListResponce) => {
                 handleNewList(newsListResponce);
             })
@@ -41,21 +42,21 @@ export default function NewsList() {
                 <Grid item />
                 <Grid item xs={12}>
                     <NewsFilterBar filter={filter} onChange={(f) => {
-                            const params = new URLSearchParams(window.location.search);
-                            if (f.verified !== undefined) {
-                                params.set("verified", f.verified.toString());
-                            }
-                            else {
-                                params.delete("verified")
-                            }
-                            if (f.topic !== undefined) {
-                                params.set("topic", f.topic);
-                            }
-                            else {
-                                params.delete("topic")
-                            }
-                            window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
-                            setFilter(f)
+                        const params = new URLSearchParams(window.location.search);
+                        if (f.verified !== undefined) {
+                            params.set("verified", f.verified.toString());
+                        }
+                        else {
+                            params.delete("verified")
+                        }
+                        if (f.topic !== undefined) {
+                            params.set("topic", f.topic);
+                        }
+                        else {
+                            params.delete("topic")
+                        }
+                        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
+                        setFilter(f)
                     }} />
                 </Grid>
             </Grid>

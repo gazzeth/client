@@ -128,6 +128,9 @@
       "vote-state-value-1": "正しい",
       "vote-state-value-2": "正しくない",
       "vote-state-value-3": "資格を満たさない",
+      "vote-state-value-4": "TODO",
+      "vote-state-value-5": "TODO",
+      "vote-state-value-6": "TODO",
 
       "succesful-copy": "Information copy to clipboard",
 
