@@ -132,6 +132,9 @@
     "vote-state-value-1": "True",
     "vote-state-value-2": "False",
     "vote-state-value-3": "Unqualified",
+    "vote-state-value-4": "Pending",
+    "vote-state-value-5": "Insufficient",
+    "vote-state-value-6": "No consent",
 
     "succesful-copy": "Information copy to clipboard",
 
@@ -142,5 +145,7 @@
     
     "gzt-explanation": "TODO gzt-explanation",
     "dai-explanation": "TODO dai-explanation",
-    "eth-explanation": "TODO eth-explanation"
+    "eth-explanation": "TODO eth-explanation",
+
+    "insuficient-balance-dai": "Not enought DAI to lock in the transaction" 
 }
