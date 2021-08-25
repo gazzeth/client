@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles(theme => ({
     root: {
         maxWidth: 345,
-        height: "100%",
+        height: "36rem",
         display: "flex",
         flexDirection: "column",
         "& .MuiCardActions-root": {

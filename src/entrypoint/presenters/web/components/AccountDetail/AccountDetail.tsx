@@ -47,7 +47,7 @@ export default function AccountDetail({ onChange, wallet }: Props) {
 
     useEffect(() => {
         setLoading(true)
-        newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(0, 5), account)
+        newsService.getNewsListByAddressUsecase().listByAddress(new Pagination(15, 0), account)
             .then((newsListResponce) => {
                 setLoading(false);
                 setNews(newsListResponce);

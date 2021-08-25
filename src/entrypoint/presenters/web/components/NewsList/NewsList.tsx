@@ -17,7 +17,7 @@ const newsService = container.get<NewsService>(TYPES.NewsService);
 const newsListUseCase = newsService.getNewsListUseCase();
 
 export default function NewsList() {
-    const PAGE_SIZE = 5; //TODO maybe put in constnants?
+    const PAGE_SIZE = 15; //TODO maybe put in constnants?
 
     let query = new URLSearchParams(useLocation().search);
 

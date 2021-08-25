@@ -25,7 +25,7 @@ export default function NewsCard(props: PropTypes) {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const MAX_LEDE = 500;
+    const MAX_LEDE = 300;
 
     const getStatusBar = () => {
         if (!news.isRevealOver()) {

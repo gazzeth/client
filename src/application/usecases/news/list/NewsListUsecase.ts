@@ -15,14 +15,14 @@ export default class NewsListUsecase implements INewsListUsecase {
         this.newsRepository = newsRepository;
         this.news = [];
         this.currentFilter = new Filter();
-        this.currentPagination = new Pagination(5, 0);
+        this.currentPagination = new Pagination(15, 0);
     }
 
     public async list(pagination: Pagination, filter: Filter): Promise<NewsPreview[]> {
         if (this.currentFilter.topic !== filter.topic || this.currentFilter.verified !== filter.verified) {
             this.currentFilter = new Filter(filter.verified, filter.topic);
             this.news = [];
-            this.currentPagination = new Pagination(5, 0);
+            this.currentPagination = new Pagination(15, 0);
         }
         if (filter.verified !== undefined && filter.verified >= 4) {
             filter = filter.setVerified(undefined);
@@ -39,6 +39,6 @@ export default class NewsListUsecase implements INewsListUsecase {
             this.currentPagination = this.currentPagination.advancePage()
             this.news = [...this.news, ...newsPage]
         }
-        return this.news.slice(pagination.offset, pagination.limit + pagination.offset + 1);
+        return this.news.slice(pagination.offset, pagination.limit + pagination.offset);
     }
 }

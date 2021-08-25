@@ -70,7 +70,7 @@ export default function JuryForm() {
     }
 
     useEffect(() => {
-        topicService.getTopicListByAddressUseCase().listByAddress(new Pagination(5, 0), account)
+        topicService.getTopicListByAddressUseCase().listByAddress(new Pagination(15, 0), account)
             .then((topics) => setSuscribeTopics(t => { setNewSuscribeTopics(topics); return topics; }))
             .catch((error) => toast.error(t(error.message)))
     }, [account, t])
