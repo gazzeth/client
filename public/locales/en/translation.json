@@ -139,13 +139,13 @@
     "succesful-copy": "Information copy to clipboard",
 
     "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for these reason is necesary to have a wallet. Please choose a option from below.",
-    "news-explanation": "TODO news-explanation",
-    "reveal-explanation": "TODO reveal-explanation",
-    "vote-explanation": "TODO vote-explanation",
+    "news-explanation": "DAIs are deposited. If the news is true these are recovered and GZT is obtained. In any other case these are lost.",
+    "reveal-explanation": "It is necessary to make the public vote to finish the voting process. Then the phase to withdraw the rewards will be activated.",
+    "vote-explanation": "DAIs are deposited. If the validation is correct, these are retrieved and GZT is obtained. In any other case these are lost.",
     
-    "gzt-explanation": "TODO gzt-explanation",
-    "dai-explanation": "TODO dai-explanation",
-    "eth-explanation": "TODO eth-explanation",
+    "gzt-explanation": "It is obtained by publishing a true news item or by correctly validating a news item.",
+    "dai-explanation": "This is a stable coin, it is used as collateral for publishing or voting.",
+    "eth-explanation": "This currency is used to execute transactions.",
 
     "insuficient-balance-dai": "Not enought DAI to lock in the transaction" 
 }
