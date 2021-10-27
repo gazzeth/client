@@ -139,9 +139,9 @@
     "succesful-copy": "Informacion copiada al portapapeles",
 
     "wallet-explanation": "Gazzeth es una plataforma descentralizada que funciona a base de incentivos, por lo que es necesario contar con una billetera. Elija una de las opciones siguientes.",
-    "news-explanation": "Se depositan DAIs. Si la noticia es verdadera estos se recuperan y se obtienen GZT. En cualquier otro caso estos se pierden.",
+    "news-explanation": "Se depositan DAIs. Si la noticia es verdadera estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
     "reveal-explanation": "Es necesario hacer el voto publico para terminar con el proceso de voto. Despues se activara la fase para retirar las recompensas.",
-    "vote-explanation": "Se depositan DAIs. Si la validación es correcta estos se recuperan y se obtienen GZT. En cualquier otro caso estos se pierden.",
+    "vote-explanation": "Se depositan DAIs. Si la validación es correcta estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
     
     "gzt-explanation": "Se obtiene al publicar una noticia verdadera o al validar correctamente una noticia.",
     "dai-explanation": "Esta es una moneda estable, se utiliza como garantia para las publicar o votar.",

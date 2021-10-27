@@ -62,7 +62,7 @@
     "balance": "Balance: {{value}}",
 
     "publish-news": "Submit publication",
-    "pre-render": "Show how publication must be visualized",
+    "pre-render": "Show how publication will be visualized",
     "publish": "Publish",
 
     "vote-news": "Emit vote",
@@ -79,8 +79,8 @@
     "vote-rule-label-1": "True",
     "vote-rule-label-2": "False",
     "vote-rule-label-3": "Unqualified",
-    "vote-rule-description-1": "The publication is news, is in the correct topic and it is completely verifiable as true.",
-    "vote-rule-description-2": "he publication is news, is in the correct topic and contains at least one piece of information that can't be verifiable as true.",
+    "vote-rule-description-1": "The publication is a news, is in the correct topic and it is completely verifiable as true.",
+    "vote-rule-description-2": "The publication is a news, is in the correct topic and contains at least one piece of information that can't be verifiable as true.",
     "vote-rule-description-3": "Any other case. For example: publication is not news, is in a wrong topic, is incomprehensible, etc.",
 
     "succesful-news-post": "Publication submitted! The jurors are already validating it",
@@ -138,12 +138,12 @@
 
     "succesful-copy": "Information copy to clipboard",
 
-    "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for these reason is necesary to have a wallet. Please choose a option from below.",
-    "news-explanation": "DAIs are deposited. If the news is true these are recovered and GZT is obtained. In any other case these are lost.",
+    "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for this reason is necesary to have a wallet. Please choose a option from below.",
+    "news-explanation": "DAIs are deposited. If the news is true, the DAIs are recovered and GZTs is obtained. In any other case the DAIs are lost.",
     "reveal-explanation": "It is necessary to make the public vote to finish the voting process. Then the phase to withdraw the rewards will be activated.",
-    "vote-explanation": "DAIs are deposited. If the validation is correct, these are retrieved and GZT is obtained. In any other case these are lost.",
+    "vote-explanation": "DAIs are deposited. If the validation is correct, the DAIs are recovered and GZTs is obtained. In any other case the DAIs are lost.",
     
-    "gzt-explanation": "It is obtained by publishing a true news item or by correctly validating a news item.",
+    "gzt-explanation": "It is obtained by publishing a true news or by correctly validating a news.",
     "dai-explanation": "This is a stable coin, it is used as collateral for publishing or voting.",
     "eth-explanation": "This currency is used to execute transactions.",
 
