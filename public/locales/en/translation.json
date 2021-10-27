@@ -3,32 +3,32 @@
     "en": "English 🇬🇧",
     "es": "Español 🇪🇸",
     "jp": "日本語 🇯🇵",
-
+  
     "loading": "Loading",
-
+  
     "404": "The page you are looking for does not exist",
     "401": "You must connect your wallet to access this page",
     "back-message": "Press the button to return to home page",
     "home": "Home",
-
+  
     "copy-news": "Copy url",
-
+  
     "filter-bar-title": "Filters:",
     "verified-title": "Verification status",
     "none": "All",
     "verified": "True",
     "not-verified": "False",
     "pending": "Pending",
-
+  
     "pending-status-bar-description": "This publication is pending review",
     "false-status-bar-description": "This publication was declared as false",
     "true-status-bar-description": "This publication was declared as true",
     "unqualified-status-bar-description": "This publication does not follow the rules",
-    "insufficient-status-bar-description": "This publication does not have enought votes",
-    "no-consent-status-bar-description": "Juries could not reach a veredict",
-     
+    "insufficient-status-bar-description": "This publication does not have enough votes",
+    "no-consent-status-bar-description": "Juries could not reach a verdict",
+    
     "connect-to-wallet": "Connect wallet",
-    "jurror-inscription": "Manage suscriptions",
+    "jurror-inscription": "Manage subscriptions",
     "back": "Back",
     "metamask-header": "Metamask",
     "metamask-subheader": "Easy to use browser extension",
@@ -40,31 +40,31 @@
     "error-connecting": "Error connecting to wallet. Refresh page.",
     "account": "Account",
     "wallet": "Wallets",
-
+  
     "connected-with": "Connected with {{wallet}}",
     "change": "Change",
     "copy-address": "Copy address",
     "view-etherscan": "View on etherscan",
-
+  
     "select-markdown": "Select a markdown file (.md)",
     "browse-files": "Browse file",
     "select-topic": "Select topic",
-
-    "registry": "Manage suscriptions",
-    "regiter-jury": "Update suscriptions",
+  
+    "registry": "Manage subscriptions",
+    "regiter-jury": "Update subscriptions",
     "topic": "Topics",
     "quantity": "Quantity",
     "add": "Add",
-    "jury-form-quantity": "Quantity must be greate then zero",
+    "jury-form-quantity": "Quantity must be greater than zero",
     "jury-form-incomplete": "You must select a topic and quantity",
-    "no-suscription": "There are no suscriptions",
-
+    "no-suscription": "There are no subscriptions",
+  
     "balance": "Balance: {{value}}",
-
+  
     "publish-news": "Submit publication",
     "pre-render": "Show how publication will be visualized",
     "publish": "Publish",
-
+  
     "vote-news": "Emit vote",
     "reveal-news": "Reveal vote",
     "select-vote-value": "Select vote value",
@@ -75,25 +75,25 @@
     "vote": "Vote",
     "reveal": "Reveal",
     "justification": "Justification",
-
+  
     "vote-rule-label-1": "True",
     "vote-rule-label-2": "False",
     "vote-rule-label-3": "Unqualified",
     "vote-rule-description-1": "The publication is a news, is in the correct topic and it is completely verifiable as true.",
     "vote-rule-description-2": "The publication is a news, is in the correct topic and contains at least one piece of information that can't be verifiable as true.",
     "vote-rule-description-3": "Any other case. For example: publication is not news, is in a wrong topic, is incomprehensible, etc.",
-
+  
     "succesful-news-post": "Publication submitted! The jurors are already validating it",
     "succesful-vote-commit": "Done! Vote sent",
     "succesful-vote-reveal": "Done! Vote revealed",
     "succesful-sucribe-topic": "You are already a juror!",
     "succesful-withdraw": "Done! Earnings withdrawn",
-
+  
     "publication-not-exist-error": "Publication does not exist",
     "not-juror-of-publication": "Your are not a juror in this publication",
     "topic-not-exist-error": "Topic does not exist",
     "close-topic-error": "Topic was closed",
-    "insufficient-jurors-in-topic-error": "Topic has not the mininum juror quantity",
+    "insufficient-jurors-in-topic-error": "Topic has not the minimum juror quantity",
     "commit-already-finished-error": "Vote phase has already finished",
     "invalid-nonce": "Invalid nonce",
     "poh-error": "You must be registered in \"Proof of Humanity\"",
@@ -109,25 +109,25 @@
     "signature-denied-error": "You cancelled the transaction signature",
     "transaction-denied-error": "You cancelled the transaction",
     "insuficient-funds-error": "Insufficient funds",
-
+  
     "votation": "Voting",
     "penalized": "Penalized",
     "votes": "Votes",
-
+  
     "news-status-message-0": "Publication has been validated as true",
     "news-status-message-1": "Publication has been validated as false",
     "news-status-message-2": "Publication has been validated as not complying with the rules",
-    "news-status-message-3": "No result was achieved because there are not enought votes",
+    "news-status-message-3": "No result was achieved because there are not enough votes",
     "news-status-message-4": "The votation is not over",
     "news-status-message-5": "A result was not achieved because of the juries votes",
-
+  
     "publications-participate": "Publications in which you participate",
     "go-to-publication": "Go to publication",
     "go-to-reveal": "Go to reveal",
     "go-to-vote": "Go to vote",
-
+  
     "withdraw": "Withdraw earnings",
-
+  
     "vote-state-value-0": "Pending",
     "vote-state-value-1": "True",
     "vote-state-value-2": "False",
@@ -135,17 +135,18 @@
     "vote-state-value-4": "Pending",
     "vote-state-value-5": "Insufficient",
     "vote-state-value-6": "No consent",
-
+  
     "succesful-copy": "Information copy to clipboard",
-
-    "wallet-explanation": "Gazzeth is a descentralize platform that works base in incentives, for this reason is necesary to have a wallet. Please choose a option from below.",
-    "news-explanation": "DAIs are deposited. If the news is true, the DAIs are recovered and GZTs is obtained. In any other case the DAIs are lost.",
+  
+    "wallet-explanation": "Gazzeth is a decentralized platform that works based on incentives, for this reason it is necessary to have a wallet. Please choose a option from below.",
+    "news-explanation": "DAIs are deposited. If the news is true, the DAIs are recovered and GZTs are obtained. In any other case the DAIs are lost.",
     "reveal-explanation": "It is necessary to make the public vote to finish the voting process. Then the phase to withdraw the rewards will be activated.",
-    "vote-explanation": "DAIs are deposited. If the validation is correct, the DAIs are recovered and GZTs is obtained. In any other case the DAIs are lost.",
-    
+    "vote-explanation": "DAIs are deposited. If the validation is correct, the DAIs are recovered and GZTs are obtained. In any other case the DAIs are lost.",
+   
     "gzt-explanation": "It is obtained by publishing a true news or by correctly validating a news.",
     "dai-explanation": "This is a stable coin, it is used as collateral for publishing or voting.",
     "eth-explanation": "This currency is used to execute transactions.",
-
-    "insuficient-balance-dai": "Not enought DAI to lock in the transaction" 
-}
+  
+    "insuficient-balance-dai": "Not enough DAI to lock in the transaction"
+ }
+   
