@@ -88,7 +88,7 @@ export default class NewsGraphRepository implements INewsRepository {
             body: JSON.stringify({
                 query: `
                 { 
-                    jurors(where: {id: "${address.toLocaleLowerCase()}, orderBy: id, orderDirection: desc"}) { 
+                    jurors(where: {id: "${address.toLocaleLowerCase()}"}, orderBy: id, orderDirection: desc) { 
                         id
                         votes(skip: ${0}, first: ${100}, where: {withdrawn: false}) {
                             voting {
