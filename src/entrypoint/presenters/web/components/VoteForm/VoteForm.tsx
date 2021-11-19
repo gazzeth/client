@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useTranslation } from 'react-i18next';
 import Container from "../Container/Container";
@@ -14,9 +14,12 @@ import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { URLS } from "@constants/urls";
 import { Link } from "react-router-dom";
+import NewsService from "@configuration/usecases/NewsService";
+import News from "@domain/models/News/News";
 
 const voteService = container.get<VoteService>(TYPES.VoteService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
+const newsService = container.get<NewsService>(TYPES.NewsService);
 
 type Props = {
     isReveal: boolean
@@ -33,6 +36,16 @@ export default function VoteForm({ isReveal }: Props) {
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [, , , library] = useActiveBlockchain();
     const [loading, setLoading] = React.useState(false);
+    const [news, setNews] = React.useState<News>(undefined);
+
+    useEffect(() => {
+        if (!isNaN(id)) {
+            newsService.getNewsGetUseCase().get(id)
+                .then((newsResponce) => setNews(newsResponce))
+                .catch((error) => console.log(error))//TODO maybe do somethin else
+                .finally(() => setLoading(false))
+        }
+    }, [id])
 
     const onSummit = () => {
         setLoading(true)
@@ -106,7 +119,9 @@ export default function VoteForm({ isReveal }: Props) {
     }
     <div className={classes.rowContainer} style={{ position: 'relative', }}>
         <Button className={classes.button} onClick={onSummit}
-            disabled={loading || voteValue === undefined || (justification === undefined && isReveal)}>
+            disabled={loading || voteValue === undefined || news === undefined || 
+            (isReveal && (justification === undefined || !news.isCommitOver() || news.isRevealOver())) ||
+            (!isReveal && news.isCommitOver())}>
             <Typography variant="h6">{t(isReveal ? "reveal" : "vote")}</Typography>
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

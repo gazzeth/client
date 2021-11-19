@@ -58,6 +58,9 @@ export default function NewsFilterBar({ filter, onChange }: PropTypes) {
                         <option aria-label="None" value={undefined} />
                         {
                             VOTE_VALUES.map((voteValue) => {
+                                if(voteValue === VOTE_VALUE.None) {
+                                    return null
+                                }
                                 return <option value={voteValue}>{t("vote-state-value-" + voteValue)}</option>
                             })
                         }
