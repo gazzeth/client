@@ -1,12 +1,14 @@
+import { BigNumber } from "ethers";
+
 export default class Topic {
     name: string;
-    costJury: number;
-    costPublish: number;
+    costJury: BigNumber;
+    costPublish: BigNumber;
     commitPhaseDuration: number;
     revealPhaseDuration: number;
     selectableJurorsQuantity: number;
 
-    constructor(name: string, costJury: number, costPublish: number, 
+    constructor(name: string, costJury: BigNumber, costPublish: BigNumber, 
         commitPhaseDuration?: number, revealPhaseDuration?: number, 
         selectableJurorsQuantity?: number) {
         this.name = name;

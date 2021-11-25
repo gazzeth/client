@@ -3,6 +3,7 @@ import Topic from "@domain/models/Topic/Topic";
 import ITopicSubscribeUsecase from "./ITopicSubscribeUsecase";
 import { Web3Provider } from '@ethersproject/providers'
 import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
+import { BigNumber } from "ethers";
 
 export default class TopicSubscribeUsecase implements ITopicSubscribeUsecase {
 
@@ -15,13 +16,13 @@ export default class TopicSubscribeUsecase implements ITopicSubscribeUsecase {
     }
     
     public async subscribe(topics: { topic: Topic, quantity: number }[], library: Web3Provider): Promise<void[]> { 
-        let total = 0;
+        let total = BigNumber.from(0);
         topics.forEach(topic => {
-            total = total + topic.quantity * topic.topic.costJury;
+            total = total.add(topic.topic.costJury.mul(topic.quantity));
         });        
         const balance = await this.daiRepository.getBalanceOf(library)
 
-        if (balance < total) {
+        if (BigNumber.from(balance) < total) {
             throw new Error("insuficient-funds-error")
         }
 

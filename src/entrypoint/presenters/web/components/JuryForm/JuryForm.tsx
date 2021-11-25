@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Pagination from "@domain/models/Pagination/Pagination";
 import SelectTopic from "../SelectTopic/SelectTopic";
+import { BigNumber, ethers } from "ethers";
 
 const topicService = container.get<TopicService>(TYPES.TopicService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -76,11 +77,11 @@ export default function JuryForm() {
     }, [account, t])
 
     const costOld = suscribeTopics
-        .map((t, i) => t.topic.costJury * t.quantity)
-        .reduce((p, c, cI, a) => p + c, 0)
+        .map((t, i) => t.topic.costJury.mul(t.quantity))
+        .reduce((p, c, cI, a) => p.add(c), BigNumber.from(0))
     const costNew = newSuscribeTopics
-        .map((t, i) => t.topic.costJury * t.quantity)
-        .reduce((p, c, cI, a) => p + c, 0)
+        .map((t, i) => t.topic.costJury.mul(t.quantity))
+        .reduce((p, c, cI, a) => p.add(c), BigNumber.from(0))
 
     let noSuscriptions = true;
 
@@ -159,7 +160,7 @@ export default function JuryForm() {
                         }
                     </table>
                     {
-                        changeSuscription.length !== 0 && <LockInfo lockCost={costNew - costOld} library={library} account={account} onChange={handleInsufficientBalance} />
+                        changeSuscription.length !== 0 && <LockInfo lockCost={parseFloat(ethers.utils.formatUnits(costNew.sub(costOld), 18))} library={library} account={account} onChange={handleInsufficientBalance} />
                     }
                 </div>
                 <div className={classes.rowContainer} style={{ position: 'relative', }}>

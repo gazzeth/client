@@ -4,7 +4,7 @@ import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import Topic from "@domain/models/Topic/Topic";
 import Vote from "@domain/models/Vote/Vote";
-import { ethers } from "ethers";
+import { BigNumber } from "ethers";
 
 export default class NewsMapper {
     public static toEntityPreview(dto: any): NewsPreview {
@@ -35,8 +35,8 @@ export default class NewsMapper {
     }
     
     public static toEntityTopic(dto: any): Topic {
-        return new Topic(dto.id, parseFloat(ethers.utils.formatUnits(dto.priceToBeJuror, 18)), 
-            parseFloat(ethers.utils.formatUnits(dto.priceToPublish, 18)), 
+        return new Topic(dto.id, BigNumber.from(dto.priceToBeJuror), 
+            BigNumber.from(dto.priceToPublish), 
             parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration),
             parseInt(dto.selectableJurorsQuantity))
     }

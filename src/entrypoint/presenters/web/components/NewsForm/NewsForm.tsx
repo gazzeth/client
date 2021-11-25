@@ -14,6 +14,7 @@ import NewsRender from "../NewsRender/NewsRender";
 import BlockchainService from "@configuration/usecases/BlockchainService";
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { ethers } from "ethers";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -87,7 +88,7 @@ export default function NewsForm() {
                         <FormControlLabel
                             control={<Checkbox checked={preRender} onChange={handleChangePreRender} color="primary" />} label={t("pre-render")} />
                     </div>
-                    {news.topic && <LockInfo lockCost={news.topic.costPublish} library={library} account={account} onChange={handleInsufficientBalance} />}
+                    {news.topic && <LockInfo lockCost={parseFloat(ethers.utils.formatUnits(news.topic.costPublish, 18))} library={library} account={account} onChange={handleInsufficientBalance} />}
                     {errorMenssage && <div className={classes.rowContainer}><Typography className={classes.error}>{errorMenssage}</Typography></div>}
                     <div className={classes.rowContainer} style={{ position: 'relative', }}>
                         <Button className={classes.buttonPublish} onClick={onSummit}
