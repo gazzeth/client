@@ -6,7 +6,8 @@ export default makeStyles(theme => ({
         flexDirection: "row",
         minWidth: 400,
         justifyContent: "left",
-        padding: "1.1rem"
+        padding: "1.1rem",
+        margin: "1rem"
     },
     borderContainer: {
         backgroundColor: "#FFFFFF",
@@ -41,4 +42,4 @@ export default makeStyles(theme => ({
             backgroundColor: "#a8abb3"
         }
     },
-}));
+}), {index: 1});

@@ -7,4 +7,4 @@ export default makeStyles(theme => ({
         borderRadius: "1.125rem",
         backgroundColor: "#888D9B"
     }
-}));
+}), {index: 1});

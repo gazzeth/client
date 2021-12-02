@@ -40,4 +40,4 @@ export default makeStyles(theme => ({
         paddingRight: "0.5rem",
         marginBottom: "0.5rem"
     }
-}));
+}), {index: 1});

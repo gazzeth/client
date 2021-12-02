@@ -67,4 +67,4 @@ export default makeStyles(theme => ({
     ruleLabel: {
         fontWeight: 'bold'
     }
-}));
+}), {index: 1});

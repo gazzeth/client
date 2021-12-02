@@ -10,6 +10,7 @@ import { TYPES } from "@constants/types";
 import BlockchainService from "@configuration/usecases/BlockchainService";
 import NewsService from "@configuration/usecases/NewsService";
 import { toast } from 'react-toastify';
+import Icon from "../Icon/Icon";
 
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
 const newsService = container.get<NewsService>(TYPES.NewsService);
@@ -25,7 +26,7 @@ export default function Votation({ votes, id }: Props) {
     const { t } = useTranslation();
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
-    const [, , , library] = useActiveBlockchain();
+    const [, account, , library] = useActiveBlockchain();
 
     const getState = (v: Vote) => {
         if (v.penalized) {
@@ -147,7 +148,7 @@ export default function Votation({ votes, id }: Props) {
                 </Container>
             </div>
             <div className={classes.root} >
-                <Container title={t("votes")} titleVariant={"h2"} icon={id !== undefined ? (
+                <Container title={t("votes")} titleVariant={"h2"} icon={(!!account && id !== undefined) ? (
                     <Button className={classes.button} onClick={onChange} disabled={loading} style={{ position: 'relative', }}>
                         <Typography variant="body2">{t("withdraw")}</Typography>
                         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
@@ -157,9 +158,12 @@ export default function Votation({ votes, id }: Props) {
                         votes.map(v => {
                             return (
                                 <div className={classes.rowContainer}>
-                                    <div className={classes.leftContainer}>
-                                        <Typography>{v.address}</Typography>
-                                        {v.justification !== "" && <Typography>{v.justification}</Typography>}
+                                    <div className={classes.container}>
+                                        <Icon account={v.address} size={40} className={classes.icon}/>
+                                        <div className={classes.leftContainer}>
+                                            <Typography className={classes.user}>{v.address}</Typography>
+                                            {v.justification !== "" && <Typography>{v.justification}</Typography>}
+                                        </div>
                                     </div>
                                     <div className={classes.rightContainer}>
                                         <Typography>{getState(v)}</Typography>

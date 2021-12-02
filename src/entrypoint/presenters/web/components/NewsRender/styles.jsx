@@ -19,4 +19,4 @@ export default makeStyles(theme => ({
     container: {
         padding: "1.1rem"
     }
-}));
+}), {index: 1});

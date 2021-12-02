@@ -10,11 +10,11 @@ export default class News {
     votes: Vote[];
     publishDate: number;
     withdraw: boolean;
-    voteCounter: number[];
+    voteCounters: number[];
 
     constructor(id: number, content: string, topic: Topic, verified: VOTE_VALUE,
                 votes?: Vote[], publishDate?: number, withdraw?: boolean, 
-                voteCounter?: number[]) {
+                voteCounters?: number[]) {
         this.id = id;
         this.verified = verified;
         this.content = content;
@@ -22,7 +22,7 @@ export default class News {
         this.votes = votes ? votes : [];
         this.publishDate = publishDate;
         this.withdraw = withdraw;
-        this.voteCounter = voteCounter;
+        this.voteCounters = voteCounters;
     }
 
     public isCommitOver(): boolean {
@@ -35,5 +35,27 @@ export default class News {
 
     public isWithdrawOver(): boolean {
         return this.withdraw; 
+    }
+
+    public hasEnoughtVotes(): boolean {
+        return (this.topic.selectableJurorsQuantity - this.voteCounters[1] 
+            - this.voteCounters[2] - this.voteCounters[3])  
+            / this.topic.selectableJurorsQuantity < 0.35
+    }
+
+    public isTrue(): boolean {
+        return this.isStateValid(VOTE_VALUE.True)
+    }
+
+    public isFalse(): boolean {
+        return this.isStateValid(VOTE_VALUE.False)
+    }
+
+    public isUnqualified(): boolean {
+        return this.isStateValid(VOTE_VALUE.Unqualified)
+    }
+
+    private isStateValid(state: VOTE_VALUE): boolean {
+        return this.verified === state && this.voteCounters[state] / this.topic.selectableJurorsQuantity >= 0.60
     }
 }

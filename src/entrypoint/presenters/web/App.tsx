@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Error from "@entrypoint/presenters/web/components/Error/Error";
+import withError from "@entrypoint/presenters/web/components/Error/withError";
 import withLayout from "@entrypoint/presenters/web/components/Layout/withLayout";
 import withAuthorization from "@entrypoint/presenters/web/components/Authorization/withAuthorization";
 import NewsList from "@entrypoint/presenters/web/components/NewsList/NewsList";
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   toast: {
     borderRadius: "20px"
   },
-}));
+}), {index: 1});
 
 export default function App() {
 
@@ -34,7 +35,7 @@ export default function App() {
           <Route exact path={URLS.voteForm} component={withAuthorization(withLayout(() => <VoteForm isReveal={false} />))} />
           <Route exact path={URLS.juryForm} component={withAuthorization(withLayout(JuryForm))} />
           <Route exact path={URLS.newsForm} component={withAuthorization(withLayout(NewsForm))} />
-          <Route exact path={URLS.news} component={withLayout(NewsPage)} />
+          <Route exact path={URLS.news} component={withError(withLayout(NewsPage))} />
           <Route component={() => <Error code={"404"}/>} />
         </Switch>
       </BrowserRouter>

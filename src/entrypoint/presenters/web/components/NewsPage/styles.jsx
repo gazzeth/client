@@ -13,4 +13,27 @@ export default makeStyles(theme => ({
     spinner: {
         width: '20%'
     },
-}));
+    statusBar: {
+        color: 'white',
+        width: "100%", 
+        padding: "1rem"
+    },
+    falseStatusBar: {
+        backgroundColor: theme.palette.status.false
+    },
+    pendingStatusBar: {
+        backgroundColor: theme.palette.status.pending
+    },
+    trueStatusBar: {
+        backgroundColor: theme.palette.status.true
+    },
+    unqualifiedStatusBar: {
+        backgroundColor: theme.palette.status.unqualified
+    },
+    noConsentStatusBar: {
+        backgroundColor: theme.palette.status.noConsent
+    },
+    insufficientStatusBar: {
+        backgroundColor: theme.palette.status.insufficient
+    },
+}), {index: 1});

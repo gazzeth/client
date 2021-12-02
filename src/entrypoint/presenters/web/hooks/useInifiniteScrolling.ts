@@ -11,7 +11,8 @@ const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]
     const [pageState, setPageState] = useState({
         pagination: new Pagination(pageSize, 0),
         filter: filter,
-        loading: true
+        loading: true,
+        isFinish: false
     })
     const setFilter = (f: Filter) => {
         setPageState({
@@ -22,29 +23,42 @@ const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]
 
     useEffect(() => {
         const defaultPagination = new Pagination(pageSize, 0)
-        getPage((newsListResponce) => {
-            setNewList(newsListResponce);
-            setPageState(p => {
-                return {
-                    ...p,
-                    pagination: defaultPagination,
-                    loading: false
-                }
-            })
-        }, defaultPagination, pageState.filter);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        setPageState(p => {
+            getPage((newsListResponce) => {
+                setNewList(newsListResponce);
+                setPageState(p => {
+                    return {
+                        ...p,
+                        pagination: defaultPagination,
+                        loading: false,
+                        isFinish: newsListResponce.length === 0
+                    }
+                })
+            }, defaultPagination, pageState.filter);
+            setNewList([])
+            return {
+                ...p,
+                pagination: defaultPagination,
+                loading: true,
+            }
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageState.filter]);
 
     useEffect(() => {
         const handleScroll = () => {
             setPageState(p => {
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !p.loading) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !p.loading && !p.isFinish) {
                     const newPagination = p.pagination.advancePage();
                     getPage((newsListResponce) => {
                         setNewList(n => [...n, ...newsListResponce]);
-                        setPageState(p => { return { ...p, loading: false } });
-                    },
-                        newPagination, p.filter);
+                        setPageState(p => {
+                            return {
+                                ...p, loading: false,
+                                isFinish: newsListResponce.length === 0
+                            }
+                        });
+                    }, newPagination, p.filter);
                     return {
                         ...p,
                         pagination: newPagination,
@@ -58,7 +72,7 @@ const useInfiniteScrolling = (getPage: (handleNewList: ((newsList: NewsPreview[]
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return [pageState.loading, pageState.pagination, pageState.filter, setFilter, newsList]

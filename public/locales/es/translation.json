@@ -2,6 +2,7 @@
     "select-language": "Seleccioná un lenguaje",
     "en": "English 🇬🇧",
     "es": "Español 🇪🇸",
+    "jp": "日本語 🇯🇵",
 
     "loading": "Cargando",
 
@@ -10,7 +11,7 @@
     "back-message": "Presioná el boton para volver a la página principal",
     "home": "Inicio",
 
-    "see-more": "Ver más",
+    "copy": "Copiar url",
 
     "filter-bar-title": "Filtros:",
     "verified-title": "Estado de verificación",
@@ -23,9 +24,11 @@
     "false-status-bar-description": "Esta noticia fue declarada falsa",
     "true-status-bar-description": "Esta noticia fue declarada verdadera",
     "unqualified-status-bar-description": "Esta noticia no cumple con las normas",
-     
+    "insufficient-status-bar-description": "Esta noticia no tiene suficientes votos",
+    "no-consent-status-bar-description": "Los jurados no llegaron a un veredicto",
+
     "connect-to-wallet": "Conectarse a la billetera",
-    "jurror-inscription": "Inscribirse como jurado",
+    "jurror-inscription": "Manejar suscripciones",
     "back": "Atrás",
     "metamask-header": "Metamask",
     "metamask-subheader": "Extensión de navegador fácil de usar",
@@ -33,30 +36,33 @@
     "loading-wallet": "Cargando la billetera...",
     "try-again": "Volver a intentar",
     "error-wallet": "Error al conectarse a la billetera",
-    "error-chain": "Por favor conectate a la red apropiada.",
-    "error-connecting": "Error al conectar la billetera. Refrescá la página.",
+    "error-chain": "Por favor conectate a la red Ropsten.",
+    "error-connecting": "Error al conectar la billetera. Refresca la página.",
     "account": "Cuenta",
     "wallet": "Billeteras",
 
     "connected-with": "Conectado con {{wallet}}",
     "change": "Cambiar",
-    "copy-address": "Copiar dirrección",
+    "copy-address": "Copiar dirección",
     "view-etherscan": "Ver en Etherscan",
 
     "select-markdown": "Seleccioná un archivo de tipo Markdown (.md)",
     "browse-files": "Examinar un archivo",
     "select-topic": "Seleccioná un tópico",
 
-    "registry": "Inscribirse como jurado",
-    "quantity": "Cantidad de veces",
+    "registry": "Manejar suscripciones",
+    "regiter-jury": "Actualizar suscripciones",
+    "topic": "Tópicos",
+    "quantity": "Cantidad",
     "add": "Agregar",
+    "jury-form-quantity": "La cantidad debe ser mayor a cero",
     "jury-form-incomplete": "Es necesario que elijas un tópico y la cantidad de veces",
-    "regiter-jury": "Inscribirse como jurado",
+    "no-suscription": "No hay suscripciones",
 
     "balance": "Balance: {{value}}",
 
     "publish-news": "Publicar una noticia",
-    "pre-render": "Mostrar como se visualizaría la noticia",
+    "pre-render": "Mostrar cómo se visualizará la noticia",
     "publish": "Publicar",
 
     "vote-news": "Emitir un voto",
@@ -111,7 +117,9 @@
     "news-status-message-0": "La publicación fue validada como verdadera",
     "news-status-message-1": "La publicación fue validada como falsa",
     "news-status-message-2": "La publicación fue validada como que no cumple las reglas",
-    "news-status-message-3": "No se logró llegar a un resultado",
+    "news-status-message-3": "No se logró llegar a un resultado por falta de votos",
+    "news-status-message-4": "La votación no terminó",
+    "news-status-message-5": "No se logró llegar a un resultado por los votos de los jurados",
 
     "publications-participate": "Publicaciones en las que participás",
     "go-to-publication": "Ir a publicación",
@@ -124,6 +132,20 @@
     "vote-state-value-1": "Verdadero",
     "vote-state-value-2": "Falso",
     "vote-state-value-3": "No clasifica",
+    "vote-state-value-4": "Pendiente",
+    "vote-state-value-5": "Insuficiente",
+    "vote-state-value-6": "Sin consenso",
+ 
+    "succesful-copy": "Información copiada al portapapeles",
 
-    "suscriptions": "Suscripciones del usuario"
+    "wallet-explanation": "Gazzeth es una plataforma descentralizada que funciona a base de incentivos, por lo que es necesario contar con una billetera. Elija una de las opciones siguientes.",
+    "news-explanation": "Se depositan DAIs. Si la noticia es verdadera estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
+    "reveal-explanation": "Es necesario hacer el voto público para terminar con el proceso de voto. Después se activará la fase para retirar las recompensas.",
+    "vote-explanation": "Se depositan DAIs. Si la validación es correcta estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
+    
+    "gzt-explanation": "Se obtiene al publicar una noticia verdadera o al validar correctamente una noticia.",
+    "dai-explanation": "Esta es una moneda estable, se utiliza como garantía para las publicar o votar.",
+    "eth-explanation": "Esta moneda se usa para ejecutar las transacciones.",
+
+    "insuficient-balance-dai": "No tienes suficientes DAI para bloquear en la transacción" 
 }

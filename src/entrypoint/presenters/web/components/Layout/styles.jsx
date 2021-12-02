@@ -9,4 +9,4 @@ export default makeStyles(theme => ({
     extendToolbar: {
         ...theme.mixins.toolbar,
     },
-}));
+}), {index: 1});

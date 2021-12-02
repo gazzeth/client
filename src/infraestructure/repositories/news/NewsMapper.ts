@@ -4,7 +4,7 @@ import News from "@domain/models/News/News";
 import NewsPreview from "@domain/models/News/NewsPreview";
 import Topic from "@domain/models/Topic/Topic";
 import Vote from "@domain/models/Vote/Vote";
-import { ethers } from "ethers";
+import { BigNumber } from "ethers";
 
 export default class NewsMapper {
     public static toEntityPreview(dto: any): NewsPreview {
@@ -14,9 +14,10 @@ export default class NewsMapper {
         const lede = parts[2];
         const winningVote: number = dto.voting.winningVote;
         const topic: any = dto.topic
+        const voteCounters: string[] = dto.voting.voteCounters;
         return new NewsPreview(parseInt(dto.id), title, lede, image, 
             NewsMapper.toEntityVoteValue(winningVote), NewsMapper.toEntityTopic(topic),
-            parseInt(dto.publishDate))
+            parseInt(dto.publishDate), voteCounters.map(vc => parseInt(vc)))
     }
 
     public static toEntity(dto: any): News {
@@ -34,9 +35,10 @@ export default class NewsMapper {
     }
     
     public static toEntityTopic(dto: any): Topic {
-        return new Topic(dto.id, parseFloat(ethers.utils.formatUnits(dto.priceToBeJuror, 18)), 
-            parseFloat(ethers.utils.formatUnits(dto.priceToPublish, 18)), 
-            parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration))
+        return new Topic(dto.id, BigNumber.from(dto.priceToBeJuror), 
+            BigNumber.from(dto.priceToPublish), 
+            parseInt(dto.commitPhaseDuration), parseInt(dto.revealPhaseDuration),
+            parseInt(dto.selectableJurorsQuantity))
     }
 
     public static toEntityVoteValue(vote: number): VOTE_VALUE {
@@ -54,7 +56,6 @@ export default class NewsMapper {
 
     public static toQuery(filter: NewsFilter): string[] {
         let queries: string[] = [];
-        console.log(filter)
         if (filter.verified === undefined) {
             queries.push("")
         }

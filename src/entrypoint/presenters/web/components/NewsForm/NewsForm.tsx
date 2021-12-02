@@ -14,6 +14,7 @@ import NewsRender from "../NewsRender/NewsRender";
 import BlockchainService from "@configuration/usecases/BlockchainService";
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { ethers } from "ethers";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 const blockchainService = container.get<BlockchainService>(TYPES.BlockchainService);
@@ -26,6 +27,7 @@ export default function NewsForm() {
     const [preRender, setPreRender] = useState<boolean>(false);
     const [fileName, setFileName] = useState<string>(undefined);
     const [loading, setLoading] = React.useState(false);
+    const [errorMenssage, setErrorMenssage] = useState<string>(undefined);
 
     const useActiveBlockchain = blockchainService.getBlockchainGetUseUseCase().getUseActive()
     const [ , account, , library ] = useActiveBlockchain();
@@ -53,10 +55,19 @@ export default function NewsForm() {
             .finally(() => setLoading(false))
     }
 
+    const handleInsufficientBalance = (b: boolean) => {
+        if (b) {
+            setErrorMenssage(t("insuficient-balance-dai"))
+        }
+        else if (errorMenssage === t("insuficient-balance-dai")) {
+            setErrorMenssage(undefined)
+        }
+    }
+
     return (
         <>
             <div className={classes.rowContainer}>
-                <Container title={t("publish-news")}>
+                <Container title={t("publish-news")} explanation={t("news-explanation")}>
                     <div className={classes.rowContainer}>
                         <div className={classes.textContainer}>
                             <Typography className={classes.text} variant="h6">{fileName ? fileName : t("select-markdown")}</Typography>
@@ -77,7 +88,8 @@ export default function NewsForm() {
                         <FormControlLabel
                             control={<Checkbox checked={preRender} onChange={handleChangePreRender} color="primary" />} label={t("pre-render")} />
                     </div>
-                    {news.topic && <LockInfo lockCost={news.topic.costPublish} library={library} account={account} />}
+                    {news.topic && <LockInfo lockCost={parseFloat(ethers.utils.formatUnits(news.topic.costPublish, 18))} library={library} account={account} onChange={handleInsufficientBalance} />}
+                    {errorMenssage && <div className={classes.rowContainer}><Typography className={classes.error}>{errorMenssage}</Typography></div>}
                     <div className={classes.rowContainer} style={{ position: 'relative', }}>
                         <Button className={classes.buttonPublish} onClick={onSummit}
                             disabled={loading || !news.content || !news.topic}>

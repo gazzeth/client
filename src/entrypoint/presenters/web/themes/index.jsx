@@ -7,10 +7,6 @@ const success = "#3CD4A0";
 const info = "#9013FE";
 const warning = "#FFC260";
 
-const red = "#ba1833";
-const green = "#10913d";
-const grey = "#7d7968";
-
 const darkenRate = 15;
 const lightenRate = 7.5;
 
@@ -36,9 +32,12 @@ const theme = (createMuiTheme)({ //TODO check
             contrastText: "#FFFFFF",
         },
         status: {
-            pending: grey,
-            false: red,
-            true: green
+            pending: "#D2B48C",
+            false: "#ba1833",
+            true: "#10913d",
+            insufficient: "#7d7968", 
+            noConsent: "#ff6200", 
+            unqualified: "#e6ac00"
         },
         warning: {
             main: warning,

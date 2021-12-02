@@ -6,4 +6,4 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
-}));
+}), {index: 1});

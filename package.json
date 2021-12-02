@@ -1,5 +1,5 @@
 {
-  "homepage":"https://gazzeth.github.io/client/",
+  "homepage": "https://www.gazzeth.com/",
   "name": "pf-front",
   "version": "0.1.0",
   "private": true,
@@ -9,7 +9,8 @@
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "test-react": "react-app-rewired test",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && npm run copy",
+    "copy": "cp ./CNAME ./build/CNAME",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {

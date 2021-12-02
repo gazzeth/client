@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import classnames from "classnames";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import News from "@domain/models/News/News";
@@ -9,7 +10,8 @@ import NewsService from "@configuration/usecases/NewsService";
 import { CircularProgress, Container, Typography } from "@material-ui/core";
 import NewsRender from "../NewsRender/NewsRender";
 import Votation from "../Votation/Votation";
-import { VOTE_VALUE } from "@constants/vote_value";
+import { useDispatch } from 'react-redux';
+import allActions from "@entrypoint/presenters/web/actions/allActions";
 
 const newsService = container.get<NewsService>(TYPES.NewsService);
 
@@ -20,6 +22,7 @@ export default function NewsPage() {
     const idNumber = Number(id)
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [news, setNews] = useState<News>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
@@ -34,7 +37,8 @@ export default function NewsPage() {
     }, [idNumber])
 
     if (isNaN(idNumber) || (loading === false && news === undefined)) {
-        return <>404 para el id:{id}</>//TODO render 404
+        dispatch(allActions.errorActions.setCode("404"))
+        return null
     }
     if (loading === true) {
         return (
@@ -45,33 +49,33 @@ export default function NewsPage() {
     }
 
     const getStatusMessage = (n: News) => {
-        let message, backColor, color;
+        let message, className;
         if (!n.isRevealOver()) {
-            return null
+            message = "news-status-message-4"
+            className = classes.pendingStatusBar
         }
-        switch (n.verified) {
-            case VOTE_VALUE.True:
-                message = "news-status-message-0"
-                backColor = "#008000"
-                color = "#FFFFFF"
-                break;
-            case VOTE_VALUE.False:
-                message = "news-status-message-1"
-                backColor = "#FF0000"
-                color = "#FFFFFF"
-                break;
-            case VOTE_VALUE.Unqualified:
-                message = "news-status-message-2"
-                backColor = "#e6ac00"
-                color = "#FFFFFF"
-                break;
-            default:
-                message = "news-status-message-3"
-                backColor = "#000000"
-                color = "#FFFFFF"
+        else if (!n.hasEnoughtVotes()) {
+            message = "news-status-message-3"
+            className = classes.insufficientStatusBar
+        }
+        else if(n.isTrue()) {
+            message = "news-status-message-0"
+            className = classes.trueStatusBar
+        }
+        else if(n.isFalse()) {
+            message = "news-status-message-1"
+            className = classes.falseStatusBar
+        }
+        else if(n.isUnqualified()) {
+            message = "news-status-message-2"
+            className = classes.unqualifiedStatusBar
+        }
+        else {
+            message = "news-status-message-5"
+            className = classes.noConsentStatusBar
         }
         return (
-            <div style={{ backgroundColor: backColor, width: "100%", padding: "1rem", color: color }}>
+            <div className={classnames(classes.statusBar, className)}>
                 <Typography variant="body2" >{t(message)}</Typography>
             </div>
         )

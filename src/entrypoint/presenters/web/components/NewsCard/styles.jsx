@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles(theme => ({
     root: {
         maxWidth: 345,
-        height: "100%",
+        height: "36rem",
         display: "flex",
         flexDirection: "column",
         "& .MuiCardActions-root": {
@@ -20,7 +20,6 @@ export default makeStyles(theme => ({
     },
     statusBar: {
         color: 'white',
-        fontWeight: 'bold',
         display: 'flex',
         alignItems: 'center'
     },
@@ -34,6 +33,12 @@ export default makeStyles(theme => ({
         backgroundColor: theme.palette.status.true
     },
     unqualifiedStatusBar: {
-        backgroundColor: "#e6ac00"
-    }
-}));
+        backgroundColor: theme.palette.status.unqualified
+    },
+    noConsentStatusBar: {
+        backgroundColor: theme.palette.status.noConsent
+    },
+    insufficientStatusBar: {
+        backgroundColor: theme.palette.status.insufficient
+    },
+}), {index: 1});

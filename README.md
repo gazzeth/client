@@ -46,11 +46,11 @@ REACT_APP_PUBLIC_URL={PATH}
 ## Build production
 
 ```bash
- npm build
+ npm run build
 ```
 
 ## Deploy github pages
 
 ```bash
- npm deploy
+ npm run deploy
 ```

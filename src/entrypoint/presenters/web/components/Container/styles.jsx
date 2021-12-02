@@ -25,5 +25,15 @@ export default makeStyles(theme => ({
     iconButton: {
         float: "right",
         padding: "0",
+    },
+    arrow: {
+        color: "#000000",
+    },
+    tooltip: {
+        backgroundColor: "#000000",
+    },
+    container: {
+        display: "flex",
+        alignItems: "center",  
     }
-}));
+}), { index: 1 });

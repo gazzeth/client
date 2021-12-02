@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
         textTransform: "none",
         border: `1px solid #ced0d9`,
         borderRadius: 20,
-
+        margin: "1rem",
         "&$disabled": {
             color: "#000000"
         }
@@ -41,4 +41,4 @@ export default makeStyles(theme => ({
         height: "24px",
         width: "24px",
     }
-}));
+}), {index: 1});
