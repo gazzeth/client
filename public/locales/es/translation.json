@@ -25,7 +25,7 @@
     "true-status-bar-description": "Esta noticia fue declarada verdadera",
     "unqualified-status-bar-description": "Esta noticia no cumple con las normas",
     "insufficient-status-bar-description": "Esta noticia no tiene suficientes votos",
-    "no-consent-status-bar-description": "Los jurados no llegaron a un veredicto",
+    "no-consent-status-bar-description": "No hubo concenso al verificar esta noticia",
 
     "connect-to-wallet": "Conectarse a la billetera",
     "jurror-inscription": "Manejar suscripciones",
@@ -119,7 +119,7 @@
     "news-status-message-2": "La publicación fue validada como que no cumple las reglas",
     "news-status-message-3": "No se logró llegar a un resultado por falta de votos",
     "news-status-message-4": "La votación no terminó",
-    "news-status-message-5": "No se logró llegar a un resultado por los votos de los jurados",
+    "news-status-message-5": "No se logró concenso sobre su clasificación",
 
     "publications-participate": "Publicaciones en las que participás",
     "go-to-publication": "Ir a publicación",
@@ -138,14 +138,14 @@
  
     "succesful-copy": "Información copiada al portapapeles",
 
-    "wallet-explanation": "Gazzeth es una plataforma descentralizada que funciona a base de incentivos, por lo que es necesario contar con una billetera. Elija una de las opciones siguientes.",
-    "news-explanation": "Se depositan DAIs. Si la noticia es verdadera estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
-    "reveal-explanation": "Es necesario hacer el voto público para terminar con el proceso de voto. Después se activará la fase para retirar las recompensas.",
-    "vote-explanation": "Se depositan DAIs. Si la validación es correcta estos se recuperan y se obtienen GZTs. En cualquier otro caso estos se pierden.",
+    "wallet-explanation": "La billetera es necesaria para tener una cuenta en Gazzeth. Con ella vas a poder manejar tus monedas y dar concentimiento sobre la ejecución de transacciones.",
+    "news-explanation": "Para publicar tenés que depositar DAI. Si la noticia es clasificada como verdadera los recuperás y ganás 1 GZT, sino los perdés a modo de penalización. Asegurate de incluir fuentes para ayudar a los jurados a validar tu publicación.",
+    "reveal-explanation": "Esta es la segunda etapa de la votación. Tenés que revelar el voto que emitiste en la fase anterior. No revelar implica una penalización sobre tu deposito de DAI.",
+    "vote-explanation": "Esta es la primer etapa de la votación. Tu voto se almacenará de forma secreta y luego tendrás que revelarlo en la segunda etapa. Recordá que no votar o votar de forma incorrecta implica una penalización sobre tu deposito de DAI.",
     
-    "gzt-explanation": "Se obtiene al publicar una noticia verdadera o al validar correctamente una noticia.",
-    "dai-explanation": "Esta es una moneda estable, se utiliza como garantía para las publicar o votar.",
-    "eth-explanation": "Esta moneda se usa para ejecutar las transacciones.",
+    "gzt-explanation": "La moneda GZT representa tu reputación en la plataforma. La obtenés publicando noticias ciertas o votando correctamente cuando participás como jurado.",
+    "dai-explanation": "La moneda DAI es estable, su cotización es siempre 1 USD, se utiliza para los depósitos de garantía al publicar o al participar como jurado.",
+    "eth-explanation": "La moneda ETH se utiliza para pagar el costo de ejecución de las transacciones.",
 
-    "insuficient-balance-dai": "No tienes suficientes DAI para bloquear en la transacción" 
+    "insuficient-balance-dai": "No tenés los DAI requeridos para realizar esta transacción" 
 }
