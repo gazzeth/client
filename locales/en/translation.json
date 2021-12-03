@@ -25,7 +25,7 @@
     "true-status-bar-description": "This publication was declared as true",
     "unqualified-status-bar-description": "This publication does not follow the rules",
     "insufficient-status-bar-description": "This publication does not have enough votes",
-    "no-consent-status-bar-description": "Juries could not reach a verdict",
+    "no-consent-status-bar-description": "There was no consensus when verifying this publication",
     
     "connect-to-wallet": "Connect wallet",
     "jurror-inscription": "Manage subscriptions",
@@ -134,19 +134,18 @@
     "vote-state-value-3": "Unqualified",
     "vote-state-value-4": "Pending",
     "vote-state-value-5": "Insufficient",
-    "vote-state-value-6": "No consent",
+    "vote-state-value-6": "No consensus",
   
     "succesful-copy": "Information copy to clipboard",
   
-    "wallet-explanation": "Gazzeth is a decentralized platform that works based on incentives, for this reason it is necessary to have a wallet. Please choose a option from below.",
-    "news-explanation": "DAIs are deposited. If the news is true, the DAIs are recovered and GZTs are obtained. In any other case the DAIs are lost.",
-    "reveal-explanation": "It is necessary to make the public vote to finish the voting process. Then the phase to withdraw the rewards will be activated.",
-    "vote-explanation": "DAIs are deposited. If the validation is correct, the DAIs are recovered and GZTs are obtained. In any other case the DAIs are lost.",
+    "wallet-explanation": "Wallet is required to have an account at Gazzeth. With it you will be able to manage your coins and give consent on execution of transactions.",
+    "news-explanation": "You have to deposit DAI to publish. If the news is classified as true you will get them back and earn 1 GZT, otherwise you lose them as a penalty. Make sure to include sources to help the jurors to validate your publication.",
+    "reveal-explanation": "This is the second phase of the voting. You have to reveal the vote that you emited in the previous phase. Not revealing implies a penalty over your DAI deposits.",
+    "vote-explanation": "This is the first phase of voting. Your vote will be stored secretly and then you will have to reveal it in the next phase. Remember that not voting or doing it incorrectly implies a penalty over your DAI deposits.",
    
-    "gzt-explanation": "It is obtained by publishing a true news or by correctly validating a news.",
-    "dai-explanation": "This is a stable coin, it is used as collateral for publishing or voting.",
-    "eth-explanation": "This currency is used to execute transactions.",
+    "gzt-explanation": "GZT coin represents your reputation on the platform. You obtain it by publishing true news or voting correctly when you participate as juror.",
+    "dai-explanation": "DAI is a stablecoin, its price is always 1 USD, it is used for guarantee deposits when publishing news or participating as juror.",
+    "eth-explanation": "ETH coin is used to pay the cost of executing transactions.",
   
-    "insuficient-balance-dai": "Not enough DAI to lock in the transaction"
+    "insuficient-balance-dai": "You do not have the required DAI to execute this transaction"
  }
-   
