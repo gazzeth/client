@@ -22,7 +22,7 @@ export default class TopicSubscribeUsecase implements ITopicSubscribeUsecase {
         });        
         const balance = await this.daiRepository.getBalanceOf(library)
 
-        if (BigNumber.from(balance) < total) {
+        if (BigNumber.from(balance * 10^18) < total) {
             throw new Error("insuficient-funds-error")
         }
 
