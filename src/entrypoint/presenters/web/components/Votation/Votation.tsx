@@ -162,7 +162,7 @@ export default function Votation({ votes, id }: Props) {
                                         <Icon account={v.address} size={40} className={classes.icon}/>
                                         <div className={classes.leftContainer}>
                                             <Typography className={classes.user}>{v.address}</Typography>
-                                            {v.justification !== "" && <Typography>{v.justification}</Typography>}
+                                            {!v.penalized && v.justification !== "" && <Typography>{v.justification}</Typography>}
                                         </div>
                                     </div>
                                     <div className={classes.rightContainer}>

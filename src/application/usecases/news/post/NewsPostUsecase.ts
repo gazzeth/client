@@ -3,7 +3,7 @@ import News from "@domain/models/News/News";
 import INewsPostUsecase from "./INewsPostUsecase";
 import { Web3Provider } from '@ethersproject/providers'
 import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 
 export default class NewsPostUsecase implements INewsPostUsecase {
 
