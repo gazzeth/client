@@ -3,7 +3,7 @@ import Topic from "@domain/models/Topic/Topic";
 import ITopicSubscribeUsecase from "./ITopicSubscribeUsecase";
 import { Web3Provider } from '@ethersproject/providers'
 import ICurrencyRepository from "@application/repositories/ICurrencyRepository";
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 
 export default class TopicSubscribeUsecase implements ITopicSubscribeUsecase {
 
@@ -22,7 +22,8 @@ export default class TopicSubscribeUsecase implements ITopicSubscribeUsecase {
         });        
         const balance = await this.daiRepository.getBalanceOf(library)
 
-        if (BigNumber.from(balance) < total) {
+        let balanceBig = ethers.utils.parseUnits(balance.toString(), 18)
+        if (balanceBig.lt(total)) {
             throw new Error("insuficient-funds-error")
         }
 
